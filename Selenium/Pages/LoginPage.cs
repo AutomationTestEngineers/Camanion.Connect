@@ -1,0 +1,40 @@
+﻿using OpenQA.Selenium;
+using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+
+namespace Selenium.Pages
+{
+    public class LoginPage : BasePage
+    {
+        public LoginPage(IWebDriver driver) : base(driver) { }
+
+        //[FindsBy]
+        //private IWebElement email = null, password = null;
+
+
+        [FindsBy(How = How.XPath, Using = "//*[@name='email']")]
+        private IWebElement email = null;
+
+        [FindsBy(How = How.XPath, Using = "//*[@name='password']")]
+        private IWebElement password = null;
+
+        [FindsBy(How = How.XPath, Using = "//div[2]/form/div[5]/div/button")]
+        private IWebElement logInButton = null;
+        
+
+        public HomePage Login(string email , string password)
+        {            
+            Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 10);
+            this.email.SendText(email);
+            this.password.SendText(password);
+            Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),10);
+            logInButton.ClickCustom();
+            return new HomePage(driver);
+        }
+    }
+}
