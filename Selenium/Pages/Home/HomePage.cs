@@ -7,7 +7,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Selenium.Pages
+namespace Selenium
 {
     public class HomePage : BasePage
     {
@@ -35,29 +35,56 @@ namespace Selenium.Pages
         private IWebElement ok = null;
 
         [FindsBy(How = How.XPath, Using = "//tbody/tr/td[3]")]
-        private IList<IWebElement> searchList = null;
+        private IList<IWebElement> searchList = null;        
+
+        [FindsBy]
+        private IWebElement newIntake=null;
         
         public void ChangeShelter(string shelterName)
         {
-            gearIcon.ClickCustom();
-            changeShelter.ClickCustom();
-            FindBy(By.XPath($"//strong[contains(text(),'{shelterName}')]")).ClickCustom();
-            ok.ClickCustom();
+            gearIcon.ClickCustom(driver);
+            changeShelter.ClickCustom(driver);
+            FindBy(By.XPath($"//strong[contains(text(),'{shelterName}')]"),10).ClickCustom(driver);
+            ok.ClickCustom(driver);
         }
+
+        
+
         public string GetUserName()
         {
-            return email.Text;
+            return email.GetText(driver);
         }
         public void EnterSearch(string text)
         {
-            searchInput.SendText(text);
-            searchButton.ClickCustom();
+            searchInput.SendText(text,driver);
+            searchButton.ClickCustom(driver);
         }
         public List<string> getSearchList()
         {
-            ScreenBusy();
-            Thread.Sleep(500);
-            return searchList.Select(e => e.Text).ToList();
+            //searchList.FirstOrDefault().HandlePopUp(driver);
+            return searchList.GetText(driver);
+        }
+        public PartnerPage NewAddIntake(string intakeType)
+        {
+            newIntake.ClickCustom(driver);
+
+            string xpath = string.Empty;
+            if (intakeType.ToLower().Contains("publicstray"))
+                xpath = "Public Stray";
+            else if (intakeType.ToLower().Contains("surrender"))
+                xpath = "Surrender";
+            else if (intakeType.ToLower().Contains("return"))
+                xpath = "Return";
+            else if (intakeType.ToLower().Contains("trasfer"))
+                xpath = "Transfer";
+            else if (intakeType.ToLower().Contains("animalcontrol"))
+                xpath = "Animal Control";
+            else if (intakeType.ToLower().Contains("service"))
+                xpath = "Service";
+
+            FindBy(By.XPath($"//div/a[contains(text(),'{xpath}')]")).ClickCustom(driver);
+
+            return new PartnerPage(driver);
         }
     }
 }

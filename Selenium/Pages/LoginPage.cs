@@ -29,11 +29,11 @@ namespace Selenium.Pages
 
         public HomePage Login(string email , string password)
         {            
-            Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 10);
-            this.email.SendText(email);
-            this.password.SendText(password);
-            Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),10);
-            logInButton.ClickCustom();
+            Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 5);
+            this.email.SendText(email,driver);
+            this.password.SendText(password,driver);
+            Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),5);
+            logInButton.ClickCustom(driver);
             return new HomePage(driver);
         }
     }

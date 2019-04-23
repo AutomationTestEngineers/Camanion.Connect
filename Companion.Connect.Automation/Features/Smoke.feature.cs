@@ -69,11 +69,21 @@ namespace Companion.Connect.Automation.Features
             testRunner.CollectScenarioErrors();
         }
         
+        public virtual void FeatureBackground()
+        {
+#line 4
+#line 5
+ testRunner.Given("I Enter \"inazir@companionprotect.com,Muridke@1\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
+#line 6
+ testRunner.Then("User Should see \"inazir@companionprotect.com\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+        }
+        
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test_001_Login")]
+        [NUnit.Framework.DescriptionAttribute("Test_001_Login112")]
         [NUnit.Framework.CategoryAttribute("Smoke")]
-        [NUnit.Framework.TestCaseAttribute("inazir@companionprotect.com", "Muridke@1", "Central Missouri Humane Society", "K", null)]
-        public virtual void Test_001_Login(string userName, string password, string shelterName, string search, string[] exampleTags)
+        [NUnit.Framework.TestCaseAttribute("Central Missouri Humane Society", "K", "animalcontrol", null)]
+        public virtual void Test_001_Login112(string shelterName, string search, string intake, string[] exampleTags)
         {
             string[] @__tags = new string[] {
                     "Smoke"};
@@ -81,20 +91,50 @@ namespace Companion.Connect.Automation.Features
             {
                 @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
             }
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_001_Login", null, @__tags);
-#line 6
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_001_Login112", null, @__tags);
+#line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
-#line 7
- testRunner.Given(string.Format("I Enter \"{0},{1}\"", userName, password), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Given ");
-#line 8
- testRunner.Then(string.Format("User Should see \"{0}\"", userName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line 9
- testRunner.When(string.Format("I Change Shelter \"{0}\"", shelterName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 4
+this.FeatureBackground();
 #line 10
- testRunner.And(string.Format("I Search \"{0}\"", search), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.When(string.Format("I Change Shelter \"{0}\"", shelterName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
+ testRunner.And(string.Format("I Search \"{0}\"", search), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 12
  testRunner.Then(string.Format("User Should See Search Reasult \"{0}\"", search), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 13
+ testRunner.When(string.Format("I Click Intake \"{0}\"", intake), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Test_001_Login221")]
+        [NUnit.Framework.CategoryAttribute("Smoke1")]
+        [NUnit.Framework.TestCaseAttribute("Central Missouri Humane Society", "K", "animalcontrol", null)]
+        public virtual void Test_001_Login221(string shelterName, string search, string intake, string[] exampleTags)
+        {
+            string[] @__tags = new string[] {
+                    "Smoke1"};
+            if ((exampleTags != null))
+            {
+                @__tags = System.Linq.Enumerable.ToArray(System.Linq.Enumerable.Concat(@__tags, exampleTags));
+            }
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_001_Login221", null, @__tags);
+#line 22
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 4
+this.FeatureBackground();
+#line 23
+ testRunner.When(string.Format("I Change Shelter \"{0}\"", shelterName), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 24
+ testRunner.And(string.Format("I Search \"{0}\"", search), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.Then(string.Format("User Should See Search Reasult \"{0}\"", search), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 26
+ testRunner.When(string.Format("I Click Intake \"{0}\"", intake), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
         }

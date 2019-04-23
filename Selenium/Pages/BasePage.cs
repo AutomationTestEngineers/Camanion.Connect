@@ -1,19 +1,22 @@
 ﻿using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
+using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Threading;
 
-namespace Selenium.Pages
+namespace Selenium
 {
-    public abstract class BasePage
+    public class BasePage
     {
+
         protected Actions actions;
         protected IWebDriver driver;
         public BasePage(IWebDriver driver, int pageLodTimeOut = 60, int elemtTimeOut = 30)
         {
-            actions = new Actions(driver);
             this.driver = driver;
+            actions = new Actions(driver);  
             PageFactory.InitElements(this.driver, this);
             ScreenBusy();
         }
@@ -24,10 +27,11 @@ namespace Selenium.Pages
             wait.IgnoreExceptionTypes(typeof(Exception));
             wait.Until(condition);
         }
-        public IWebElement FindBy(By by)
+        public IWebElement FindBy(By by,int i=5)
         {
             try
             {
+                Wait(ExpectedConditions.ElementExists(by),i);
                 return driver.FindElement(by);
             }
             catch(StaleElementReferenceException e)

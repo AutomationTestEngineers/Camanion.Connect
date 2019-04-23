@@ -29,6 +29,7 @@ namespace Selenium
             driver.Manage().Window.Maximize();
             driver.Navigate().GoToUrl(Url);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
+            driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(200);
             return driver;
         }
     }
