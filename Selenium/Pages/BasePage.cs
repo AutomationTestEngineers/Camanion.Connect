@@ -13,7 +13,7 @@ namespace Selenium
 
         protected Actions actions;
         protected IWebDriver driver;
-        public BasePage(IWebDriver driver, int pageLodTimeOut = 60, int elemtTimeOut = 30)
+        public BasePage(IWebDriver driver)
         {
             this.driver = driver;
             actions = new Actions(driver);  
@@ -39,7 +39,7 @@ namespace Selenium
                 return FindBy(by);
             }
         }
-        public void ScreenBusy(int timeout = 60)
+        public void ScreenBusy(int timeout = 90)
         {
             Thread.Sleep(1000);
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")),timeout);

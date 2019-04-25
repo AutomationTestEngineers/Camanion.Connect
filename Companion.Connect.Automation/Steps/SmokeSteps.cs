@@ -13,16 +13,12 @@ namespace Companion.Connect.Automation.Steps
         PartnerPage partnerPage;
         public SmokeSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
 
-        [Given(@"I Enter ""(.*)""")]
-        public void GivenIEnter(string args)
+        [Given(@"I Login")]
+        public void ILogin()
         {
-            homepage = loginPage.Login(args.Split(',')[0], args.Split(',')[1]);
-        }
-        [Then(@"User Should see ""(.*)""")]
-        public void ThenUserShouldSee(string name)
-        {
-            homepage.GetUserName().Should().Contain(name);
-        }
+            homepage = loginPage.Login();
+        } 
+        
         [When(@"I Change Shelter ""(.*)""")]
         public void WhenIChangeShelter(string shelterName)
         {
@@ -53,6 +49,12 @@ namespace Companion.Connect.Automation.Steps
         public void ThenUserShouldSeeIntakeHeader(string intakeMessage)
         {
             partnerPage.GetheaderName().Should().Contain(intakeMessage);
+        }
+
+        [When(@"I Search Partner ""(.*)""")]
+        public void WhenISearchPartner(string name)
+        {
+            partnerPage.SearchPartner(name);            
         }
 
     }

@@ -15,13 +15,13 @@ namespace Selenium
 {
     public static class WebElementExtensions
     {
-        public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 60)
+        public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 90)
         {
             Thread.Sleep(100);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")));
         }
-        public static void ScreenBusy(IWebDriver driver, int timeout = 60)
+        public static void ScreenBusy(IWebDriver driver, int timeout = 90)
         {
             Thread.Sleep(100);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));

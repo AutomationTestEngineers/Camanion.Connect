@@ -2,8 +2,7 @@
 	In order Execute Basic Functionality
 
 Background: 
-	Given I Enter "inazir@companionprotect.com,Muridke@1"
-	Then User Should see "inazir@companionprotect.com"
+	Given I Login
 
 @Smoke
 Scenario Outline: Test_001_Login112	
@@ -11,22 +10,12 @@ Scenario Outline: Test_001_Login112
 	And I Search "<Search>"
 	Then User Should See Search Reasult "<Search>"
 	When I Click Intake "<Intake>"
-	#Then User Should See Intake Header "<Intake>"
+	Then User Should See Intake Header "<HeaderName>"
+	When I Search Partner "K"
 	
 Examples: 
-| ShelterName                     | Search | Intake        |
-| Central Missouri Humane Society | K      | animalcontrol |
+| ShelterName                     | Search | Intake        | HeaderName     |
+| Central Missouri Humane Society | K      | animalcontrol | Animal Control |
 	
 
-@Smoke1
-Scenario Outline: Test_001_Login221
-	When I Change Shelter "<ShelterName>"
-	And I Search "<Search>"
-	Then User Should See Search Reasult "<Search>"
-	When I Click Intake "<Intake>"
-	#Then User Should See Intake Header "<Intake>"
-	
-Examples: 
-| ShelterName                     | Search | Intake        |
-| Central Missouri Humane Society | K      | animalcontrol |
 

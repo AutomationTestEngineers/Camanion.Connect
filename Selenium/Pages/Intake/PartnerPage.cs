@@ -13,10 +13,18 @@ namespace Selenium
     {
         public PartnerPage(IWebDriver driver): base(driver) { }
 
-        
+        [FindsBy]
+        private IWebElement keywordSearch=null, searchButton=null;
+
+
         public string GetheaderName()
         {
-            return FindBy(By.XPath("//*[@id='content']/div[3]/div[1]/div/progress-step/div/div[1]/div/h1")).GetText(driver);
+            return FindBy(By.XPath("//*[@id='content']/div[3]/div[1]/progress-step/div//h1")).GetText(driver);
+        }
+        public void SearchPartner(string partner)
+        {
+            keywordSearch.SendText(partner, driver);
+            searchButton.ClickCustom(driver);
         }
     }
 }

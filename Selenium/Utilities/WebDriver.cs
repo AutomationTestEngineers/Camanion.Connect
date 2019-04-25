@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Chrome;
 using System;
 
@@ -6,11 +7,11 @@ namespace Selenium
 {
     public class WebDriver
     {
-        public virtual IWebDriver InitDriver(string browser,string Url)
+        public virtual IWebDriver InitDriver()
         {
             IWebDriver driver;
 
-            switch (browser)
+            switch (Config.Browser)
             {
                 case "chrome":
                     {
@@ -23,11 +24,11 @@ namespace Selenium
                     }
                 
                 default:
-                    throw new ArgumentException($"Browser Option {browser} Is Not Valid - Use Chrome, Edge or IE Instead");
+                    throw new ArgumentException($"Browser Option {Config.Browser} Is Not Valid - Use Chrome, Edge or IE Instead");
 
             }
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(Url);
+            driver.Navigate().GoToUrl(Config.Url);
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(200);
             return driver;

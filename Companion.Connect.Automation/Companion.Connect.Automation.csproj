@@ -65,7 +65,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Config.cs" />
     <Compile Include="Features\Smoke.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>

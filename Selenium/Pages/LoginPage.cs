@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Configuration;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using System;
@@ -27,11 +28,11 @@ namespace Selenium.Pages
         private IWebElement logInButton = null;
         
 
-        public HomePage Login(string email , string password)
+        public HomePage Login()
         {            
             Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 5);
-            this.email.SendText(email,driver);
-            this.password.SendText(password,driver);
+            this.email.SendText(Config.UserName,driver);
+            this.password.SendText(Config.Password, driver);
             Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),5);
             logInButton.ClickCustom(driver);
             return new HomePage(driver);

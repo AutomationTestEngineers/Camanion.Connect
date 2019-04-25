@@ -36,7 +36,7 @@ namespace Epiq.ECA.E2ETest.Global
             }
             else
             {
-                driver = (new WebDriver()).InitDriver(Config.Browser,Config.Url);
+                driver = (new WebDriver()).InitDriver();
             }
             scenarioContext.Set<IWebDriver>(driver);
             var login = new LoginPage(driver);
