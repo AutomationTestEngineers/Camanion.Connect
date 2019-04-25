@@ -47,6 +47,8 @@ namespace Epiq.ECA.E2ETest.Global
         public void CleanUp(FeatureContext featureContext)
         {
             IWebDriver driver = scenarioContext.Get<IWebDriver>();
+            if (scenarioContext.TestError != null)
+                driver.GetScreenShot(scenarioContext.ScenarioInfo.Title);
             driver.Quit();
         }
 
