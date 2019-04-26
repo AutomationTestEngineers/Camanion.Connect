@@ -74,7 +74,7 @@ namespace Selenium
             }
 
             image.Save(screenshotFilePath, ImageFormat.Jpeg);
-            Console.WriteLine("Screenshot: {0}", new Uri(screenshotFilePath));
+            //Console.WriteLine("Screenshot: {0}", new Uri(screenshotFilePath));
         }
 
         public static void GetScreenShot(this IWebDriver driver,string testName)
