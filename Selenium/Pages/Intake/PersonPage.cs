@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Selenium
 {
-    public class PartnerPage : BasePage
+    public class PersonPage : BasePage
     {
-        public PartnerPage(IWebDriver driver): base(driver) { }
+        public PersonPage(IWebDriver driver): base(driver) { }
 
         [FindsBy]
         private IWebElement searchButton=null;

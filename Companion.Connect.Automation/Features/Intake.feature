@@ -1,7 +1,5 @@
-﻿Feature: SpecFlowFeature1
-	In order to avoid silly mistakes
-	As a math idiot
-	I want to be told the sum of two numbers
+﻿Feature: Intake
+	In order Execute Intake Functionality
 
 Background: 
 	Given I Login
@@ -12,9 +10,10 @@ Scenario Outline: Test_001_Login112
 	And I Search "<Search>"
 	Then User Should See Search Reasult "<Search>"
 	When I Click Intake "<Intake>"
-	Then User Should See Intake Header "<HeaderName>"
-	When I Search Partner "K"
 	
 Examples: 
 | ShelterName                     | Search | Intake        | HeaderName     |
 | Central Missouri Humane Society | K      | animalcontrol | Animal Control |
+	
+
+

@@ -7,11 +7,11 @@ using TechTalk.SpecFlow;
 namespace Companion.Connect.Automation.Steps
 {
     [Binding]
-    public class SmokeSteps : BaseSteps
+    public class IntakeSteps : BaseSteps
     {
         HomePage homepage;
-        PartnerPage partnerPage;
-        public SmokeSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
+        PersonPage personPage;
+        public IntakeSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
 
         [Given(@"I Login")]
         public void ILogin()
@@ -42,20 +42,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click Intake ""(.*)""")]
         public void WhenIClickIntake(string intake)
         {
-            partnerPage = homepage.NewAddIntake(intake);
-        }
-
-        [Then(@"User Should See Intake Header ""(.*)""")]
-        public void ThenUserShouldSeeIntakeHeader(string intakeMessage)
-        {
-            partnerPage.GetheaderName().Should().Contain(intakeMessage);
-        }
-
-        [When(@"I Search Partner ""(.*)""")]
-        public void WhenISearchPartner(string name)
-        {
-            partnerPage.SearchPartner(name);            
-        }
+            personPage = homepage.NewAddIntake(intake);
+        }       
 
     }
 }

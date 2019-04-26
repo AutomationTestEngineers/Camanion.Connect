@@ -20,10 +20,7 @@ namespace Selenium
         private IWebElement searchInput = null;
 
         [FindsBy(How = How.XPath, Using = "//div[@class='input-group inline-input']/span/button")]
-        private IWebElement searchButton = null;
-
-        [FindsBy(How = How.XPath, Using = "//div[@class='input-group inline-input']/span/label[1]/span//i[1]")]
-        private IWebElement activeOnly = null;
+        private IWebElement searchButton = null;        
 
         [FindsBy(How = How.XPath, Using = "//div[@id='mainmenu']//button/i[@class='icon icon-setting']")]
         private IWebElement gearIcon = null;
@@ -46,9 +43,7 @@ namespace Selenium
             changeShelter.ClickCustom(driver);
             FindBy(By.XPath($"//strong[contains(text(),'{shelterName}')]"),10).ClickCustom(driver);
             ok.ClickCustom(driver);
-        }
-
-        
+        }        
 
         public string GetUserName()
         {
@@ -61,10 +56,9 @@ namespace Selenium
         }
         public List<string> getSearchList()
         {
-            //searchList.FirstOrDefault().HandlePopUp(driver);
             return searchList.GetText(driver);
         }
-        public PartnerPage NewAddIntake(string intakeType)
+        public PersonPage NewAddIntake(string intakeType)
         {
             newIntake.ClickCustom(driver);
 
@@ -84,7 +78,7 @@ namespace Selenium
 
             FindBy(By.XPath($"//div/a[contains(text(),'{xpath}')]")).ClickCustom(driver);
 
-            return new PartnerPage(driver);
+            return new PersonPage(driver);
         }
     }
 }

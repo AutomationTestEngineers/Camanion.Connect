@@ -65,39 +65,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Smoke.feature.cs">
+    <Compile Include="Features\Intake.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Smoke.feature</DependentUpon>
+      <DependentUpon>Intake.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\SpecFlowFeature1.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature1.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Features\SpecFlowFeature2.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>SpecFlowFeature2.feature</DependentUpon>
-    </Compile>
-    <Compile Include="Hooks.cs" />
+    <Compile Include="Steps\Hooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
-    <Compile Include="Steps\SmokeSteps.cs" />
+    <Compile Include="Steps\IntakeSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Smoke.feature">
+    <None Include="Features\Intake.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Smoke.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\SpecFlowFeature1.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature1.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\SpecFlowFeature2.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>SpecFlowFeature2.feature.cs</LastGenOutput>
+      <LastGenOutput>Intake.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
