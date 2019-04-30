@@ -32,7 +32,7 @@ namespace Selenium.Pages
         {            
             Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 5);
             this.email.SendText(Config.UserName,driver);
-            this.password.SendText(Config.Password, driver);
+            this.password.SendKeysWrapper(Config.Password, driver);
             Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),5);
             logInButton.ClickCustom(driver);
             return new HomePage(driver);

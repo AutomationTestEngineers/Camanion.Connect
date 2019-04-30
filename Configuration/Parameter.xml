@@ -12,4 +12,9 @@
   <BiteHistory>Bite - Person</BiteHistory>
   <Impression>Bites</Impression>
   <CauseOfDeath>Aggression</CauseOfDeath>
-</Parameter> 
+
+  <Test_Animal_Contol_Death>
+    <Impression>Bites</Impression>
+  </Test_Animal_Contol_Death>
+</Parameter>
+

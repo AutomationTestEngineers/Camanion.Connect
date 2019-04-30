@@ -27,7 +27,7 @@ namespace Selenium.Pages.Intake.AnimalControl
             petType.SelectDropDown(driver, Parameter.Get<string>("PetType"));
             Sleep();
             Parameter.Add<string>("AnimalName","Animal_" + FakeData.FirstName);
-            animalName.SendText(Parameter.Get<string>("AnimalName"), driver);
+            animalName.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);
             years.SendKeys(Parameter.Get<string>("Years"));
             years.SendKeys(Keys.Tab);
             primaryBreed.SelectByIndex(driver);

@@ -1,5 +1,7 @@
 ﻿using OpenQA.Selenium;
+using Selenium;
 using Selenium.Pages;
+using Selenium.Pages.Intake.AnimalControl;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,6 +16,8 @@ namespace Companion.Connect.Automation.Steps
     {
         protected IWebDriver driver;
         protected LoginPage loginPage;
+        protected HomePage homePage;
+        protected PartnerPageAnimalControl partnerPage;        
         protected readonly ScenarioContext scenarioContext;
 
         public BaseSteps(ScenarioContext scenarioContext)

@@ -19,7 +19,7 @@ namespace Selenium.Pages
         public void AddAnimal()
         {
             addAnimal.ClickCustom(driver);
-            animalName.SendText("Animal_" + FakeData.FirstName, driver);
+            animalName.SendKeysWrapper("Animal_" + FakeData.FirstName, driver);
         }
     }
 }

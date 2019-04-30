@@ -33,7 +33,7 @@ namespace Selenium
         }
         public void SearchPartner(string partner)
         {
-            search.SendText(partner, driver);
+            search.SendKeysWrapper(partner, driver);
             searchButton.ClickCustom(driver);
         }
 

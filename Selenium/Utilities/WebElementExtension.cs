@@ -36,7 +36,7 @@ namespace Selenium
                 else
                 {
                     Console.WriteLine("[Locator] :" + element.GetLocator());
-                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                    throw new Exception("[Error] : While Click & [Message] : [" + e.Message + "]");
                 }
             }
 
@@ -82,14 +82,13 @@ namespace Selenium
                 element.HighlightElement(driver);
                 element.Clear();
                 Thread.Sleep(100);
-                for(int i=0;i<text.Length;i++)
-                    element.SendKeys(text[i].ToString());
+                element.SendKeys(text);
                 ScreenBusy(driver);
             }
             catch (Exception e)
             {
                 if (HandlePopUp(driver))
-                    element.SendText(text, driver);
+                    element.SendKeysWrapper(text, driver);
                 else
                 {
                     Console.WriteLine("[Locator] :"+ element.GetLocator());
@@ -103,7 +102,7 @@ namespace Selenium
         {
             ScreenBusy(driver);
             bool selected = false;
-            for (int i=0; i <= 20; i++)
+            for (int i=0; i <= 25; i++)
             {
                 element.ClickCustom(driver);                
                 Thread.Sleep(300);
@@ -111,7 +110,7 @@ namespace Selenium
                 Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
                 foreach (var a in options)
                 {
-                    if (a.Text == option)
+                    if (a.Text.Trim() == option)
                     {
                         a.ClickCustom(driver);
                         selected = true;

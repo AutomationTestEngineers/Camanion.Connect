@@ -32,7 +32,7 @@ namespace Selenium.Pages
         public void EnterMicroChipDetails()
         {
             Parameter.Add<string>("MicroChipNumber",FakeData.Number(1,10000));
-            microchipNumber.SendText(Parameter.Get<string>("MicroChipNumber"),driver);
+            microchipNumber.SendKeysWrapper(Parameter.Get<string>("MicroChipNumber"),driver);
             issuer.SelectByIndex(driver);            
         }
 

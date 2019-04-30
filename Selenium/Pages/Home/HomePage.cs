@@ -66,7 +66,7 @@ namespace Selenium
 
         public void EnterSearch(string text)
         {
-            searchInput.SendText(text,driver);
+            searchInput.SendKeysWrapper(text,driver);
             searchButton.ClickCustom(driver);
         }
 
