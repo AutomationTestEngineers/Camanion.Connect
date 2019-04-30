@@ -52,9 +52,10 @@ namespace Selenium
                 {
                     var screenshot = takesScreenshot.GetScreenshot();
                     string screenshotFilePath = Path.Combine(artifactDirectory, fileNameBase + "_screenshot.jpg");
+                    Console.WriteLine($"[Screen Shot Path] {screenshotFilePath}");
                     var screenshotBase64 = screenshot.AsBase64EncodedString;
                     SaveByteArrayAsImage(screenshotFilePath, screenshotBase64);
-                    Console.WriteLine($"[IMG] {screenshotBase64}");
+                    //Console.WriteLine($"[IMG] {screenshotBase64}");
                 }
             }
             catch (Exception ex)

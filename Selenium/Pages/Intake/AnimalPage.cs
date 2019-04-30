@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Configuration;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,13 @@ namespace Selenium.Pages
     {
         public AnimalPage(IWebDriver driver) : base(driver) { }        
 
-        [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
-        private IWebElement search = null;
+        [FindsBy]
+        private IWebElement addAnimal = null, animalName=null;
+
+        public void AddAnimal()
+        {
+            addAnimal.ClickCustom(driver);
+            animalName.SendText("Animal_" + FakeData.FirstName, driver);
+        }
     }
 }

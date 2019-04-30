@@ -10,6 +10,7 @@ using System.Diagnostics;
 using Selenium;
 using Companion.Connect.Automation;
 using Selenium.Pages;
+using Configuration;
 
 namespace Epiq.ECA.E2ETest.Global
 {
@@ -29,6 +30,7 @@ namespace Epiq.ECA.E2ETest.Global
         [BeforeScenario]
         public void SetUp(FeatureContext featureContext)
         {
+            Parameter.Collect("Parameter.xml",new List<string> { "Parameter"});
             IWebDriver driver;
             if (featureContext.Keys.Count > 0)
             {
@@ -50,6 +52,7 @@ namespace Epiq.ECA.E2ETest.Global
             if (scenarioContext.TestError != null)
                 driver.GetScreenShot(scenarioContext.ScenarioInfo.Title);
             driver.Quit();
+            Parameter.ClearParameters();
         }
 
         [AfterStep]

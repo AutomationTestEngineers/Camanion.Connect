@@ -65,25 +65,39 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Features\Intake.feature.cs">
+    <Compile Include="Features\AnimalControl.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Intake.feature</DependentUpon>
+      <DependentUpon>AnimalControl.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\IntakeReturnsToOutcome.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>IntakeReturnsToOutcome.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Steps\AnimalControlSteps.cs" />
     <Compile Include="Steps\Hooks.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Steps\BaseSteps.cs" />
-    <Compile Include="Steps\IntakeSteps.cs" />
+    <Compile Include="Steps\CommonSteps.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Features\Intake.feature">
+    <None Include="Features\AnimalControl.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Intake.feature.cs</LastGenOutput>
+      <LastGenOutput>AnimalControl.feature.cs</LastGenOutput>
+    </None>
+    <None Include="Features\IntakeReturnsToOutcome.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>IntakeReturnsToOutcome.feature.cs</LastGenOutput>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Configuration\Configuration.csproj">
+      <Project>{1d97764c-53f6-4832-9f24-ddb9e52f9244}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Selenium\Selenium.csproj">
       <Project>{8ef547f4-cebb-43a6-8dad-43c927514ecc}</Project>
       <Name>Selenium</Name>

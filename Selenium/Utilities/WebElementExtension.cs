@@ -10,18 +10,159 @@ using System.Runtime.Remoting;
 using System.Windows.Forms;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
+using OpenQA.Selenium.Interactions;
 
 namespace Selenium
 {
     public static class WebElementExtensions
     {
-        public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 90)
+        public static void ClickCustom(this IWebElement element, IWebDriver driver, bool js = false)
+        {
+            try
+            {
+                element.ScreenBusy(driver);
+                Wait(ExpectedConditions.ElementToBeClickable(element),driver);
+                element.HighlightElement(driver);
+                if (!js)
+                    element.Click();
+                else
+                    JavaScriptExecutor(JSOperator.Click, element);
+                element.ScreenBusy(driver);
+            }
+            catch (Exception e)
+            {
+                if (HandlePopUp(driver))
+                    element.ClickCustom(driver);
+                else
+                {
+                    Console.WriteLine("[Locator] :" + element.GetLocator());
+                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                }
+            }
+
+        }
+
+        public static void SendText(this IWebElement element, string text, IWebDriver driver, bool js = false)
+        {
+            try
+            {
+                ScreenBusy(driver);
+                element.HighlightElement(driver);
+                if (!js)
+                {
+                    element.ClearManual();
+                    Thread.Sleep(100);
+                    element.PasteFromClipboard(text);
+                }
+                else
+                {
+                    JavaScriptExecutor(JSOperator.Clear, element);
+                    JavaScriptExecutor(string.Format(JSOperator.SetValue, text), element);
+                }
+                ScreenBusy(driver);
+            }
+            catch (Exception e)
+            {
+                if (HandlePopUp(driver))
+                    element.SendText(text, driver);
+                else
+                {
+                    Console.WriteLine("[Locator] :" + element.GetLocator());
+                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                }
+                    
+            }
+        }
+
+        public static void SendKeysWrapper(this IWebElement element, string text, IWebDriver driver)
+        {
+            try
+            {
+                ScreenBusy(driver);
+                element.HighlightElement(driver);
+                element.Clear();
+                Thread.Sleep(100);
+                for(int i=0;i<text.Length;i++)
+                    element.SendKeys(text[i].ToString());
+                ScreenBusy(driver);
+            }
+            catch (Exception e)
+            {
+                if (HandlePopUp(driver))
+                    element.SendText(text, driver);
+                else
+                {
+                    Console.WriteLine("[Locator] :"+ element.GetLocator());
+                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                }
+                    
+            }
+        }
+
+        public static void SelectDropDown(this IWebElement element, IWebDriver driver,string option, bool js = false)
+        {
+            ScreenBusy(driver);
+            bool selected = false;
+            for (int i=0; i <= 20; i++)
+            {
+                element.ClickCustom(driver);                
+                Thread.Sleep(300);
+                var options = element.FindElements(By.TagName("option"));
+                Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
+                foreach (var a in options)
+                {
+                    if (a.Text == option)
+                    {
+                        a.ClickCustom(driver);
+                        selected = true;
+                        return;
+                    }
+                }
+                Thread.Sleep(3000);
+            }
+            if (!selected)
+            {
+                Console.WriteLine("[Locator] :" + element.GetLocator());
+                throw new Exception($"[Error] : Selecting combobox value [{option}] to  element [{element}] was unsuccessfull");
+            }
+        }
+
+        public static void SelectByIndex(this IWebElement element, IWebDriver driver,int index=1)
+        {            
+
+            ScreenBusy(driver);
+            bool selected = false;
+            for (int i = 0; i <= 20; i++)
+            {
+                element.ClickCustom(driver);
+                Thread.Sleep(300);
+                var options = element.FindElements(By.TagName("option"));
+                Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
+                for(int j=0;j< options.Count(); j++)
+                {
+                    options[index].ClickCustom(driver);
+                    selected = true;
+                    return;
+                }
+                Thread.Sleep(3000);
+            }
+            if (!selected)
+            {                
+                Console.WriteLine("[Locator] :" + element.GetLocator());
+                throw new Exception($"[Error] : Selecting combobox value [{index}] to  element [{element}] was unsuccessfull");
+            }
+
+        }
+
+        public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 120)
         {
             Thread.Sleep(100);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
             wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")));
+            Thread.Sleep(100);
         }
-        public static void ScreenBusy(IWebDriver driver, int timeout = 90)
+
+        public static void ScreenBusy(IWebDriver driver, int timeout = 120)
         {
             Thread.Sleep(100);
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
@@ -46,67 +187,7 @@ namespace Selenium
                 .GetProperty("Bys", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?
                 .GetValue(elementProxy);
             return (By)bysFromElement[0];
-        }
-
-        public static void SelectDropDown(this IWebElement element, IWebDriver driver, string option = null, bool js = false)
-        {
-            ScreenBusy(driver);
-            element.HighlightElement(driver);
-            if (!js)
-            {                 
-                bool selected = false;
-                var options = element.FindElements(By.TagName("option"));
-                if (!string.IsNullOrEmpty(option))
-                    foreach (var a in options)
-                    {
-                        if (a.Text == option)
-                        {
-                            a.ClickCustom(driver);
-                            selected = true;
-                            break;
-                        }
-                    }
-                else
-                {
-                    options[1].Click();
-                    selected = true;
-                }
-                if (!selected)
-                    throw new Exception($"[Error] : Selecting combobox value [{option}] to  element [{element}] was unsuccessfull");
-            }
-            else
-            {
-                JavaScriptExecutor(string.Format(JSOperator.DropDown, option), element);
-            }
-        }
-
-        public static void SendText(this IWebElement element, string text,IWebDriver driver, bool js = false)
-        {
-            try
-            {
-                ScreenBusy(driver);
-                element.HighlightElement(driver);
-                if (!js)
-                {
-                    element.ClearManual();
-                    Thread.Sleep(100);
-                    element.PasteFromClipboard(text);
-                }
-                else
-                {
-                    JavaScriptExecutor(JSOperator.Clear, element);
-                    JavaScriptExecutor(string.Format(JSOperator.SetValue, text), element);
-                }
-                ScreenBusy(driver);
-            }
-            catch (Exception e)
-            {
-                if (HandlePopUp(driver))
-                    element.SendText(text,driver);
-                else
-                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message+"]");
-            }
-        }
+        }        
 
         public static string GetText(this IWebElement element,IWebDriver driver)
         {
@@ -162,27 +243,7 @@ namespace Selenium
                 else
                     throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
             }
-        }
-        public static void ClickCustom(this IWebElement element,IWebDriver driver, bool js = false)
-        {
-            try
-            {
-                element.ScreenBusy(driver);
-                element.HighlightElement(driver);
-                if (!js)
-                    element.Click();
-                else
-                    JavaScriptExecutor(JSOperator.Click, element);                
-            }
-            catch (Exception e)
-            {
-                if (HandlePopUp(driver))
-                    element.ClickCustom(driver);
-                else
-                    throw new Exception("[Error] : While Click & [Message] :" + e.Message);
-            }
-
-        }
+        }        
 
         public static void ClearManual(this IWebElement element)
         {
@@ -198,7 +259,6 @@ namespace Selenium
             thread.Join();
             element.SendKeys(OpenQA.Selenium.Keys.Control + "v");
         }
-
 
         public static IWebDriver GetWrappedDriver(this IWebElement element)
         {
@@ -230,7 +290,7 @@ namespace Selenium
         {
             try
             {
-                string xpath = "//button[contains(text(),'OK')] | //button[contains(text(),'Yes')]";
+                string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]]";
                 Thread.Sleep(300);
                 ScreenBusy(driver);
                 var e = driver.FindElement(By.XPath(xpath));
@@ -246,6 +306,7 @@ namespace Selenium
             }
 
         }
+
 
         private static void JavaScriptExecutor(string pattern, IWebElement element)
         {
@@ -265,16 +326,17 @@ namespace Selenium
         {
             for (int i = 0; i < 2; i++)
             {
+                Thread.Sleep(100);
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 3px solid blue;");
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
             }
 
         }
 
-        public static IJavaScriptExecutor Js(this IWebElement element)
+        public static void MoveAndClick(this IWebElement element,IWebDriver driver)
         {
-            Thread.Sleep(50);
-            return element.GetWrappedDriver() as IJavaScriptExecutor;
+            Actions actions = new Actions(driver);
+            actions.MoveToElement(element).Click().Build().Perform();
         }
 
         private static class JSOperator

@@ -27,6 +27,7 @@ namespace Selenium
             wait.IgnoreExceptionTypes(typeof(Exception));
             wait.Until(condition);
         }
+
         public IWebElement FindBy(By by,int i=5)
         {
             try
@@ -38,12 +39,37 @@ namespace Selenium
             {
                 return FindBy(by);
             }
+            catch(NoSuchElementException e)
+            {
+                return null;
+            }
         }
-        public void ScreenBusy(int timeout = 90)
+
+        public void ScreenBusy(int timeout = 120)
         {
             Thread.Sleep(1000);
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")),timeout);
             Thread.Sleep(1000);
+        }
+
+        public void Signature()
+        {
+            if (FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a"))==null)
+            {
+                FindBy(By.XPath("//div[@class='checkbox-blue']/label/i")).ClickCustom(driver);
+                FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
+                var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
+                actions.MoveToElement(signature).Click().MoveByOffset(200, 80).Click().MoveByOffset(100, 100)
+                    .DoubleClick().Build().Perform();
+                FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);
+                Thread.Sleep(200);
+                ScreenBusy();
+            }
+        }
+
+        public void Sleep(int timeout = 1000)
+        {
+            Thread.Sleep(timeout);
         }
     }
 }

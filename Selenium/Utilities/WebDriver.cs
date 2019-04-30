@@ -11,7 +11,7 @@ namespace Selenium
         {
             IWebDriver driver;
 
-            switch (Config.Browser)
+            switch (Parameter.Get<string>("Browser").ToLower())
             {
                 case "chrome":
                     {
@@ -24,11 +24,11 @@ namespace Selenium
                     }
                 
                 default:
-                    throw new ArgumentException($"Browser Option {Config.Browser} Is Not Valid - Use Chrome, Edge or IE Instead");
+                    throw new ArgumentException($"Browser Option {Parameter.Get<string>("Browser")} Is Not Valid - Use Chrome, Edge or IE Instead");
 
             }
             driver.Manage().Window.Maximize();
-            driver.Navigate().GoToUrl(Config.Url);
+            driver.Navigate().GoToUrl(Parameter.Get<string>("SiteUrl"));
             driver.Manage().Timeouts().PageLoad = TimeSpan.FromSeconds(60);
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromMilliseconds(200);
             return driver;

@@ -1,17 +1,18 @@
 ﻿using FluentAssertions;
 using Selenium;
 using Selenium.Pages;
+using Selenium.Pages.Intake;
 using System;
 using TechTalk.SpecFlow;
 
 namespace Companion.Connect.Automation.Steps
 {
     [Binding]
-    public class IntakeSteps : BaseSteps
+    public class CommonSteps : BaseSteps
     {
         HomePage homepage;
-        PersonPage personPage;
-        public IntakeSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
+        NewIntakePage newIntakePage;
+        public CommonSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
 
         [Given(@"I Login")]
         public void ILogin()
@@ -39,11 +40,11 @@ namespace Companion.Connect.Automation.Steps
                 s.ToLower().Should().Contain(searchName.ToLower());
         }
 
-        [When(@"I Click Intake ""(.*)""")]
-        public void WhenIClickIntake(string intake)
+        [When(@"I Click New Intake")]
+        public void WhenIClickNewIntake()
         {
-            personPage = homepage.NewAddIntake(intake);
-        }       
+            homepage.NewAddIntake();
+        }
 
     }
 }
