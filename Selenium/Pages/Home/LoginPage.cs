@@ -31,8 +31,8 @@ namespace Selenium.Pages
         public HomePage Login()
         {            
             Wait(ExpectedConditions.ElementToBeClickable(this.email.GetLocator()), 5);
-            this.email.SendText(Config.UserName,driver);
-            this.password.SendKeysWrapper(Config.Password, driver);
+            this.email.SendText(Parameter.Get<string>("Email"),driver);
+            this.password.SendKeysWrapper(Parameter.Get<string>("Password"), driver);
             Wait(ExpectedConditions.ElementToBeClickable(logInButton.GetLocator()),5);
             logInButton.ClickCustom(driver);
             return new HomePage(driver);

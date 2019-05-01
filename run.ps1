@@ -1,7 +1,7 @@
 try
 {
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
-	[string]$TESTSELECT = 'cat == AnimalControl'
+	[string]$TESTSELECT = 'cat == PublicStray'
 	
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm.ss
 	$RESULTDIR="C:\Automation\$DateTime"
@@ -41,7 +41,7 @@ try
     (Get-Content $RESULOUTTXT) | ForEach-Object { $_ -replace '=>', '*****' } | Set-Content $RESULOUTTXT
 
 	# Generate Html Report
-    specflow nunitexecutionreport --ProjectFile=$PROJECT --xmlTestResult=$RESULTXML --testOutput=$RESULOUTTXT --OutputFile=$OUTHTML --XsltFile=$XSLTFILE   
+    #specflow nunitexecutionreport --ProjectFile=$PROJECT --xmlTestResult=$RESULTXML --testOutput=$RESULOUTTXT --OutputFile=$OUTHTML --XsltFile=$XSLTFILE   
 	 
 
 	Stop-Transcript
