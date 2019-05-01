@@ -11,4 +11,4 @@ Scenario: Test_Intake_Transfer_Outcome_Adoption
 	And I Search "k"
 	And I Click New Intake 
 	And I Select "Transfer" Intake
-	And I Select Partner "John"
+	And I Select Partner "k"

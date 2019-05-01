@@ -289,7 +289,7 @@ namespace Selenium
         {
             try
             {
-                string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]]";
+                string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]";
                 Thread.Sleep(300);
                 ScreenBusy(driver);
                 var e = driver.FindElement(By.XPath(xpath));
