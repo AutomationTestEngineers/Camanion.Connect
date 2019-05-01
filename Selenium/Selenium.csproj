@@ -1,0 +1,114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{8EF547F4-CEBB-43A6-8DAD-43C927514ECC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Selenium</RootNamespace>
+    <AssemblyName>Selenium</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="SeleniumExtras.PageObjects, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetSeleniumExtras.PageObjects.3.11.0\lib\net45\SeleniumExtras.PageObjects.dll</HintPath>
+    </Reference>
+    <Reference Include="SeleniumExtras.WaitHelpers, Version=3.11.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\DotNetSeleniumExtras.WaitHelpers.3.11.0\lib\net45\SeleniumExtras.WaitHelpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebDriver, Version=3.141.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Selenium.WebDriver.3.141.0\lib\net45\WebDriver.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Pages\Home\AdministrationPage.cs" />
+    <Compile Include="Pages\BasePage.cs" />
+    <Compile Include="Pages\Home\HomePage.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Animal_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Behavior_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Detials_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Medical_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Partner_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalControl\Summary_AnimalControl_Page.cs" />
+    <Compile Include="Pages\Intake\AnimalPage.cs" />
+    <Compile Include="Pages\Intake\BehaviorPage.cs" />
+    <Compile Include="Pages\Intake\DetailsPage.cs" />
+    <Compile Include="Pages\Intake\MedicalPage.cs" />
+    <Compile Include="Pages\Intake\PersonPage.cs" />
+    <Compile Include="Pages\Home\LoginPage.cs" />
+    <Compile Include="Pages\Intake\PaymentPage.cs" />
+    <Compile Include="Pages\Intake\NewIntakePage.cs" />
+    <Compile Include="Pages\Intake\SummaryPage.cs" />
+    <Compile Include="Pages\Outcome\DeathOutcomePage.cs" />
+    <Compile Include="Pages\Outcome\NewOutComePage.cs" />
+    <Compile Include="Pages\Outcome\OutcomeSearchPage.cs" />
+    <Compile Include="Pages\Home\ProfilePage.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utilities\WebDriver.cs" />
+    <Compile Include="Utilities\WebDriverExtension.cs" />
+    <Compile Include="Utilities\WebElementExtension.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Configuration\Configuration.csproj">
+      <Project>{1d97764c-53f6-4832-9f24-ddb9e52f9244}</Project>
+      <Name>Configuration</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Pages\Intake\Publicstray\" />
+    <Folder Include="Pages\Intake\Return\" />
+    <Folder Include="Pages\Intake\Service\" />
+    <Folder Include="Pages\Intake\Surrender\" />
+    <Folder Include="Pages\Intake\Transfer\" />
+    <Folder Include="Pages\Outcome\AnimalControl\" />
+    <Folder Include="Pages\Outcome\Publicstray\" />
+    <Folder Include="Pages\Outcome\Return\" />
+    <Folder Include="Pages\Outcome\Service\" />
+    <Folder Include="Pages\Outcome\Surrender\" />
+    <Folder Include="Pages\Outcome\Transfer\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets'))" />
+  </Target>
+</Project>
