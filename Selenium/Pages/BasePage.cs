@@ -28,10 +28,11 @@ namespace Selenium
             wait.Until(condition);
         }
 
-        public IWebElement FindBy(By by,int i=5)
+        public IWebElement FindBy(By by,int i=5,bool exist = false)
         {
             try
             {
+                if (exist) { Sleep(i * 1000); return driver.FindElement(by); }                    
                 Wait(ExpectedConditions.ElementExists(by),i);
                 return driver.FindElement(by);
             }
@@ -39,7 +40,7 @@ namespace Selenium
             {
                 return FindBy(by);
             }
-            catch(NoSuchElementException e)
+            catch(NoSuchElementException ex)
             {
                 return null;
             }

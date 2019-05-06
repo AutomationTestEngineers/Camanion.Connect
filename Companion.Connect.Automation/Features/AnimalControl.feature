@@ -7,9 +7,8 @@ Background:
 
 
 Scenario Outline: Test_Animal_Contol_Death
-	When I Change Shelter "Central Missouri Humane Society"
-	And I Search "k"
-	And I Click New Intake 
+	When I Change Shelter "Central Missouri Humane Society"	
+	And I Click Add
 	And I Select "Animal Control" Intake
 	And I Select Partner "k"
 	And I Add Animal
@@ -21,9 +20,14 @@ Scenario Outline: Test_Animal_Contol_Death
 	And I Realease Animal Holds
 	And I Click New Outcome Button
 	And I Select "<Outcome>"
-	#And I Delete Recent Outcome
-	#And I Delete Recent Intake
+	And I Delete Recent Outcome
+	And I Delete Recent Intake
 
 	Examples: 
-	| Outcome |
-	| Death   |
+	| Outcome         |
+	#| Return to Owner |
+	| Death           |
+	#| Euthanasia      |
+	#| Transfer        |
+	#| Return to Owner |
+	#| Adoption        |

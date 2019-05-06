@@ -12,17 +12,28 @@ namespace Selenium.Pages.Outcome
     {
         public NewOutComePage(IWebDriver driver) : base(driver) { }
 
-        [FindsBy]
-        private IWebElement elem = null;
+        //[FindsBy]
+        //private IWebElement elem = null;
 
         public void SelectOutcome(string outCome)
         {            
             FindBy(By.XPath($"//a[@id='outcomeType.Name'][contains(text(),'{outCome}')]")).ClickCustom(driver);
+            var death = new DeathOutcomePage(driver);
             switch (outCome)
-            {
-                case "Death":
-                    var death = new DeathOutcomePage(driver);
+            {                
+                case "Death":                    
                     death.EnterDeathDetails();
+                    break;
+                case "Euthanasia":                    
+                    death.EnterDeathEuthanasia();
+                    break;
+                case "Transfer":
+                    death.EnterDeathTransfer();
+                    break;
+                case "Return to Owner":
+
+                    break;
+                case "Adoption":
                     break;
             }
         }

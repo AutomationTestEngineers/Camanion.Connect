@@ -17,16 +17,19 @@ namespace Selenium.Pages
 
         [FindsBy]
         private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null,
-            ViewHoldHistory=null, btnClose=null, NewOutcome=null;
-
-        [FindsBy(How = How.XPath, Using = "//div[7]//*[@id='headingAction']/label/span")]
-        private IWebElement animalDetails = null;
+             btnClose=null, NewOutcome=null;
 
         [FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
         private IWebElement animalCurrentHolds = null;
 
         [FindsBy(How = How.XPath, Using = "//form[@name='animalHold']/div[6]/div/div[1]/button")]
         private IWebElement releaseHoldBtn = null;
+
+        [FindsBy(How = How.XPath, Using = "(//button[@id='ViewHoldHistory'])[1]")]
+        private IWebElement ViewHoldHistory = null;
+
+        [FindsBy(How = How.XPath, Using = "(//div[7]//*[@id='headingAction']/label/span)[1]")]
+        private IWebElement animalDetails = null;
 
 
         public void EnterMicroChipDetails()
@@ -38,16 +41,27 @@ namespace Selenium.Pages
 
         public void EnterAnimalDetails()
         {
+            Sleep(1000);
+            actions.MoveToElement(animalDetails).Click().Build().Perform();
+            if (FindBy(By.XPath("(//div[7]//*[@id='headingAction']/label/span)[1][@class='expandable collapsed']"), 1, true) != null)
+                animalDetails.ClickCustom(driver);
+
             animalDetails.ClickCustom(driver);
             animalAltered.SelectByIndex(driver, 2);
             btnSave.ClickCustom(driver);
         }
 
         public void ReleaseHolds()
-        {
-            animalCurrentHolds.ClickCustom(driver);
+        {            
+            Sleep(2000);
+            ScreenBusy();
+            var ele = FindBy(By.CssSelector("span[data-target='#collapseHold']"),3,true);
+            actions.MoveToElement(ele).Click().Build().Perform();
+            if(FindBy(By.CssSelector("div[id='collapseHold'][class='panel-collapse collapse']"), 1, true)!=null)
+                animalCurrentHolds.ClickCustom(driver);
+
             ViewHoldHistory.ClickCustom(driver);
-            for(int i = 0; i < 10; i++)
+            for(int i = 0; i < 20; i++)
             {
                 try
                 {

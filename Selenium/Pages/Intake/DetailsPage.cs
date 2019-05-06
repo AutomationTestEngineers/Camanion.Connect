@@ -12,7 +12,34 @@ namespace Selenium.Pages.Intake
     {
         public DetailsPage(IWebDriver driver) : base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
-        private IWebElement search = null;
+        [FindsBy]
+        private IWebElement site = null, subSite = null, location = null, subLocation = null, intakeDetailsnote = null;
+
+        [FindsBy(How = How.Name, Using = "IntakeSubType")]
+        private IWebElement intakeSubType = null;
+
+        [FindsBy(How = How.Name, Using = "AnimalCondition")]
+        private IWebElement animalCondition = null;
+
+        [FindsBy(How = How.Id, Using = "intakeDetails-save")]
+        private IWebElement saveNotes = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-ng-click='vm.done()']")]
+        private IWebElement saveAndClose = null;
+
+        public HomePage EnterDetailsInfo()
+        {
+            intakeSubType.SelectByIndex(driver);
+            animalCondition.SelectByIndex(driver);
+            site.SelectByIndex(driver);
+            subSite.SelectByIndex(driver);
+            location.SelectByIndex(driver);
+            subLocation.SelectByIndex(driver);
+            intakeDetailsnote.SendKeysWrapper("intake Detailsnote", driver);
+            saveNotes.ClickCustom(driver);
+            saveAndClose.ClickCustom(driver);
+            Sleep(3000);
+            return new HomePage(driver);
+        }
     }
 }

@@ -26,6 +26,21 @@ namespace Selenium
             }           
         } 
 
+        public static void Popup(this IWebDriver driver,bool clickYes=true)
+        {
+            if(driver.Find(By.XPath("//div[@class='modal-content']"), 2).Displayed)
+            {
+                if (clickYes)
+                    driver.Find(By.XPath("//button[contains(text(),'Yes')]"), 2).ClickCustom(driver);
+                else
+                    driver.Find(By.XPath("//button[contains(text(),'No')]"), 2).ClickCustom(driver);
+
+                Console.WriteLine("************* Handling Popup *************");
+                Console.WriteLine("     [Performed] : Click On 'OK/Yes'      ");
+                Console.WriteLine("******************************************");
+            }
+        }
+
         private static IWebElement FindBy(IWebDriver driver, By by,int timeout)
         {
             driver.Wait(ExpectedConditions.ElementIsVisible(by), timeout);
