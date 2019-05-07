@@ -98,5 +98,10 @@ namespace Selenium
             string fileNameBase = string.Format("Error_{0}_{1}", testName, DateTime.Now.ToString("yyyyMMdd_HHmmss"));
             driver.TakeScreenshot(fileNameBase);
         }
+
+        public static void ScrollPage(this IWebDriver driver,int x,int y)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript($"window.scrollBy({x},{y})");
+        }
     }
 }

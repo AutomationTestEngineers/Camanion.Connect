@@ -5,9 +5,8 @@ Feature: AnimalControl
 Background: 
 	Given I Login
 
-
 Scenario Outline: Test_Animal_Contol_Death
-	When I Change Shelter "Central Missouri Humane Society"	
+	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Animal Control" Intake
 	And I Select Partner "k"
@@ -24,9 +23,9 @@ Scenario Outline: Test_Animal_Contol_Death
 	And I Delete Recent Intake
 
 	Examples: 
-	| Outcome         |
-	#| Return to Owner |
+	| Outcome         |	
 	| Death           |
+	#| Return to Owner |
 	#| Euthanasia      |
 	#| Transfer        |
 	#| Return to Owner |

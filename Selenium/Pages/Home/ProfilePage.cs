@@ -19,8 +19,8 @@ namespace Selenium.Pages
         private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null,
              btnClose=null, NewOutcome=null;
 
-        [FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
-        private IWebElement animalCurrentHolds = null;
+        //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
+        //private IWebElement animalCurrentHolds = null;
 
         [FindsBy(How = How.XPath, Using = "//form[@name='animalHold']/div[6]/div/div[1]/button")]
         private IWebElement releaseHoldBtn = null;
@@ -28,8 +28,11 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "(//button[@id='ViewHoldHistory'])[1]")]
         private IWebElement ViewHoldHistory = null;
 
-        [FindsBy(How = How.XPath, Using = "(//div[7]//*[@id='headingAction']/label/span)[1]")]
+        [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='animalDetail']/div/label/span/span")]
         private IWebElement animalDetails = null;
+
+        [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
+        private IWebElement animalCurrentHolds = null;
 
 
         public void EnterMicroChipDetails()
@@ -41,23 +44,38 @@ namespace Selenium.Pages
 
         public void EnterAnimalDetails()
         {
-            Sleep(1000);
+            Sleep(500);
+            driver.ScrollPage(0, 1000);
+            Sleep(500);
             actions.MoveToElement(animalDetails).Click().Build().Perform();
-            if (FindBy(By.XPath("(//div[7]//*[@id='headingAction']/label/span)[1][@class='expandable collapsed']"), 1, true) != null)
+            Sleep(1000);
+            if (FindBy(By.XPath("(//div[7]//*[@id='headingAction']/label/span)[1][@class='expandable collapsed']"), 2, true) != null)
                 animalDetails.ClickCustom(driver);
 
-            animalDetails.ClickCustom(driver);
             animalAltered.SelectByIndex(driver, 2);
             btnSave.ClickCustom(driver);
         }
 
         public void ReleaseHolds()
         {            
-            Sleep(2000);
+            Sleep(500);
             ScreenBusy();
-            var ele = FindBy(By.CssSelector("span[data-target='#collapseHold']"),3,true);
-            actions.MoveToElement(ele).Click().Build().Perform();
-            if(FindBy(By.CssSelector("div[id='collapseHold'][class='panel-collapse collapse']"), 1, true)!=null)
+            driver.ScrollPage(0, 1000);
+            Sleep(500);
+            Wait(ExpectedConditions.PresenceOfAllElementsLocatedBy(animalCurrentHolds.GetLocator()),10);
+            bool state = true;
+            while (state)
+            {
+                try
+                {
+                    driver.FindElement(animalCurrentHolds.GetLocator()).Click();
+                    state = false;
+                }
+                catch(Exception e) { state = true; }
+            }
+            //actions.MoveToElement(FindBy(animalCurrentHolds.GetLocator())).Click().Build().Perform();
+            Sleep(500);
+            if (FindBy(By.XPath("(//div[6]//*[@id='headingAction']/label/span)[1][@class='expandable ng-scope collapsed']"), 1, true) != null)
                 animalCurrentHolds.ClickCustom(driver);
 
             ViewHoldHistory.ClickCustom(driver);

@@ -35,7 +35,9 @@ namespace Selenium.Pages
             primaryColor.SelectByIndex(driver);
             gender.SelectDropDown(driver, Parameter.Get<string>("Gender"));
             estAdultSize.SelectByIndex(driver);
-            noteType.SelectByIndex(driver);
+            if(FindBy(noteType.GetLocator(), 1, true)!=null)
+                noteType.SelectByIndex(driver);
+
             nextButton.ClickCustom(driver);
             return new BehaviorPage(driver);
         }

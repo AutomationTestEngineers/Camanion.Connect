@@ -28,14 +28,14 @@ namespace Selenium.Pages.Intake
 
         public MedicalPage EnterBehavior()
         {
-            temperament.SelectDropDown(driver, Parameter.Get<string>("Temperament"));
+            temperament.SelectByIndex(driver,2);
             biteHistory.SelectDropDown(driver, Parameter.Get<string>("BiteHistory"));
             FindBy(By.XPath($"(//div[@class='row'])[10]//label[contains(.,'{Parameter.Get<string>("Impression")}')]//i[1]")).ClickCustom(driver);
             handlingColor.ClickCustom(driver);
             FindBy(By.XPath($"//ul[@ng-show='showTicks']/li[3]")).ClickCustom(driver);
             intakeBehaviornote.SendKeysWrapper("AutomationTest", driver);
             saveNotes.ClickCustom(driver);
-            Sleep(200);
+            Sleep(500);
             nextBtn.ClickCustom(driver);
             return new MedicalPage(driver);
         }

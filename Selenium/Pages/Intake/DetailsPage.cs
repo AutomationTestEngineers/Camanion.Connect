@@ -13,7 +13,7 @@ namespace Selenium.Pages.Intake
         public DetailsPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement site = null, subSite = null, location = null, subLocation = null, intakeDetailsnote = null;
+        private IWebElement site = null, subSite = null, location = null, subLocation = null, intakeDetailsnote = null, intakeServicenote=null;
 
         [FindsBy(How = How.Name, Using = "IntakeSubType")]
         private IWebElement intakeSubType = null;
@@ -27,6 +27,10 @@ namespace Selenium.Pages.Intake
         [FindsBy(How = How.XPath, Using = "//button[@data-ng-click='vm.done()']")]
         private IWebElement saveAndClose = null;
 
+        [FindsBy(How = How.XPath, Using = "//button[@data-ng-click='vm.gotoNextStep()']")]
+        private IWebElement goNext = null;
+
+
         public HomePage EnterDetailsInfo()
         {
             intakeSubType.SelectByIndex(driver);
@@ -37,8 +41,26 @@ namespace Selenium.Pages.Intake
             subLocation.SelectByIndex(driver);
             intakeDetailsnote.SendKeysWrapper("intake Detailsnote", driver);
             saveNotes.ClickCustom(driver);
+            Signature();            
             saveAndClose.ClickCustom(driver);
             Sleep(3000);
+            return new HomePage(driver);
+        }
+
+        public HomePage EnterDetails(string type)
+        {
+            if(type.Trim()== "Service")
+            {
+                site.SelectByIndex(driver);
+                subSite.SelectByIndex(driver);
+                location.SelectByIndex(driver);
+                subLocation.SelectByIndex(driver);
+                intakeServicenote.SendKeysWrapper("intake Service note", driver);
+                FindBy(By.Id("intakeService-save")).ClickCustom(driver);
+                Signature();
+                goNext.ClickCustom(driver);
+                Sleep(3000);
+            }
             return new HomePage(driver);
         }
     }

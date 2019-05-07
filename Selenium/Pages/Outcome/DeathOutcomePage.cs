@@ -30,7 +30,7 @@ namespace Selenium.Pages.Outcome
         public void EnterDeathDetails()
         {
             Sleep(3000);
-            causeOfDeath.SelectDropDown(driver,Parameter.Get<string>("CauseOfDeath"));
+            causeOfDeath.SelectByIndex(driver,2);
             Deathnote.SendKeysWrapper(FakeData.Word, driver);
             nextButton.ClickCustom(driver);
             closeButton.ClickCustom(driver);

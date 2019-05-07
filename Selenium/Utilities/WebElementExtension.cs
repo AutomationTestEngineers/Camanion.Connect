@@ -147,7 +147,15 @@ namespace Selenium
                     element.ClickCustom(driver);
                     Thread.Sleep(200);
                     var options = element.FindElements(By.TagName("option"));
-                    Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
+                    Wait((d => d.FindElements(By.TagName("option")).Count() > 1), driver, 1);
+                    //for(int k = 0; i < 10; i++)
+                    //{
+                    //    if (options.Count() > 1)
+                    //    {
+                    //        Thread.Sleep(2000);
+                    //        break;
+                    //    }
+                    //}                        
                     for (int j = 0; j < options.Count(); j++)
                     {
                         options[index].ClickCustom(driver);
@@ -198,6 +206,7 @@ namespace Selenium
 
         public static By GetLocator(this IWebElement element)
         {
+            Thread.Sleep(20);
             var elementProxy = RemotingServices.GetRealProxy(element);
             var bysFromElement = (IReadOnlyList<object>)elementProxy
                 .GetType()
