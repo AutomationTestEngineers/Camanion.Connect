@@ -35,40 +35,32 @@ namespace Selenium
                     element.ClickCustom(driver);
                 else
                 {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
-                    throw new Exception("[Error] : While Click & [Message] : [" + e.Message + "]");
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + " || " + $"[Error] : While Click & [Message] : [" + e.Message + "]");
+                    throw new Exception(e.Message);
                 }
             }
 
         }
 
-        public static void SendText(this IWebElement element, string text, IWebDriver driver, bool js = false)
+        public static void ClearAndPaste(this IWebElement element, string text, IWebDriver driver)
         {
             try
             {
                 ScreenBusy(driver);
                 element.HighlightElement(driver);
-                if (!js)
-                {
-                    element.ClearManual();
-                    Thread.Sleep(100);
-                    element.PasteFromClipboard(text);
-                }
-                else
-                {
-                    JavaScriptExecutor(JSOperator.Clear, element);
-                    JavaScriptExecutor(string.Format(JSOperator.SetValue, text), element);
-                }
+                element.ClearManual();
+                Thread.Sleep(100);
+                element.PasteFromClipboard(text);
                 ScreenBusy(driver);
             }
             catch (Exception e)
             {
                 if (HandlePopUp(driver))
-                    element.SendText(text, driver);
+                    element.ClearAndPaste(text, driver);
                 else
-                {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
-                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                {                   
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + " || " + $"[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                    throw new Exception(e.Message);
                 }
                     
             }
@@ -81,7 +73,7 @@ namespace Selenium
                 ScreenBusy(driver);
                 element.HighlightElement(driver);
                 element.Clear();
-                Thread.Sleep(100);
+                Thread.Sleep(50);
                 element.SendKeys(text);
                 ScreenBusy(driver);
             }
@@ -90,8 +82,8 @@ namespace Selenium
                 if (HandlePopUp(driver)) element.SendKeysWrapper(text, driver);
                 else
                 {
-                    Console.WriteLine("[Locator] :"+ element.GetLocator());
-                    throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + " || " + $"[Error] : While Sending Text & [Message] : [" + e.Message + "]");
+                    throw new Exception(e.Message);
                 }                    
             }
         }
@@ -101,11 +93,11 @@ namespace Selenium
             try
             {
                 ScreenBusy(driver);
+                Thread.Sleep(20);
                 bool selected = false;
                 for (int i = 0; i < 25; i++)
                 {
                     element.ClickCustom(driver);
-                    Thread.Sleep(300);
                     var options = element.FindElements(By.TagName("option"));
                     Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
                     foreach (var a in options)
@@ -130,8 +122,8 @@ namespace Selenium
                 if (HandlePopUp(driver)) element.SelectDropDown(driver, option);
                 else
                 {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
-                    throw new Exception($"[Error] : Selecting combobox value [{option}] to  element [{element}] was unsuccessfull");
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + " || " + $"[Error] : Selecting combobox value [{option}] to  element [{element}] was unsuccessfull");
+                    throw new Exception(e.Message);
                 }
             }            
         }
@@ -142,27 +134,24 @@ namespace Selenium
             {
                 ScreenBusy(driver);
                 bool selected = false;
+                Thread.Sleep(20);
+                IList<IWebElement> options = null;
+                Wait((d => d.FindElements(By.TagName("option")).Count() > 1), driver, 3);
                 for (int i = 0; i < 25; i++)
                 {
-                    element.ClickCustom(driver);
-                    Thread.Sleep(200);
-                    var options = element.FindElements(By.TagName("option"));
-                    Wait((d => d.FindElements(By.TagName("option")).Count() > 1), driver, 1);
-                    //for(int k = 0; i < 10; i++)
-                    //{
-                    //    if (options.Count() > 1)
-                    //    {
-                    //        Thread.Sleep(2000);
-                    //        break;
-                    //    }
-                    //}                        
-                    for (int j = 0; j < options.Count(); j++)
+                    options = element.FindElements(By.TagName("option"));
+                    if (options.Count() > 1)
                     {
-                        options[index].ClickCustom(driver);
-                        selected = true;
-                        return;
+                        element.ClickCustom(driver);
+                        break;
                     }
                     Thread.Sleep(3000);
+                }
+                for (int j = 0; j < options.Count(); j++)
+                {
+                    options[index].ClickCustom(driver);
+                    selected = true;
+                    break; 
                 }
                 if (!selected)
                 {
@@ -175,8 +164,8 @@ namespace Selenium
                 if (HandlePopUp(driver)) element.SelectByIndex(driver, index);
                 else
                 {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
-                    throw new Exception($"[Error] : Selecting combobox value [{index}] to  element [{element}] was unsuccessfull");
+                    Console.WriteLine("[Locator] :" + element.GetLocator() +" || "+ $"[Error] : Selecting combobox value [{index}] to  element [{element}] was unsuccessfull");
+                    throw new Exception(e.Message);
                 }
             }            
 
@@ -188,7 +177,7 @@ namespace Selenium
                 Thread.Sleep(100);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
                 wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")));
-                Thread.Sleep(100);
+                Thread.Sleep(50);
             }
             catch { }
             
@@ -289,7 +278,7 @@ namespace Selenium
             catch (Exception e)
             {
                 if (HandlePopUp(driver))
-                    element.SendText(text, driver);
+                    element.ClearAndPaste(text, driver);
                 else
                     throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
             }
@@ -349,10 +338,10 @@ namespace Selenium
                 var e = driver.FindElement(By.XPath(xpath));
                 Wait(ExpectedConditions.ElementToBeClickable(e),driver,5);
                 e.ClickCustom(driver);
-                Thread.Sleep(300);
-                Console.WriteLine("************* Handling Popup *************");
-                Console.WriteLine("     [Performed] : Click On 'OK/Yes'      ");
-                Console.WriteLine("******************************************");
+                Thread.Sleep(100);
+                Console.WriteLine("************* Handling Un Expected Popup *************");
+                Console.WriteLine("             [Performed] : Click On 'OK/Yes'          ");
+                Console.WriteLine("******************************************************");
                 ScreenBusy(driver);
                 return true;
             }
@@ -362,8 +351,7 @@ namespace Selenium
             }
 
         }
-
-
+        
         private static void JavaScriptExecutor(string pattern, IWebElement element)
         {
             var js = element.GetWrappedDriver() as IJavaScriptExecutor;
@@ -382,7 +370,7 @@ namespace Selenium
         {
             for (int i = 0; i < 2; i++)
             {
-                Thread.Sleep(100);
+                Thread.Sleep(80);
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 3px solid blue;");
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
             }

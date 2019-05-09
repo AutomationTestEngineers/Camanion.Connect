@@ -36,7 +36,7 @@ namespace Selenium.Pages.Intake
         public void DeleteIntake()
         {
             x_Btn.ClickCustom(driver);
-            driver.Popup();
+            driver.Popup(true);
             ScreenBusy();
         }
 

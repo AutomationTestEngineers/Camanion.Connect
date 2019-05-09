@@ -40,6 +40,7 @@ namespace Selenium.Pages.Outcome
             x_Btn.ClickCustom(driver);
             driver.Popup();
             ScreenBusy();
+            Sleep(100);
         }
     }
 }

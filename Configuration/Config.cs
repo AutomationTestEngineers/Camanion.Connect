@@ -72,6 +72,20 @@ namespace Configuration
     public class FakeData
     {
         static string Prefix = "Auto_";
+        public static string PhoneNumber
+        {
+            get
+            {
+                return new Bogus.DataSets.PhoneNumbers().PhoneNumber();
+            }
+        }
+        public static string ClinicName
+        {
+            get
+            {
+                return new Bogus.DataSets.Company().CompanyName();
+            }
+        }
         public static string FirstName
         {
             get

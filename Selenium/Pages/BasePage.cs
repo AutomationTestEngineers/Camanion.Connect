@@ -13,6 +13,7 @@ namespace Selenium
 
         protected Actions actions;
         protected IWebDriver driver;
+
         public BasePage(IWebDriver driver)
         {
             this.driver = driver;
@@ -20,6 +21,7 @@ namespace Selenium
             PageFactory.InitElements(this.driver, this);
             ScreenBusy();
         }
+
         public void Wait<TResult>(Func<IWebDriver, TResult> condition, int seconds = 20)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
@@ -48,25 +50,27 @@ namespace Selenium
 
         public void ScreenBusy(int timeout = 120)
         {
-            Thread.Sleep(1000);
+            Thread.Sleep(800);
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")),timeout);
-            Thread.Sleep(1000);
+            Thread.Sleep(800);
         }
 
-        public void Signature()
+        public void Signature(bool chkbox =true)
         {
             try
             {
                 var element = FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a"), 2, true);
                 if (element.Displayed)
                 {
-                    FindBy(By.XPath("//div[@class='checkbox-blue']/label/i")).ClickCustom(driver);
+                    if(chkbox)
+                        FindBy(By.XPath("//div[@class='checkbox-blue']/label/i")).ClickCustom(driver);
+
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
                     var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
                     actions.MoveToElement(signature).Click().MoveByOffset(200, 80).Click().MoveByOffset(200, 500)
                         .DoubleClick().Build().Perform();
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);
-                    Thread.Sleep(200);
+                    Thread.Sleep(100);
                     ScreenBusy();
                 }
             } catch { }

@@ -17,7 +17,7 @@ namespace Selenium.Pages.Outcome
 
         public void SelectOutcome(string outCome)
         {            
-            FindBy(By.XPath($"//a[@id='outcomeType.Name'][contains(text(),'{outCome}')]")).ClickCustom(driver);
+            FindBy(By.XPath($"//a[@id='outcomeType.Name'][normalize-space()='{outCome}']")).ClickCustom(driver); //Click Corresponding Outcome
             var death = new DeathOutcomePage(driver);
             switch (outCome)
             {                
@@ -34,6 +34,12 @@ namespace Selenium.Pages.Outcome
 
                     break;
                 case "Adoption":
+                    break;
+                case "Service":
+                    var service = new ServiceOutcomePage(driver);
+                    service.EnterOutcomeService();
+                    service.EnterDonation();
+                    service.EnterPayment();
                     break;
             }
         }

@@ -1,4 +1,4 @@
-﻿@PublicStray
+﻿@PublicStray @E2E
 Feature: PublicStray
 	In order Execute Intake PublicStray To Outcome Functionality
 

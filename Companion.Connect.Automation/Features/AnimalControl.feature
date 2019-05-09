@@ -1,4 +1,4 @@
-﻿@AnimalControl
+﻿@AnimalControl @E2E
 Feature: AnimalControl
 	In order Execute Animal Control Intake To Outcome Functionality
 

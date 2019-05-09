@@ -1,4 +1,5 @@
 ﻿using Configuration;
+using FluentAssertions;
 using OpenQA.Selenium;
 using Selenium.Pages;
 using Selenium.Pages.Intake;
@@ -18,7 +19,27 @@ namespace Selenium
         public HomePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement newIntake = null, editAnimal=null/*, searchValue=null*/;
+        private IWebElement newIntake = null, editAnimal=null, adminDate=null, scheduleDate=null, veterinarian=null, technician=null,
+            careComments=null/*, searchValue=null*/;  
+
+
+        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
+        private IWebElement vetBag = null;
+
+        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[5]")]
+        private IWebElement procedure = null;
+
+        [FindsBy(How = How.Name, Using = "careActivity")]
+        private IWebElement careActivity = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[@ng-click='vm.save()']")]
+        private IWebElement saveAndClose = null;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='procedure']")]
+        private IWebElement procedures = null;        
+
+        //[FindsBy(How = How.Name, Using = "careActivity")]
+        //private IWebElement careActivity = null;
 
         //[FindsBy(How = How.XPath, Using = "//a[@class='QuickAdd-button']")]
         //private IWebElement addBtn = null;
@@ -58,6 +79,7 @@ namespace Selenium
 
         [FindsBy(How = How.XPath, Using = "//button[contains(text(),'OK')]")]
         private IWebElement ok = null;
+        
 
         [FindsBy(How = How.XPath, Using = "//tbody/tr/td[3]")]
         private IList<IWebElement> searchList = null;
@@ -148,6 +170,7 @@ namespace Selenium
             FindBy(By.XPath("(//span[@class='glyphicon glyphicon-pencil'])[1]")).ClickCustom(driver);
             Sleep(3000);
         }
+
         public ProfilePage EditAnimal()
         {
             editAnimal.ClickCustom(driver);
@@ -156,6 +179,7 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
+            Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()),5);
             gearIcon.ClickCustom(driver);
             admin.ClickCustom(driver);
             return new AdministrationPage(driver);
@@ -165,6 +189,27 @@ namespace Selenium
         {
             addBtn.ClickCustom(driver);
             return new NewIntakePage(driver);
+        }
+
+        public ProfilePage AddProcedure()
+        {
+            Sleep(1000);
+            vetBag.ClickCustom(driver);
+            procedure.ClickCustom(driver);
+            driver.Popup(true);
+            Sleep(1000);
+            careActivity.SelectByIndex(driver, 1);
+            adminDate.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
+            adminDate.SendKeys(Keys.Tab);
+            veterinarian.SelectByIndex(driver, 1);
+            technician.SelectByIndex(driver, 1);
+            careComments.SendKeysWrapper("Care Comments", driver);
+            saveAndClose.ClickCustom(driver);
+            Sleep(200);
+            ScreenBusy();
+            procedures.Displayed.Should().BeTrue("Procedures Not Displayed");
+
+            return new ProfilePage(driver);
         }
     }
 }

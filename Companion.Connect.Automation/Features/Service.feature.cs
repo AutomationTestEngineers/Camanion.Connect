@@ -20,6 +20,7 @@ namespace Companion.Connect.Automation.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Service")]
     [NUnit.Framework.CategoryAttribute("Service")]
+    [NUnit.Framework.CategoryAttribute("E2E")]
     public partial class ServiceFeature
     {
         
@@ -33,7 +34,8 @@ namespace Companion.Connect.Automation.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Service", "\tIn order Execute Service Intake To Outcome Functionality", ProgrammingLanguage.CSharp, new string[] {
-                        "Service"});
+                        "Service",
+                        "E2E"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -81,7 +83,7 @@ namespace Companion.Connect.Automation.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Test_Intake_Service_Outcome_Adoption")]
-        [NUnit.Framework.TestCaseAttribute("Death", null)]
+        [NUnit.Framework.TestCaseAttribute("Service", null)]
         public virtual void Test_Intake_Service_Outcome_Adoption(string outcome, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_Intake_Service_Outcome_Adoption", null, exampleTags);
@@ -91,7 +93,7 @@ this.ScenarioInitialize(scenarioInfo);
 #line 5
 this.FeatureBackground();
 #line 10
- testRunner.When("I Change Shelter \"Demo Shelter\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When("I Change Shelter \"Prairie Paws Animal Shelter\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
  testRunner.And("I Click Add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
@@ -103,19 +105,21 @@ this.FeatureBackground();
 #line 15
  testRunner.And("I Enter Details \"Service\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 16
-  testRunner.Then("User Should See Animal Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+ testRunner.And("I Add Procedure", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 17
- testRunner.When("I Enter Animal Details To Profile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.And("I Search Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 18
- testRunner.And("I Realease Animal Holds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Request Medical Exam", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 19
- testRunner.And("I Click New Outcome Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Enter Animal Microchip Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 20
- testRunner.And(string.Format("I Select \"{0}\"", outcome), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Enter Animal Rabies Vaccine Details And Realase Holds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 21
- testRunner.And("I Delete Recent Outcome", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Enter Animal Details To Profile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 22
- testRunner.And("I Delete Recent Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Click Pencil Icon From Result", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+ testRunner.And(string.Format("I Click on \"{0}\" Outcome", outcome), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }

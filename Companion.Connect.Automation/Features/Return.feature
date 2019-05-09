@@ -1,4 +1,4 @@
-﻿@Return
+﻿@Return @E2E
 Feature: Return
 	In order Execute Return Intake To Outcome Functionality
 

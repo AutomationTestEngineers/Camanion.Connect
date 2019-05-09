@@ -12,7 +12,56 @@ namespace Selenium.Pages.Intake
     {
         public PaymentPage(IWebDriver driver) : base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
-        private IWebElement search = null;
+        [FindsBy]
+        private IWebElement AnimalFee0 = null, nextButton=null, amountReceived = null, cashRegisterName = null, CardNumber=null, month=null, year=null, ccv=null;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='configure-filter']//i")]
+        private IWebElement personalInfoChkBox = null;
+
+        [FindsBy(How = How.XPath, Using = "//div[@class='radio-blue display-inline']//i[1]")]
+        private IList<IWebElement> paymentMethods = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[@id='nextButton']")]
+        private IWebElement submitPayment = null;
+
+        [FindsBy(How = How.CssSelector, Using = "button[data-ng-click='vm.completePayment()']")]
+        private IWebElement completePayment = null;
+
+        [FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
+        private IWebElement close = null;
+
+        
+
+        public AnimalPage EnterPayment(int method = 0)
+        {
+            AnimalFee0.SelectByIndex(driver, 3);
+            nextButton.ClickCustom(driver);
+            personalInfoChkBox.ClickCustom(driver);
+            CreditCardMethod();
+            completePayment.ClickCustom(driver);
+            //close.ClickCustom(driver);
+            return new AnimalPage(driver);
+        }
+
+        public void CreditCardMethod()
+        {
+            CardNumber.SendKeysWrapper("4111111111111111", driver);
+            month.SelectByIndex(driver, 5);
+            year.SelectByIndex(driver, 4);
+            ccv.SendKeysWrapper("123", driver);
+            Signature(false);
+            submitPayment.ClickCustom(driver);
+            driver.Popup();
+        }
+
+        public void CashMethod(int method = 0)
+        {
+            if(method!=0)
+                paymentMethods[method].ClickCustom(driver);
+            amountReceived.SendKeysWrapper("1000", driver);
+            cashRegisterName.SelectByIndex(driver, 1);
+            submitPayment.ClickCustom(driver);  // need to update if fail
+            driver.Popup();
+        }
     }
 }

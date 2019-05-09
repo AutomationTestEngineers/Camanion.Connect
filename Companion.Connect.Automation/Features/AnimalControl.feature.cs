@@ -20,6 +20,7 @@ namespace Companion.Connect.Automation.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("AnimalControl")]
     [NUnit.Framework.CategoryAttribute("AnimalControl")]
+    [NUnit.Framework.CategoryAttribute("E2E")]
     public partial class AnimalControlFeature
     {
         
@@ -33,7 +34,8 @@ namespace Companion.Connect.Automation.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "AnimalControl", "\tIn order Execute Animal Control Intake To Outcome Functionality", ProgrammingLanguage.CSharp, new string[] {
-                        "AnimalControl"});
+                        "AnimalControl",
+                        "E2E"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

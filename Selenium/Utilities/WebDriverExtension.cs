@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Selenium
@@ -17,27 +18,35 @@ namespace Selenium
         public static IWebElement Find(this IWebDriver driver,By by, int timeout = 5)
         {
             try
-            {                
-                return FindBy(driver, by, timeout);
+            {
+                IWebElement element = null;
+                for (int i = 0;i<= timeout;i++)
+                {
+                    Thread.Sleep(500);
+                    element= driver.FindElement(by);
+                    break;
+                }
+                return element;
             }
             catch(StaleElementReferenceException e)
             {
-                return FindBy(driver, by, timeout);
-            }           
+                Thread.Sleep(500);
+                return driver.FindElement(by);
+            }
+            catch (NoSuchElementException ex)
+            {
+                return null;
+            }
         } 
 
         public static void Popup(this IWebDriver driver,bool clickYes=true)
         {
-            if(driver.Find(By.XPath("//div[@class='modal-content']"), 2).Displayed)
+            if(driver.Find(By.XPath("//div[@class='modal-content']"), 10)!=null)
             {
                 if (clickYes)
-                    driver.Find(By.XPath("//button[contains(text(),'Yes')]"), 2).ClickCustom(driver);
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='OK' or normalize-space()='Yes']"), 5).ClickCustom(driver);
                 else
-                    driver.Find(By.XPath("//button[contains(text(),'No')]"), 2).ClickCustom(driver);
-
-                Console.WriteLine("************* Handling Popup *************");
-                Console.WriteLine("     [Performed] : Click On 'OK/Yes'      ");
-                Console.WriteLine("******************************************");
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[contains(text(),'No')]"), 5).ClickCustom(driver);
             }
         }
 

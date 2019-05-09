@@ -20,6 +20,7 @@ namespace Companion.Connect.Automation.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("PublicStray")]
     [NUnit.Framework.CategoryAttribute("PublicStray")]
+    [NUnit.Framework.CategoryAttribute("E2E")]
     public partial class PublicStrayFeature
     {
         
@@ -33,7 +34,8 @@ namespace Companion.Connect.Automation.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "PublicStray", "\tIn order Execute Intake PublicStray To Outcome Functionality", ProgrammingLanguage.CSharp, new string[] {
-                        "PublicStray"});
+                        "PublicStray",
+                        "E2E"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

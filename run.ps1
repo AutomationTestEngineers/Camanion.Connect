@@ -1,5 +1,11 @@
 try
 {
+	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Usage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	# .\run.ps1
+	# Change the Category if you want to execute all the test cases Example ::====>>>> [string]$TESTSELECT = 'cat == E2E'
+	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
 	[string]$TESTSELECT = 'cat == PublicStray'
 	

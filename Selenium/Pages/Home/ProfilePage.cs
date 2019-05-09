@@ -16,8 +16,8 @@ namespace Selenium.Pages
         public ProfilePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null,
-             btnClose=null, NewOutcome=null;
+        private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null, btnClose=null, NewOutcome=null,
+            MedicalCare=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, animalStatus=null, btnAddPetId = null;
 
         //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
         //private IWebElement animalCurrentHolds = null;
@@ -34,9 +34,23 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
 
+        [FindsBy(How = How.XPath, Using = "//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[4]/textarea")]
+        private IWebElement comments = null;
+
+        [FindsBy(How = How.XPath, Using = "//input[@id='inFoster']/..//span")]
+        private IWebElement urgentChkBox = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[contains(text(),'Submit')]")]
+        private IWebElement submit = null;
+
+        [FindsBy(How = How.XPath, Using = "//*[@id='rabiesVaccine']/../span")]
+        private IWebElement rabiesVaccine = null;
+
+
 
         public void EnterMicroChipDetails()
         {
+            Sleep(1000);
             Parameter.Add<string>("MicroChipNumber",FakeData.Number(1,10000));
             microchipNumber.SendKeysWrapper(Parameter.Get<string>("MicroChipNumber"),driver);
             issuer.SelectByIndex(driver);            
@@ -90,13 +104,39 @@ namespace Selenium.Pages
                 catch { break; }
             }
             btnClose.ClickCustom(driver);
-        }
+        }        
 
         public NewOutComePage ClickNewOutcome()
         {
             Sleep(1000);
             NewOutcome.ClickCustom(driver);
             return new NewOutComePage(driver);
+        }
+
+        public void MedicalExam()
+        {
+            MedicalCare.ClickCustom(driver);
+            int[] index = new int[] { 14, 17, 20 };
+            for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
+                FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]")).ClickCustom(driver);
+            comments.SendKeysWrapper("Comments", driver);
+            urgentChkBox.ClickCustom(driver);
+            submit.ClickCustom(driver);
+        }
+
+        public void EnterAnimalRabiesVaccineDetails()
+        {
+            rabiesVaccine.ClickCustom(driver);
+            clinicName.SendKeysWrapper(FakeData.ClinicName, driver);
+            clinicPhone.SendKeysWrapper(FakeData.PhoneNumber, driver);
+            PetIDNumber_.SendKeysWrapper(FakeData.Number(1, 1300000), driver);
+            petIdType_.SelectByIndex(driver, 11);
+            btnAddPetId.ClickCustom(driver);
+            //animalStatus.SelectDropDown(driver, "Available");
+            driver.ScrollPage(0, -250);
+            Sleep(300);
+            ReleaseHolds();
+            Sleep(3000);
         }
     }
 }

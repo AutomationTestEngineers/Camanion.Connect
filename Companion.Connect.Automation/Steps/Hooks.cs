@@ -52,6 +52,7 @@ namespace Epiq.ECA.E2ETest.Global
             if (scenarioContext.TestError != null)
                 driver.GetScreenShot(scenarioContext.ScenarioInfo.Title);
             driver.Quit();
+            Parameter.ClearParameters();
         }
 
         [AfterStep]

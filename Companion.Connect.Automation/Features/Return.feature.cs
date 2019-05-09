@@ -20,6 +20,7 @@ namespace Companion.Connect.Automation.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Return")]
     [NUnit.Framework.CategoryAttribute("Return")]
+    [NUnit.Framework.CategoryAttribute("E2E")]
     public partial class ReturnFeature
     {
         
@@ -33,7 +34,8 @@ namespace Companion.Connect.Automation.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Return", "\tIn order Execute Return Intake To Outcome Functionality", ProgrammingLanguage.CSharp, new string[] {
-                        "Return"});
+                        "Return",
+                        "E2E"});
             testRunner.OnFeatureStart(featureInfo);
         }
         

@@ -15,8 +15,12 @@ namespace Companion.Connect.Automation.Steps
         OutcomeSearchPage outcomeSearchPage;
         AdministrationPage administrationPage;
         IntakeSearchPage intakeSearchPage;
+       
 
-        public CommonSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }
+        public CommonSteps(ScenarioContext scenarioContext) : base(scenarioContext)
+        {
+            profilePage = new ProfilePage(driver); ;
+        }
 
         [Given(@"I Login")]
         public void ILogin()
@@ -42,6 +46,12 @@ namespace Companion.Connect.Automation.Steps
             newIntake = homePage.ClickAdd();
         }
 
+        [When(@"I Search Animal")]
+        public void WhenISearchAnimal()
+        {
+            homePage.SearchAnimal();
+            homePage.ClickPencilIcon();
+        }
 
         [Then(@"User Should See Search Reasult ""(.*)""")]
         public void ThenUserShouldSeeSearchReasult(string searchName)
@@ -69,6 +79,13 @@ namespace Companion.Connect.Automation.Steps
             animalPage = personPage.SearchPartner(partner);
         }
 
+        [When(@"I Enter Payment Details")]
+        public void WhenIEnterPaymentDetails()
+        {
+            animalPage = (new PaymentPage(driver)).EnterPayment();
+        }
+
+
         [When(@"I Add Animal")]
         public void WhenIAddAnimal()
         {
@@ -86,6 +103,7 @@ namespace Companion.Connect.Automation.Steps
         {
             detailsPage = medicalPage.EnterMedicalInfo();
         }
+        
 
         [When(@"I Enter Details")]
         public void WhenIEnterDetails()
@@ -106,6 +124,13 @@ namespace Companion.Connect.Automation.Steps
             profilePage.EnterMicroChipDetails();
             profilePage.EnterAnimalDetails();
         }
+
+        [When(@"I Click Pencil Icon From Result")]
+        public void WhenIClickPencilIconFromResult()
+        {
+            homePage.ClickPencilIcon();
+        }
+
 
         [When(@"I Realease Animal Holds")]
         public void WhenIRealeaseAnimalHolds()
@@ -145,5 +170,6 @@ namespace Companion.Connect.Automation.Steps
             intakeSearchPage.SearchIntake();
             intakeSearchPage.DeleteIntake();            
         }
+
     }
 }

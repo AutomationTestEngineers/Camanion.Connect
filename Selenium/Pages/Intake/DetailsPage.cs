@@ -35,6 +35,8 @@ namespace Selenium.Pages.Intake
         {
             intakeSubType.SelectByIndex(driver);
             animalCondition.SelectByIndex(driver);
+            if (FindBy(By.Name("OriginalSource"), 1, true)!=null)
+                FindBy(By.Name("OriginalSource"), 1, true).SelectByIndex(driver, 1);
             site.SelectByIndex(driver);
             subSite.SelectByIndex(driver);
             location.SelectByIndex(driver);
