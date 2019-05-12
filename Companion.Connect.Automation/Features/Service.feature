@@ -6,7 +6,7 @@ Background:
 	Given I Login
 
 
-Scenario Outline: Test_Intake_Service_Outcome_Adoption
+Scenario Outline: Test_Intake_Service_Intake_To_Outcome
 	When I Change Shelter "Prairie Paws Animal Shelter"	
 	And I Click Add
 	And I Select "Service" Intake
@@ -25,3 +25,18 @@ Scenario Outline: Test_Intake_Service_Outcome_Adoption
 	Examples: 
 	| Outcome |
 	| Service |
+
+@Intake
+Scenario: Test_Intake_Service_Intake
+	When I Change Shelter "Prairie Paws Animal Shelter"	
+	And I Click Add
+	And I Select "Service" Intake
+	And I Select Partner "John"
+	And I Add Animal
+	And I Enter Details "Service"
+	And I Add Procedure
+	And I Search Animal
+	And I Request Medical Exam
+	And  I Enter Animal Microchip Details
+	And I Enter Animal Rabies Vaccine Details And Realase Holds
+	And I Enter Animal Details To Profile

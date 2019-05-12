@@ -12,7 +12,7 @@ try
 
 
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
-	[string]$TESTSELECT = 'cat == PublicStray'
+	[string]$TESTSELECT = 'PublicStray'
 	
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm.ss
 	$RESULTDIR="C:\Automation\$DateTime"
@@ -21,7 +21,12 @@ try
     Start-Transcript -path $RESULTDIR\logs\log_${DateTime}_$environment.log	
 	Set-Location $PSScriptRoot
 
-
+	## For E2E tests Should not execute Individual Intake Tests
+	if($TESTSELECT -eq 'E2E')
+	{
+	
+	}
+	
 	#Update Path
 	$listDirectories = Get-ChildItem -Path .\packages -Include tools* -Recurse -Directory | Select-Object FullName
 	foreach($directory in $listDirectories.FullName) {
@@ -42,7 +47,7 @@ try
 
 
 	# Execute Tests
-    $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "$TESTSELECT"
+    $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT"
 	
     $OUTPUT | Out-File $RESULTLOG 
     Write-Host $OUTPUT -Separator "`n"

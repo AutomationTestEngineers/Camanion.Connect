@@ -5,7 +5,7 @@ Feature: AnimalControl
 Background: 
 	Given I Login
 
-Scenario Outline: Test_Animal_Contol_Death
+Scenario Outline: Test_Animal_Contol_Intake_To_Outcome
 	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Animal Control" Intake
@@ -30,3 +30,16 @@ Scenario Outline: Test_Animal_Contol_Death
 	#| Transfer        |
 	#| Return to Owner |
 	#| Adoption        |
+
+
+@Intake
+Scenario: Test_Animal_Contol_Intake
+	When I Change Shelter "Demo Shelter"	
+	And I Click Add
+	And I Select "Animal Control" Intake
+	And I Select Partner "k"
+	And I Add Animal
+	And I Enter Behavior
+	And I Enter Medical
+	And I Enter Details
+		Then User Should See Animal Name
