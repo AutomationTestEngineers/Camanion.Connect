@@ -82,11 +82,11 @@ namespace Companion.Connect.Automation.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test_Intake_PublicStray_Intake_To_Outcome")]
+        [NUnit.Framework.DescriptionAttribute("PublicStray_Intake_To_Outcome")]
         [NUnit.Framework.TestCaseAttribute("Death", null)]
-        public virtual void Test_Intake_PublicStray_Intake_To_Outcome(string outcome, string[] exampleTags)
+        public virtual void PublicStray_Intake_To_Outcome(string outcome, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_Intake_PublicStray_Intake_To_Outcome", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PublicStray_Intake_To_Outcome", null, exampleTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
@@ -127,11 +127,11 @@ this.FeatureBackground();
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test_Intake_PublicStray_Intake")]
+        [NUnit.Framework.DescriptionAttribute("PublicStray_Intake")]
         [NUnit.Framework.CategoryAttribute("Intake")]
-        public virtual void Test_Intake_PublicStray_Intake()
+        public virtual void PublicStray_Intake()
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_Intake_PublicStray_Intake", null, new string[] {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("PublicStray_Intake", null, new string[] {
                         "Intake"});
 #line 32
 this.ScenarioInitialize(scenarioInfo);

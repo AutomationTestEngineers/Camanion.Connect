@@ -6,7 +6,7 @@ Background:
 	Given I Login
 
 
-Scenario Outline: Test_Intake_PublicStray_Intake_To_Outcome
+Scenario Outline: PublicStray_Intake_To_Outcome
 	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Public Stray" Intake
@@ -29,7 +29,7 @@ Scenario Outline: Test_Intake_PublicStray_Intake_To_Outcome
 
 
 @Intake
-Scenario: Test_Intake_PublicStray_Intake
+Scenario: PublicStray_Intake
 	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Public Stray" Intake

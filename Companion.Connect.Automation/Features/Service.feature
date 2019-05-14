@@ -6,7 +6,7 @@ Background:
 	Given I Login
 
 
-Scenario Outline: Test_Intake_Service_Intake_To_Outcome
+Scenario Outline: Service_Intake_To_Outcome
 	When I Change Shelter "Prairie Paws Animal Shelter"	
 	And I Click Add
 	And I Select "Service" Intake
@@ -27,7 +27,7 @@ Scenario Outline: Test_Intake_Service_Intake_To_Outcome
 	| Service |
 
 @Intake
-Scenario: Test_Intake_Service_Intake
+Scenario: Service_Intake
 	When I Change Shelter "Prairie Paws Animal Shelter"	
 	And I Click Add
 	And I Select "Service" Intake

@@ -13,6 +13,7 @@ try
 
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
 	[string]$TESTSELECT = 'PublicStray'
+	[string]$Ignore=''
 	
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm.ss
 	$RESULTDIR="C:\Automation\$DateTime"
@@ -21,12 +22,12 @@ try
     Start-Transcript -path $RESULTDIR\logs\log_${DateTime}_$environment.log	
 	Set-Location $PSScriptRoot
 
-	## For E2E tests Should not execute Individual Intake Tests
-	if($TESTSELECT -eq 'E2E')
+	## For Intakes Test no need to execute other tests
+	if($TESTSELECT -ne 'Intake')
 	{
-	# If E2E tag present then intake tag should skip 
+		$Ignore += '&& cat != Intake'
 	}
-	
+	[string]$vv = "cat == $TESTSELECT$Ignore"
 	#Update Path
 	$listDirectories = Get-ChildItem -Path .\packages -Include tools* -Recurse -Directory | Select-Object FullName
 	foreach($directory in $listDirectories.FullName) {
@@ -47,7 +48,7 @@ try
 
 
 	# Execute Tests
-    $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT"
+    $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT$Ignore"
 	
     $OUTPUT | Out-File $RESULTLOG 
     Write-Host $OUTPUT -Separator "`n"

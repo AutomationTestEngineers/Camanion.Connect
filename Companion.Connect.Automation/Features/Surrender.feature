@@ -6,7 +6,7 @@ Background:
 	Given I Login
 
 
-Scenario Outline: Test_Intake_Surrender_Intake_To_Outcome
+Scenario Outline: Surrender_Intake_To_Outcome
 	When I Change Shelter "Demo Shelter"
 	And I Click Add
 	And I Select "Surrender" Intake
@@ -31,7 +31,7 @@ Scenario Outline: Test_Intake_Surrender_Intake_To_Outcome
 
 
 @Intake
-Scenario: Test_Intake_Surrender_Intake
+Scenario: Surrender_Intake
 	When I Change Shelter "Demo Shelter"
 	And I Click Add
 	And I Select "Surrender" Intake

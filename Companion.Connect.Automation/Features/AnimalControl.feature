@@ -5,7 +5,7 @@ Feature: AnimalControl
 Background: 
 	Given I Login
 
-Scenario Outline: Test_Animal_Contol_Intake_To_Outcome
+Scenario Outline: Contol_Intake_To_Outcome
 	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Animal Control" Intake
@@ -33,7 +33,7 @@ Scenario Outline: Test_Animal_Contol_Intake_To_Outcome
 
 
 @Intake
-Scenario: Test_Animal_Contol_Intake
+Scenario: Animal_Contol_Intake
 	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Animal Control" Intake
