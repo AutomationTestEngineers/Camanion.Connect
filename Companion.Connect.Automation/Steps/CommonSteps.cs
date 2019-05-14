@@ -98,10 +98,10 @@ namespace Companion.Connect.Automation.Steps
             medicalPage = behaviorPage.EnterBehavior();
         }
 
-        [When(@"I Enter Medical")]
-        public void WhenIEnterMedical()
+        [When(@"I Enter Medical ""(.*)""")]
+        public void WhenIEnterMedical(string index)
         {
-            detailsPage = medicalPage.EnterMedicalInfo();
+            detailsPage = medicalPage.EnterMedicalInfo(index);
         }
         
 

@@ -26,13 +26,23 @@ namespace Selenium.Pages.Intake
         private IWebElement nextBtn = null;
 
 
-        public DetailsPage EnterMedicalInfo()
+        public DetailsPage EnterMedicalInfo(string index=null)
         {
             Sleep(1000);
             Wait(ExpectedConditions.ElementExists(givenIntake.GetLocator()));
-            givenIntake.ClickCustom(driver);
-            Sleep(2000);
-            intakeMedicalVaccinationnote.SendKeys("MedicalNotes");
+            if (index!=null)
+                FindBy(By.XPath($"(//ng-form[@name='medicalForm']/div[1]//input[@type='checkbox']/../i[1])[{index}]"), 1, true).ClickCustom(driver);
+            else
+                givenIntake.ClickCustom(driver);
+
+            if (index == null)  // Scedule Date Present
+            {
+                Sleep(300);
+                if (FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"), 1, true) != null)
+                    FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]")).SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
+                Sleep(500);
+            }            
+            intakeMedicalVaccinationnote.SendKeys("Medical Notes");
             Sleep(100);
             saveNotes_Medical.ClickCustom(driver);
             nextBtn.ClickCustom(driver);

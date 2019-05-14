@@ -13,7 +13,7 @@ Scenario Outline: Test_Intake_PublicStray_Intake_To_Outcome
 	And I Select Partner "John"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "3"
 	And I Enter Details
 		Then User Should See Animal Name
 	When I Enter Animal Details To Profile
@@ -36,6 +36,6 @@ Scenario: Test_Intake_PublicStray_Intake
 	And I Select Partner "John"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "4"
 	And I Enter Details
 		Then User Should See Animal Name

@@ -14,7 +14,7 @@ Scenario Outline: Test_Intake_Surrender_Intake_To_Outcome
 	And I Enter Payment Details
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "7"
 	And I Enter Details
 		Then User Should See Animal Name
 	When I Enter Animal Details To Profile
@@ -39,6 +39,6 @@ Scenario: Test_Intake_Surrender_Intake
 	And I Enter Payment Details
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "8"
 	And I Enter Details
 		Then User Should See Animal Name

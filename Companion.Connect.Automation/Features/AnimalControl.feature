@@ -12,7 +12,7 @@ Scenario Outline: Test_Animal_Contol_Intake_To_Outcome
 	And I Select Partner "k"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "1"
 	And I Enter Details
 		Then User Should See Animal Name
 	When I Enter Animal Details To Profile
@@ -40,6 +40,6 @@ Scenario: Test_Animal_Contol_Intake
 	And I Select Partner "k"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical
+	And I Enter Medical "2"
 	And I Enter Details
 		Then User Should See Animal Name

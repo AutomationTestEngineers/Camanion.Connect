@@ -29,7 +29,7 @@ namespace Selenium.Pages.Intake
         public MedicalPage EnterBehavior()
         {
             temperament.SelectByIndex(driver,2);
-            biteHistory.SelectDropDown(driver, Parameter.Get<string>("BiteHistory"));
+            biteHistory.SelectByIndex(driver, 2);
             FindBy(By.XPath($"(//div[@class='row'])[10]//label[contains(.,'{Parameter.Get<string>("Impression")}')]//i[1]")).ClickCustom(driver);
             handlingColor.ClickCustom(driver);
             FindBy(By.XPath($"//ul[@ng-show='showTicks']/li[3]")).ClickCustom(driver);
