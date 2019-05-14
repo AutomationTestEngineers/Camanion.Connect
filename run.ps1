@@ -24,7 +24,7 @@ try
 	## For E2E tests Should not execute Individual Intake Tests
 	if($TESTSELECT -eq 'E2E')
 	{
-	
+	# If E2E tag present then intake tag should skip 
 	}
 	
 	#Update Path
