@@ -95,6 +95,7 @@ namespace Selenium
                 ScreenBusy(driver);
                 Thread.Sleep(20);
                 bool selected = false;
+                int count = 0;
                 for (int i = 0; i < 25; i++)
                 {
                     element.ClickCustom(driver);
@@ -104,8 +105,9 @@ namespace Selenium
                     {
                         if (a.Text.Trim() == option)
                         {
-                            a.ClickCustom(driver);
+                            a.Click();
                             selected = true;
+                            count = i;
                             return;
                         }
                     }
@@ -113,7 +115,7 @@ namespace Selenium
                 }
                 if (!selected)
                 {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + $"[Retry Count] : {count} To Select Dropdown By index");
                     throw new Exception($"[Error] : Selecting combobox value [{option}] to  element [{element}] was unsuccessfull");
                 }
             }
@@ -136,6 +138,7 @@ namespace Selenium
                 bool selected = false;
                 Thread.Sleep(20);
                 IList<IWebElement> options = null;
+                int count = 0;
                 Wait((d => d.FindElements(By.TagName("option")).Count() > 1), driver, 3);
                 for (int i = 0; i < 25; i++)
                 {
@@ -143,19 +146,16 @@ namespace Selenium
                     if (options.Count() > 1)
                     {
                         element.ClickCustom(driver);
+                        options[index].Click();
+                        selected = true;
+                        count = i;
                         break;
                     }
                     Thread.Sleep(3000);
-                }
-                for (int j = 0; j < options.Count(); j++)
-                {
-                    options[index].ClickCustom(driver);
-                    selected = true;
-                    break; 
-                }
+                }                
                 if (!selected)
                 {
-                    Console.WriteLine("[Locator] :" + element.GetLocator());
+                    Console.WriteLine("[Locator] :" + element.GetLocator() + $"[Retry Count] : {count} To Select Dropdown By index");
                     throw new Exception($"[Error] : Selecting combobox Index [{index}] to  element [{element}] was unsuccessfull");
                 }
             }

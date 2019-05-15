@@ -50,7 +50,7 @@ namespace Selenium.Pages
 
         public void EnterMicroChipDetails()
         {
-            Sleep(1000);
+            Sleep(500);
             Parameter.Add<string>("MicroChipNumber",FakeData.Number(1,10000));
             microchipNumber.SendKeysWrapper(Parameter.Get<string>("MicroChipNumber"),driver);
             issuer.SelectByIndex(driver);            
@@ -58,7 +58,7 @@ namespace Selenium.Pages
 
         public void EnterAnimalDetails()
         {
-            Sleep(500);
+            Sleep(100);
             driver.ScrollPage(0, 1000);
             Sleep(500);
             actions.MoveToElement(animalDetails).Click().Build().Perform();
@@ -72,10 +72,10 @@ namespace Selenium.Pages
 
         public void ReleaseHolds()
         {            
-            Sleep(500);
+            Sleep(200);
             ScreenBusy();
             driver.ScrollPage(0, 1000);
-            Sleep(500);
+            Sleep(20);
             Wait(ExpectedConditions.PresenceOfAllElementsLocatedBy(animalCurrentHolds.GetLocator()),10);
             bool state = true;
             while (state)
@@ -97,7 +97,7 @@ namespace Selenium.Pages
             {
                 try
                 {
-                    Sleep(500);
+                    Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
                     releaseHoldBtn.ClickCustom(driver);
                 }
@@ -108,7 +108,7 @@ namespace Selenium.Pages
 
         public NewOutComePage ClickNewOutcome()
         {
-            Sleep(1000);
+            Sleep(500);
             NewOutcome.ClickCustom(driver);
             return new NewOutComePage(driver);
         }

@@ -25,7 +25,8 @@ Scenario Outline: Return_Intake_To_Outcome
 
 	Examples: 
 	| Outcome         |	
-	| Death           |
+	#| Death           |
+	| Return to Owner |
 
 
 @Intake

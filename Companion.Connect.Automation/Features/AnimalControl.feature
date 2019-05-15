@@ -24,8 +24,8 @@ Scenario Outline: Contol_Intake_To_Outcome
 
 	Examples: 
 	| Outcome         |	
-	| Death           |
-	#| Return to Owner |
+	#| Death           |
+	| Return to Owner |
 	#| Euthanasia      |
 	#| Transfer        |
 	#| Return to Owner |

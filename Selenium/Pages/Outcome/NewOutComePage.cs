@@ -31,7 +31,7 @@ namespace Selenium.Pages.Outcome
                     death.EnterDeathTransfer();
                     break;
                 case "Return to Owner":
-
+                    RTO();
                     break;
                 case "Adoption":
                     break;
@@ -42,6 +42,19 @@ namespace Selenium.Pages.Outcome
                     service.EnterPayment();
                     break;
             }
+        }
+
+        public void RTO()
+        {
+            var details = (new PersonPage(driver)).SearchPartner("k");
+            details.EnterRTODetails();
+            details.EnterMedicalHistory();
+            var donation = details.EnterBahviorCare();
+            var payment = donation.EnterDonation();
+            payment.PaymentBreakDown();
+            payment.PaymentMethod();
+            var release = payment.PaymentSummary();
+            release.Release();
         }
     }
 }

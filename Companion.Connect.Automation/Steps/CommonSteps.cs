@@ -82,7 +82,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Enter Payment Details")]
         public void WhenIEnterPaymentDetails()
         {
-            animalPage = (new PaymentPage(driver)).EnterPayment();
+            animalPage = (new Selenium.Pages.Intake.PaymentPage(driver)).EnterPayment();
         }
 
 

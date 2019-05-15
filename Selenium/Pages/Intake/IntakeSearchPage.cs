@@ -38,29 +38,6 @@ namespace Selenium.Pages.Intake
             x_Btn.ClickCustom(driver);
             driver.Popup(true);
             ScreenBusy();
-        }
-
-
-        public void DeleteIntakes()
-        {
-
-            try
-            {
-                //a = FindBy(By.XPath("(//div[@class='row'])[5]/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
-                //a.Click();
-                //a.SendKeys("Animal Name");
-                //a.SendKeys(Keys.Enter);
-                //outcomeSearch.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);
-                //searchButton.ClickCustom(driver);
-
-                //a = FindBy(By.XPath("(//tr/td[last()])[1]/a[2]"), 1, true);
-                //a.Click();
-                //a = FindBy(By.XPath("//button[contains(text(),'Yes')]"), 1, true);
-
-                //a.Click();
-            }
-            catch { }
-
-        }
+        }        
     }
 }

@@ -175,7 +175,7 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
-            Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()),5);
+            Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()));
             gearIcon.ClickCustom(driver);
             admin.ClickCustom(driver);
             return new AdministrationPage(driver);

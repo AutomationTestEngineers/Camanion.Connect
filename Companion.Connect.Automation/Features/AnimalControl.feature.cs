@@ -83,7 +83,7 @@ namespace Companion.Connect.Automation.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Contol_Intake_To_Outcome")]
-        [NUnit.Framework.TestCaseAttribute("Death", null)]
+        [NUnit.Framework.TestCaseAttribute("Return to Owner", null)]
         public virtual void Contol_Intake_To_Outcome(string outcome, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Contol_Intake_To_Outcome", null, exampleTags);

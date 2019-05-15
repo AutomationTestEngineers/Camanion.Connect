@@ -23,7 +23,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Enter Details ""(.*)""")]
         public void WhenIEnterDetails(string intakeType)
         {
-            (new DetailsPage(driver)).EnterDetails(intakeType);
+            (new Selenium.Pages.Intake.DetailsPage(driver)).EnterDetails(intakeType);
         }
 
         [When(@"I Add Procedure")]

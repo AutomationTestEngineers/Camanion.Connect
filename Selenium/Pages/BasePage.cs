@@ -13,6 +13,8 @@ namespace Selenium
 
         protected Actions actions;
         protected IWebDriver driver;
+        protected int minTimeOut = 10;
+       
 
         public BasePage(IWebDriver driver)
         {
@@ -20,6 +22,18 @@ namespace Selenium
             actions = new Actions(driver);  
             PageFactory.InitElements(this.driver, this);
             ScreenBusy();
+        }
+
+        public WebDriverWait WebDriverWait
+        {
+            get
+            {
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(minTimeOut));
+                wait.PollingInterval = TimeSpan.FromMilliseconds(500);
+                wait.IgnoreExceptionTypes(typeof(Exception));
+                return wait;
+            }
+            
         }
 
         public void Wait<TResult>(Func<IWebDriver, TResult> condition, int seconds = 20)
@@ -67,8 +81,8 @@ namespace Selenium
 
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
                     var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
-                    actions.MoveToElement(signature).Click().MoveByOffset(200, 80).Click().MoveByOffset(200, 500)
-                        .DoubleClick().Build().Perform();
+                    actions.MoveToElement(signature).ClickAndHold().MoveByOffset(165, 15).MoveByOffset(185, 15)
+                        .Release().Build().Perform();
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);
                     Thread.Sleep(100);
                     ScreenBusy();
@@ -80,5 +94,24 @@ namespace Selenium
         {
             Thread.Sleep(timeout);
         }        
+
+        public void ClickWithLoop(By by,int retry=5)
+        {
+            for(int i = 0; i < retry; i++)
+            {
+                try
+                {
+                    ScreenBusy();
+                    driver.FindElement(by).HighlightElement(driver);
+                    WebDriverWait.Until(ExpectedConditions.ElementToBeClickable(by));
+                    driver.FindElement(by).Click();
+                    ScreenBusy();
+                    break;
+                }
+                catch {
+
+                }
+            }
+        }
     }
 }
