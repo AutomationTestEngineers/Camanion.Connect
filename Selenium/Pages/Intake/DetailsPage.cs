@@ -45,7 +45,7 @@ namespace Selenium.Pages.Intake
             saveNotes.ClickCustom(driver);
             Signature();            
             saveAndClose.ClickCustom(driver);
-            Sleep(3000);
+            Sleep(4000);
             return new HomePage(driver);
         }
 

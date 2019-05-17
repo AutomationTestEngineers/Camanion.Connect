@@ -74,7 +74,7 @@
     <Compile Include="Pages\Intake\NewIntakePage.cs" />
     <Compile Include="Pages\Outcome\RTO\DonationPage.cs" />
     <Compile Include="Pages\Outcome\Death\DeathOutcomePage.cs" />
-    <Compile Include="Pages\Outcome\RTO\DetailsPage.cs" />
+    <Compile Include="Pages\Outcome\DetailsPage.cs" />
     <Compile Include="Pages\Outcome\NewOutComePage.cs" />
     <Compile Include="Pages\Outcome\OutcomeSearchPage.cs" />
     <Compile Include="Pages\Home\ProfilePage.cs" />

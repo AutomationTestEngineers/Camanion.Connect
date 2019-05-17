@@ -128,6 +128,7 @@ namespace Selenium
         public void SearchAnimal(string searchName=null)
         {
             Sleep(1000);
+            ScreenBusy();
             if (searchName == null)
                 searchName = Parameter.Get<string>("AnimalName");
 

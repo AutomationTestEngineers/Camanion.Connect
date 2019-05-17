@@ -50,10 +50,13 @@ namespace Selenium.Pages.Outcome
             month.SelectByIndex(driver, 5);
             year.SelectByIndex(driver, 4);
             ccv.SendKeysWrapper("123", driver);
+            if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"),2,true)!=null)
+                FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
             Signature(false);
             next.ClickCustom(driver);
             driver.Popup();
         }
+        
 
         public ReleasePage PaymentSummary()
         {

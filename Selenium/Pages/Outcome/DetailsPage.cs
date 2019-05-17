@@ -14,10 +14,15 @@ namespace Selenium.Pages.Outcome
         public DetailsPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement OutcomeSubType = null, AnimalCondition = null, OutcomeFee = null, comments=null, nextButton=null, behaviornote=null;
+        private IWebElement OutcomeSubType = null, AnimalCondition = null, OutcomeFee = null, comments=null, nextButton=null, behaviornote=null,
+            euthanasiaReason=null, performedBy=null, euthanasiaSubtance=null, euthanasiaDosage=null, method=null, route=null, Deathnote=null,
+            closeButton=null;
 
         [FindsBy(How = How.Name, Using = "IntakeSubType")]
         private IWebElement intakeSubType = null;
+
+        [FindsBy(How = How.Name, Using = "euthanasiaMeasurement")]
+        private IWebElement euthanasiaMeasurement = null;
 
 
         public void EnterRTODetails()
@@ -41,5 +46,18 @@ namespace Selenium.Pages.Outcome
             return new DonationPage(driver);
         }
 
+        public void EnterDetailsEuthanasia()
+        {
+            euthanasiaReason.SelectByIndex(driver, 2);
+            performedBy.SelectByIndex(driver, 1);
+            euthanasiaSubtance.SelectByIndex(driver, 1);
+            euthanasiaDosage.SendKeysWrapper("10", driver);
+            euthanasiaMeasurement.SelectByIndex(driver, 1);
+            method.SelectByIndex(driver, 1);
+            route.SelectByIndex(driver, 1);
+            Deathnote.SendKeysWrapper("Death Comment Notes For Testing", driver);
+            ClickWithLoop(nextButton.GetLocator());
+            ClickWithLoop(closeButton.GetLocator());            
+        }
     }
 }

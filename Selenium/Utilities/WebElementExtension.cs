@@ -101,13 +101,13 @@ namespace Selenium
                     element.ClickCustom(driver);
                     var options = element.FindElements(By.TagName("option"));
                     Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
+                    count = i;
                     foreach (var a in options)
                     {
                         if (a.Text.Trim() == option)
                         {
                             a.Click();
                             selected = true;
-                            count = i;
                             return;
                         }
                     }
@@ -143,12 +143,12 @@ namespace Selenium
                 for (int i = 0; i < 25; i++)
                 {
                     options = element.FindElements(By.TagName("option"));
+                    count = i;
+                    element.ClickCustom(driver);
                     if (options.Count() > 1)
-                    {
-                        element.ClickCustom(driver);
+                    {                        
                         options[index].Click();
                         selected = true;
-                        count = i;
                         break;
                     }
                     Thread.Sleep(3000);
@@ -334,7 +334,7 @@ namespace Selenium
             {
                 string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]";
                 Thread.Sleep(300);
-                ScreenBusy(driver);
+                ScreenBusy(driver,30);
                 var e = driver.FindElement(By.XPath(xpath));
                 Wait(ExpectedConditions.ElementToBeClickable(e),driver,5);
                 e.ClickCustom(driver);
@@ -342,7 +342,7 @@ namespace Selenium
                 Console.WriteLine("************* Handling Un Expected Popup *************");
                 Console.WriteLine("             [Performed] : Click On 'OK/Yes'          ");
                 Console.WriteLine("******************************************************");
-                ScreenBusy(driver);
+                ScreenBusy(driver,30);
                 return true;
             }
             catch
@@ -370,7 +370,7 @@ namespace Selenium
         {
             for (int i = 0; i < 2; i++)
             {
-                Thread.Sleep(80);
+                Thread.Sleep(60);
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 3px solid blue;");
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
             }

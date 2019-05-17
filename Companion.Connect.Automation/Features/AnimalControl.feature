@@ -6,30 +6,29 @@ Background:
 	Given I Login
 
 Scenario Outline: Contol_Intake_To_Outcome
-	When I Change Shelter "Demo Shelter"	
+	When I Change Shelter "<Shelter>"	
 	And I Click Add
 	And I Select "Animal Control" Intake
-	And I Select Partner "k"
+	And I Select Partner "<Person>"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical "1"
+	And I Enter Medical "<IntakeSection>"
 	And I Enter Details
 		Then User Should See Animal Name
 	When I Enter Animal Details To Profile
 	And I Realease Animal Holds
 	And I Click New Outcome Button
 	And I Select "<Outcome>"
-	And I Delete Recent Outcome
+	And I Delete Recent Outcome 
 	And I Delete Recent Intake
 
 	Examples: 
-	| Outcome         |	
-	#| Death           |
-	| Return to Owner |
-	#| Euthanasia      |
-	#| Transfer        |
-	#| Return to Owner |
-	#| Adoption        |
+	| Outcome         | Shelter                         | Person | IntakeSection |
+	| Death           | Demo Shelter                    | k      | 1             |
+	| Return to Owner | Demo Shelter                    | k      | 2             |
+	| Euthanasia      | Central Missouri Humane Society | k      | 3             |
+	| Transfer        | Demo Shelter                    | k      | 4             |
+	| Adoption        | Demo Shelter                    | k      | 5             |
 
 
 @Intake

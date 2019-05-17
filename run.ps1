@@ -12,8 +12,9 @@ try
 
 
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
-	[string]$TESTSELECT = 'PublicStray'
+	[string]$TESTSELECT = 'Service'
 	[string]$Ignore=''
+	[bool] $Nuget = $false
 	
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm.ss
 	$RESULTDIR="C:\Automation\$DateTime"
@@ -25,9 +26,9 @@ try
 	## For Intakes Test no need to execute other tests
 	if($TESTSELECT -ne 'Intake')
 	{
-		$Ignore += '&& cat != Intake'
+		$Ignore += ' && cat != Intake'
 	}
-	[string]$vv = "cat == $TESTSELECT$Ignore"
+
 	#Update Path
 	$listDirectories = Get-ChildItem -Path .\packages -Include tools* -Recurse -Directory | Select-Object FullName
 	foreach($directory in $listDirectories.FullName) {
@@ -40,12 +41,15 @@ try
 	$RESULTXML="$RESULTDIR\$DATEYYYYMMDD"+"TestResult"+"$ENVIRONMENT.xml"
 	$RESULTERR="$RESULTDIR\$DATEYYYYMMDD"+"StdErr"+"$ENVIRONMENT.txt"
 	$RESULOUTTXT="$RESULTDIR\$DATEYYYYMMDD"+"TestResult"+"$ENVIRONMENT.txt"
-	$EXECUTIONREP="$env:USERPROFILE\$DATEYYYYMMDD"+"AutomationTest.ExecutionReport"+"$CONFIGURATION"
-	$FEATURESDIR="$PSScriptRoot\$PROJECTNAME\Features"
+	#$FEATURESDIR="$PSScriptRoot\$PROJECTNAME\Features"
 	$XSLTFILE="$PSScriptRoot\NUnitExecutionReport.xslt"
-
     $OUTHTML = "$RESULTDIR\$ENVIRONMENT_${DateTime}.html"
 
+	if($Nuget)  # To Restore the NuGet packages
+	{
+		$args = @("restore", $SOLUTION) 
+        & NuGet $args
+	}
 
 	# Execute Tests
     $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT$Ignore"
@@ -58,7 +62,7 @@ try
     (Get-Content $RESULOUTTXT) | ForEach-Object { $_ -replace '=>', '*****' } | Set-Content $RESULOUTTXT
 
 	# Generate Html Report
-    #specflow nunitexecutionreport --ProjectFile=$PROJECT --xmlTestResult=$RESULTXML --testOutput=$RESULOUTTXT --OutputFile=$OUTHTML --XsltFile=$XSLTFILE   
+    specflow nunitexecutionreport --ProjectFile=$PROJECT --xmlTestResult=$RESULTXML --testOutput=$RESULOUTTXT --OutputFile=$OUTHTML   
 	 
 
 	Stop-Transcript

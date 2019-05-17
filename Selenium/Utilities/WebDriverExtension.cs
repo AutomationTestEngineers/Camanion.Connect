@@ -44,7 +44,7 @@ namespace Selenium
             if(driver.Find(By.XPath("//div[@class='modal-content']"), 10)!=null)
             {
                 if (clickYes)
-                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='OK' or normalize-space()='Yes' or normalize-space()='Ok']"), 5).ClickCustom(driver);
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='OK' or normalize-space()='Yes' or normalize-space()='Ok' or normalize-space()='YES']"), 5).ClickCustom(driver);
                 else
                     FindBy(driver,By.XPath("//div[@class='modal-content']//button[contains(text(),'No')]"), 5).ClickCustom(driver);
             }

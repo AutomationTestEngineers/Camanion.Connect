@@ -14,7 +14,7 @@ namespace Selenium.Pages.Outcome
         public PersonPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement searchButton = null;
+        private IWebElement searchButton = null, cancelButton=null;
 
         [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
         private IWebElement search = null;
@@ -35,6 +35,21 @@ namespace Selenium.Pages.Outcome
             select.ClickCustom(driver);
             //nextButton.ClickCustom(driver);
             return new DetailsPage(driver);
+        }
+
+        public void NextButton()
+        {
+            try
+            {
+                Wait(ExpectedConditions.ElementToBeClickable(nextButton.GetLocator()),5);
+                ClickWithLoop(nextButton.GetLocator());
+            }
+            catch
+            {
+                //ClickWithLoop(cancelButton.GetLocator());
+                //driver.Popup();
+            }
+            
         }
     }
 }

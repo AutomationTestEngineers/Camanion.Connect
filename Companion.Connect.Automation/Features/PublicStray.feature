@@ -7,13 +7,13 @@ Background:
 
 
 Scenario Outline: PublicStray_Intake_To_Outcome
-	When I Change Shelter "Demo Shelter"	
+	When I Change Shelter "<Shelter>"	
 	And I Click Add
 	And I Select "Public Stray" Intake
-	And I Select Partner "John"
+	And I Select Partner "<Person>"
 	And I Add Animal
 	And I Enter Behavior
-	And I Enter Medical "3"
+	And I Enter Medical "<IntakeSection>"
 	And I Enter Details
 		Then User Should See Animal Name
 	When I Enter Animal Details To Profile
@@ -24,9 +24,12 @@ Scenario Outline: PublicStray_Intake_To_Outcome
 	And I Delete Recent Intake
 
 	Examples: 
-	| Outcome         |	
-	#| Death           |
-	| Return to Owner |
+	| Outcome         | Shelter                         | Person | IntakeSection |
+	| Death           | Demo Shelter                    | John   | 1             |
+	| Return to Owner | Demo Shelter                    | John   | 2             |
+	| Euthanasia      | Central Missouri Humane Society | John   | 3             |
+	| Transfer        | Demo Shelter                    | John   | 4             |
+	| Adoption        | Demo Shelter                    | John   | 2             |
 
 
 @Intake

@@ -25,15 +25,13 @@ namespace Selenium
         }
 
         public WebDriverWait WebDriverWait
-        {
-            get
+        { get
             {
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(minTimeOut));
                 wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 wait.IgnoreExceptionTypes(typeof(Exception));
                 return wait;
-            }
-            
+            }            
         }
 
         public void Wait<TResult>(Func<IWebDriver, TResult> condition, int seconds = 20)
@@ -77,14 +75,13 @@ namespace Selenium
                 if (element.Displayed)
                 {
                     if(chkbox)
-                        FindBy(By.XPath("//div[@class='checkbox-blue']/label/i")).ClickCustom(driver);
+                        FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
 
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
                     var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
                     actions.MoveToElement(signature).ClickAndHold().MoveByOffset(165, 15).MoveByOffset(185, 15)
                         .Release().Build().Perform();
-                    FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);
-                    Thread.Sleep(100);
+                    FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);                    
                     ScreenBusy();
                 }
             } catch { }
@@ -95,21 +92,27 @@ namespace Selenium
             Thread.Sleep(timeout);
         }        
 
-        public void ClickWithLoop(By by,int retry=5)
+        public void ClickWithLoop(By by,int retry=3)
         {
+            bool found = false;
             for(int i = 0; i < retry; i++)
             {
                 try
                 {
-                    ScreenBusy();
+                    ScreenBusy(30);
                     driver.FindElement(by).HighlightElement(driver);
                     WebDriverWait.Until(ExpectedConditions.ElementToBeClickable(by));
                     driver.FindElement(by).Click();
-                    ScreenBusy();
+                    found = true;
+                    ScreenBusy(60);
                     break;
                 }
-                catch {
-
+                catch (Exception e){
+                    if (found)
+                    {
+                        Console.WriteLine("[Locator] :" + by + " || " + $"[Error] : While Click & [Message] : [" + e.Message + "]");
+                        throw new Exception(e.Message);
+                    }
                 }
             }
         }
