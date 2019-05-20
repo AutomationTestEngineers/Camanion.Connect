@@ -20,6 +20,7 @@ namespace Companion.Connect.Automation.Features
     [NUnit.Framework.TestFixtureAttribute()]
     [NUnit.Framework.DescriptionAttribute("Surrender")]
     [NUnit.Framework.CategoryAttribute("Surrender")]
+    [NUnit.Framework.CategoryAttribute("E2E")]
     public partial class SurrenderFeature
     {
         
@@ -33,7 +34,8 @@ namespace Companion.Connect.Automation.Features
         {
             testRunner = TechTalk.SpecFlow.TestRunnerManager.GetTestRunner();
             TechTalk.SpecFlow.FeatureInfo featureInfo = new TechTalk.SpecFlow.FeatureInfo(new System.Globalization.CultureInfo("en-US"), "Surrender", "\tIn order Execute Surrender Intake To Outcome Functionality", ProgrammingLanguage.CSharp, new string[] {
-                        "Surrender"});
+                        "Surrender",
+                        "E2E"});
             testRunner.OnFeatureStart(featureInfo);
         }
         
@@ -80,25 +82,88 @@ namespace Companion.Connect.Automation.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Test_Intake_Surrender_Outcome_Adoption")]
-        public virtual void Test_Intake_Surrender_Outcome_Adoption()
+        [NUnit.Framework.DescriptionAttribute("Surrender_Intake_To_Outcome")]
+        [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "John", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "John", "2", null)]
+        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "John", "3", null)]
+        [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "John", "4", null)]
+        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "John", "5", null)]
+        public virtual void Surrender_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Test_Intake_Surrender_Outcome_Adoption", null, ((string[])(null)));
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Surrender_Intake_To_Outcome", null, exampleTags);
 #line 9
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();
 #line 5
 this.FeatureBackground();
 #line 10
- testRunner.When("I Change Shelter \"Central Missouri Humane Society\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+ testRunner.When(string.Format("I Change Shelter \"{0}\"", shelter), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 11
- testRunner.And("I Search \"k\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Click Add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 12
- testRunner.And("I Click New Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And("I Select \"Surrender\" Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 13
- testRunner.And("I Select \"Return\" Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+ testRunner.And(string.Format("I Select Partner \"{0}\"", person), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 14
+ testRunner.And("I Enter Payment Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 15
+ testRunner.And("I Add Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 16
+ testRunner.And("I Enter Behavior", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 17
+ testRunner.And(string.Format("I Enter Medical \"{0}\"", intakeSection), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 18
+ testRunner.And("I Enter Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 19
+  testRunner.Then("User Should See Animal Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line 20
+ testRunner.When("I Enter Animal Details To Profile", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 21
+ testRunner.And("I Realease Animal Holds", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 22
+ testRunner.And("I Click New Outcome Button", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 23
+ testRunner.And(string.Format("I Select \"{0}\"", outcome), ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 24
+ testRunner.And("I Delete Recent Outcome", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 25
+ testRunner.And("I Delete Recent Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Surrender_Intake")]
+        [NUnit.Framework.CategoryAttribute("Intake")]
+        public virtual void Surrender_Intake()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Surrender_Intake", null, new string[] {
+                        "Intake"});
+#line 38
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line 39
+ testRunner.When("I Change Shelter \"Demo Shelter\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 40
+ testRunner.And("I Click Add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 41
+ testRunner.And("I Select \"Surrender\" Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 42
  testRunner.And("I Select Partner \"John\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 43
+ testRunner.And("I Enter Payment Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 44
+ testRunner.And("I Add Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 45
+ testRunner.And("I Enter Behavior", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 46
+ testRunner.And("I Enter Medical \"8\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 47
+ testRunner.And("I Enter Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 48
+  testRunner.Then("User Should See Animal Name", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
 #line hidden
             this.ScenarioCleanup();
         }

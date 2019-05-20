@@ -1,5 +1,6 @@
 ﻿using Configuration;
 using OpenQA.Selenium;
+using Selenium.Pages.Intake;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -11,15 +12,34 @@ namespace Selenium.Pages
 {
     public class AnimalPage : BasePage
     {
-        public AnimalPage(IWebDriver driver) : base(driver) { }        
+        public AnimalPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement addAnimal = null, animalName=null;
+        private IWebElement addAnimal = null, animalName = null, petType = null, years = null, primaryBreed = null, primaryColor = null,
+            gender = null, noteType = null, estAdultSize = null, nextButton = null;
 
-        public void AddAnimal()
+
+        public BehaviorPage AddAnimal()
         {
             addAnimal.ClickCustom(driver);
-            animalName.SendKeysWrapper("Animal_" + FakeData.FirstName, driver);
+            Sleep(3000);
+            petType.ClickCustom(driver);
+            Sleep();
+            petType.SelectDropDown(driver, Parameter.Get<string>("PetType"));
+            Sleep();
+            Parameter.Add<string>("AnimalName", "Animal_" + FakeData.FirstName);
+            animalName.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);
+            years.SendKeys(Parameter.Get<string>("Years"));
+            years.SendKeys(Keys.Tab);
+            primaryBreed.SelectByIndex(driver);
+            primaryColor.SelectByIndex(driver);
+            gender.SelectDropDown(driver, Parameter.Get<string>("Gender"));
+            estAdultSize.SelectByIndex(driver);
+            if(FindBy(noteType.GetLocator(), 1, true)!=null)
+                noteType.SelectByIndex(driver);
+
+            nextButton.ClickCustom(driver);
+            return new BehaviorPage(driver);
         }
     }
 }

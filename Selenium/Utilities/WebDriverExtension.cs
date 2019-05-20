@@ -8,6 +8,7 @@ using System.Drawing.Imaging;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace Selenium
@@ -17,14 +18,37 @@ namespace Selenium
         public static IWebElement Find(this IWebDriver driver,By by, int timeout = 5)
         {
             try
-            {                
-                return FindBy(driver, by, timeout);
+            {
+                IWebElement element = null;
+                for (int i = 0;i<= timeout;i++)
+                {
+                    Thread.Sleep(500);
+                    element= driver.FindElement(by);
+                    break;
+                }
+                return element;
             }
             catch(StaleElementReferenceException e)
             {
-                return FindBy(driver, by, timeout);
-            }           
+                Thread.Sleep(500);
+                return driver.FindElement(by);
+            }
+            catch (NoSuchElementException ex)
+            {
+                return null;
+            }
         } 
+
+        public static void Popup(this IWebDriver driver,bool clickYes=true)
+        {
+            if(driver.Find(By.XPath("//div[@class='modal-content']"), 10)!=null)
+            {
+                if (clickYes)
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='OK' or normalize-space()='Yes' or normalize-space()='Ok' or normalize-space()='YES']"), 5).ClickCustom(driver);
+                else
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[contains(text(),'No')]"), 5).ClickCustom(driver);
+            }
+        }
 
         private static IWebElement FindBy(IWebDriver driver, By by,int timeout)
         {
@@ -82,6 +106,11 @@ namespace Selenium
         {
             string fileNameBase = string.Format("Error_{0}_{1}", testName, DateTime.Now.ToString("yyyyMMdd_HHmmss"));
             driver.TakeScreenshot(fileNameBase);
+        }
+
+        public static void ScrollPage(this IWebDriver driver,int x,int y)
+        {
+            ((IJavaScriptExecutor)driver).ExecuteScript($"window.scrollBy({x},{y})");
         }
     }
 }

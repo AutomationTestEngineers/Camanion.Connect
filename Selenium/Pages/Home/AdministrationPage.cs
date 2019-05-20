@@ -1,4 +1,5 @@
 ﻿using OpenQA.Selenium;
+using Selenium.Pages.Intake;
 using Selenium.Pages.Outcome;
 using SeleniumExtras.PageObjects;
 using System;
@@ -14,12 +15,21 @@ namespace Selenium.Pages
         public AdministrationPage(IWebDriver driver): base(driver) { }
 
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Outcomes')]")]
-        private IWebElement outComes = null, outcomeSearch=null;
+        private IWebElement outComes = null;
 
-        public OutcomeSearchPage DeleteOutComes()
+        [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Intakes')]")]
+        private IWebElement intakes = null;
+
+        public OutcomeSearchPage ClickOutcomes()
         {
             outComes.ClickCustom(driver);return new OutcomeSearchPage(driver);
 
         }
+
+        public IntakeSearchPage ClickIntakes()
+        {
+            intakes.ClickCustom(driver);  return new IntakeSearchPage(driver);
+        }
+       
     }
 }

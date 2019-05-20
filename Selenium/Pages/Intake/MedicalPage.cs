@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,7 +13,41 @@ namespace Selenium.Pages.Intake
     {
         public MedicalPage(IWebDriver driver) : base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
-        private IWebElement search = null;
+        [FindsBy]
+        private IWebElement intakeMedicalVaccinationnote = null;
+
+        [FindsBy(How = How.CssSelector, Using = "#intakeMedicalVaccination-save")]
+        private IWebElement saveNotes_Medical = null;
+
+        [FindsBy(How = How.XPath, Using = "//input[@id='VACC_GIVEN_0']/following-sibling::i[1]")]
+        private IWebElement givenIntake = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[@data-ng-click='vm.gotoNextStep()']")]
+        private IWebElement nextBtn = null;
+
+
+        public DetailsPage EnterMedicalInfo(string index=null)
+        {
+            Sleep(1000);
+            Wait(ExpectedConditions.ElementExists(givenIntake.GetLocator()));
+
+            if (index!=null) // Index Based Intake
+                FindBy(By.XPath($"(//ng-form[@name='medicalForm']/div[1]//input[@type='checkbox']/../i[1])[{index}]"), 1, true).ClickCustom(driver);
+            else
+                givenIntake.ClickCustom(driver);
+
+            if (index != null)  // If Scedule Date Present
+            {
+                ScreenBusy();
+                IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"), 1, true);
+                if (schedule != null && schedule.Displayed)
+                    schedule.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
+            }            
+            intakeMedicalVaccinationnote.SendKeys("Medical Notes");
+            Sleep(100);
+            saveNotes_Medical.ClickCustom(driver);
+            nextBtn.ClickCustom(driver);
+            return new DetailsPage(driver);
+        }
     }
 }

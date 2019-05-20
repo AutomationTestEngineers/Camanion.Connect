@@ -1,19 +1,23 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Selenium.Pages.Intake
+namespace Selenium.Pages.Outcome
 {
-    public class PaymentPage:BasePage
+    public class PaymentPage : BasePage
     {
         public PaymentPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement AnimalFee0 = null, nextButton=null, amountReceived = null, cashRegisterName = null, CardNumber=null, month=null, year=null, ccv=null;
+        private IWebElement CardNumber = null, month = null, year=null, ccv=null;
+
+        [FindsBy(How = How.CssSelector, Using = "button[data-ng-click='vm.nextStep()']")]
+        private IWebElement next = null;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='configure-filter']//i")]
         private IWebElement personalInfoChkBox = null;
@@ -27,20 +31,17 @@ namespace Selenium.Pages.Intake
         [FindsBy(How = How.CssSelector, Using = "button[data-ng-click='vm.completePayment()']")]
         private IWebElement completePayment = null;
 
-        [FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
-        private IWebElement close = null;
 
-        
 
-        public AnimalPage EnterPayment(int method = 0)
+        public void PaymentBreakDown()
         {
-            AnimalFee0.SelectByIndex(driver, 3);
-            nextButton.ClickCustom(driver);
+            ClickWithLoop(next.GetLocator());
+        }
+
+        public void PaymentMethod()
+        {
             personalInfoChkBox.ClickCustom(driver);
             CreditCardMethod();
-            completePayment.ClickCustom(driver);
-            //close.ClickCustom(driver);
-            return new AnimalPage(driver);
         }
 
         public void CreditCardMethod()
@@ -49,19 +50,18 @@ namespace Selenium.Pages.Intake
             month.SelectByIndex(driver, 5);
             year.SelectByIndex(driver, 4);
             ccv.SendKeysWrapper("123", driver);
+            if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"),2,true)!=null)
+                FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
             Signature(false);
-            submitPayment.ClickCustom(driver);
+            next.ClickCustom(driver);
             driver.Popup();
         }
+        
 
-        public void CashMethod(int method = 0)
+        public ReleasePage PaymentSummary()
         {
-            if(method!=0)
-                paymentMethods[method].ClickCustom(driver);
-            amountReceived.SendKeysWrapper("1000", driver);
-            cashRegisterName.SelectByIndex(driver, 1);
-            submitPayment.ClickCustom(driver);  // need to update if fail
-            driver.Popup();
+            ClickWithLoop(completePayment.GetLocator());
+            return new ReleasePage(driver);
         }
     }
 }

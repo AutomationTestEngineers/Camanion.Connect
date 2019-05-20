@@ -2,73 +2,38 @@
 using OpenQA.Selenium;
 using Selenium.Pages;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Selenium
 {
     public class PersonPage : BasePage
     {
-        public PersonPage(IWebDriver driver): base(driver) { }
+        public PersonPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement searchButton=null, addPerson=null, nextButton=null;
-
-        [FindsBy(How = How.CssSelector, Using = "#save-person")]
-        private IWebElement nextBtn = null;
+        private IWebElement searchButton = null;
 
         [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
         private IWebElement search = null;
 
-        [FindsBy(How = How.XPath, Using = "//div[3]//a[contains(text(),'Select')]")]
-        private IList<IWebElement> select = null;
+        [FindsBy(How = How.XPath, Using = "(//tbody/tr/td/a)[1]")]
+        private IWebElement select = null;
+
+        [FindsBy(How = How.XPath, Using = "//button[@id='save-person' or @id='nextButton']")]
+        private IWebElement nextButton = null;
 
 
-        public string GetheaderName()
-        {
-            return FindBy(By.XPath("//*[@id='content']/div[3]/div[1]//div//h1")).GetText(driver);
-        }
-        public void SearchPartner(string partner)
+        public AnimalPage SearchPartner(string partner)
         {
             search.SendKeysWrapper(partner, driver);
             searchButton.ClickCustom(driver);
-        }
-
-        public AnimalPage SelectPerson(string name=null)
-        {            
-            switch (name)
-            {
-                //case "publicstray":
-                //    {
-                //        FindBy(By.XPath($"//tbody/tr[td[2][contains(text(),'{name}')]]/td//a[contains(text(),'Select')]")).ClickCustom(driver);
-                //        nextBtn.ClickCustom(driver);
-                //        break;
-                //    }
-                //case "surrender":
-                    
-                //    break;
-                //case "return":
-                    
-                //    break;
-                //case "transfer":
-                    
-                //    break;
-                case "Animal Control":
-                    SearchPartner(Config.Person);
-                    select.FirstOrDefault().ClickCustom(driver);
-                    nextButton.ClickCustom(driver);
-                    break;
-                case "service":
-                    
-                    break;
-                default:
-                    throw new Exception("Please Provide Intake from :{publicstray,surrender,return,transfer, animalcontrol, service}");
-
-            }
-            
+            Sleep(1000);
+            Wait(ExpectedConditions.ElementExists(select.GetLocator()));
+            select.ClickCustom(driver);
+            nextButton.ClickCustom(driver);
             return new AnimalPage(driver);
         }
 
