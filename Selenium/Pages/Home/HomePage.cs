@@ -101,6 +101,11 @@ namespace Selenium
             changeShelter.ClickCustom(driver);
             FindBy(By.XPath($"//strong[normalize-space()='{shelterName}']"), 10).ClickCustom(driver);
             ok.ClickCustom(driver);
+            if(shelterName== "Demo Shelter")
+            {
+                FindBy(By.XPath($"//strong[normalize-space()='Demo Site']"), 10).ClickCustom(driver);
+                ok.ClickCustom(driver);
+            }
         }        
 
         public string GetUserName()

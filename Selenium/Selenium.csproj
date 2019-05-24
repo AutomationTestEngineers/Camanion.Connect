@@ -72,6 +72,9 @@
     <Compile Include="Pages\Home\LoginPage.cs" />
     <Compile Include="Pages\Intake\PaymentPage.cs" />
     <Compile Include="Pages\Intake\NewIntakePage.cs" />
+    <Compile Include="Pages\Outcome\Adaption\CampanionProjectPage.cs" />
+    <Compile Include="Pages\Outcome\Adaption\ContractPage.cs" />
+    <Compile Include="Pages\Outcome\Adaption\ReviewCareHistoryPage.cs" />
     <Compile Include="Pages\Outcome\RTO\DonationPage.cs" />
     <Compile Include="Pages\Outcome\Death\DeathOutcomePage.cs" />
     <Compile Include="Pages\Outcome\DetailsPage.cs" />
@@ -82,6 +85,7 @@
     <Compile Include="Pages\Outcome\RTO\PersonPage.cs" />
     <Compile Include="Pages\Outcome\RTO\ReleasePage.cs" />
     <Compile Include="Pages\Outcome\Service\ServiceOutcomePage.cs" />
+    <Compile Include="Pages\Outcome\Transfer\TransferOutcomeInfoPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\WebDriver.cs" />
     <Compile Include="Utilities\WebDriverExtension.cs" />
