@@ -46,6 +46,7 @@ namespace Selenium.Pages.Outcome
             int[] array = new int[] { 2, 3, 5 };
             foreach (int value in array)
             {
+                Wait(ExpectedConditions.ElementToBeClickable(OutcomeFee.GetLocator()), 5);
                 OutcomeFee.SelectByIndex(driver,value);
                 Sleep(200);
             }

@@ -19,7 +19,7 @@ namespace Selenium.Pages.Outcome
         [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
         private IWebElement search = null;
 
-        [FindsBy(How = How.XPath, Using = "(//tbody/tr/td/a)[3]")]
+        [FindsBy(How = How.XPath, Using = "(//tbody/tr/td/a)[1]")]
         private IWebElement select = null;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='save-person' or @id='nextButton']")]
@@ -30,9 +30,15 @@ namespace Selenium.Pages.Outcome
         {
             search.SendKeysWrapper(partner, driver);
             searchButton.ClickCustom(driver);
-            Sleep(1000);
             Wait(ExpectedConditions.ElementExists(select.GetLocator()));
-            select.ClickCustom(driver);
+            try // To Handle Multiple Select Hyperlinks
+            {
+                select.HighlightElement(driver);
+                select.Click();
+            }
+            catch {
+                FindBy(By.XPath("(//tbody/tr/td/a[@class='cursor-pointer ng-scope ng-isolate-scope'])[1]"),1,true).Click();
+            }            
             //nextButton.ClickCustom(driver);
             return new DetailsPage(driver);
         }

@@ -171,5 +171,11 @@ namespace Companion.Connect.Automation.Steps
             intakeSearchPage.DeleteIntake();            
         }
 
+        [Then(@"""(.*)"" Message Should Be Display")]
+        public void ThenMessageShouldBeDisplay(string message)
+        {
+            intakeSearchPage.GetToastMessage().Should().Equals(message);
+        }
+
     }
 }

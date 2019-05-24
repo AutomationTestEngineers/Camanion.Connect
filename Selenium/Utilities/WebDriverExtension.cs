@@ -22,7 +22,7 @@ namespace Selenium
                 IWebElement element = null;
                 for (int i = 0;i<= timeout;i++)
                 {
-                    Thread.Sleep(500);
+                    Thread.Sleep(300);
                     element= driver.FindElement(by);
                     break;
                 }
@@ -46,7 +46,7 @@ namespace Selenium
                 if (clickYes)
                     FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='OK' or normalize-space()='Yes' or normalize-space()='Ok' or normalize-space()='YES']"), 5).ClickCustom(driver);
                 else
-                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[contains(text(),'No')]"), 5).ClickCustom(driver);
+                    FindBy(driver,By.XPath("//div[@class='modal-content']//button[normalize-space()='No' or normalize-space()='NO']"), 5).ClickCustom(driver);
             }
         }
 

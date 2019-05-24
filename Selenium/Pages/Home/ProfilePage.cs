@@ -17,19 +17,19 @@ namespace Selenium.Pages
 
         [FindsBy]
         private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null, btnClose=null, NewOutcome=null,
-            MedicalCare=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, animalStatus=null, btnAddPetId = null;
+            MedicalCare=null, BehavioralCare=null, note=null, addNote=null, submitButton=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, animalStatus=null, btnAddPetId = null;
 
         //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
         //private IWebElement animalCurrentHolds = null;
 
-        [FindsBy(How = How.XPath, Using = "//form[@name='animalHold']/div[6]/div/div[1]/button")]
+        [FindsBy(How = How.XPath, Using = "//button[normalize-space()='Release Hold']")]
         private IWebElement releaseHoldBtn = null;
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='ViewHoldHistory'])[1]")]
         private IWebElement ViewHoldHistory = null;
 
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='animalDetail']/div/label/span/span")]
-        private IWebElement animalDetails = null;
+        private IWebElement animalDetails = null;        
 
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
@@ -46,6 +46,9 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//*[@id='rabiesVaccine']/../span")]
         private IWebElement rabiesVaccine = null;
 
+        [FindsBy(How = How.XPath, Using = "//div[@data-ng-repeat='item in vm.observations']//i[1]")]
+        private IList<IWebElement> abservations = null;
+        
 
 
         public void EnterMicroChipDetails()
@@ -88,7 +91,7 @@ namespace Selenium.Pages
                 catch(Exception e) { state = true; }
             }
             //actions.MoveToElement(FindBy(animalCurrentHolds.GetLocator())).Click().Build().Perform();
-            Sleep(500);
+            Sleep(300);
             if (FindBy(By.XPath("(//div[6]//*[@id='headingAction']/label/span)[1][@class='expandable ng-scope collapsed']"), 1, true) != null)
                 animalCurrentHolds.ClickCustom(driver);
 
@@ -101,7 +104,7 @@ namespace Selenium.Pages
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
                     releaseHoldBtn.ClickCustom(driver);
                 }
-                catch { break; }
+                catch { Console.WriteLine(" <<<< Holds Released #"+i+" >>>>"); break; }
             }
             btnClose.ClickCustom(driver);
         }        
@@ -119,9 +122,19 @@ namespace Selenium.Pages
             int[] index = new int[] { 14, 17, 20 };
             for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
                 FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]")).ClickCustom(driver);
-            comments.SendKeysWrapper("Comments", driver);
+            comments.SendKeysWrapper("Medical Exam Comments", driver);
             urgentChkBox.ClickCustom(driver);
             submit.ClickCustom(driver);
+        }
+
+        public void BehaviorExam()
+        {
+            BehavioralCare.ClickCustom(driver);
+            for (int i = 1; i <= 4; i++)
+                abservations[i].ClickCustom(driver);
+            note.SendKeysWrapper("Behavior Exam Notes", driver);
+            addNote.ClickCustom(driver);
+            submitButton.ClickCustom(driver);
         }
 
         public void EnterAnimalRabiesVaccineDetails()

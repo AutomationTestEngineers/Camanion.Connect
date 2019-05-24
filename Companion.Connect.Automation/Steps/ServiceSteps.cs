@@ -38,6 +38,13 @@ namespace Companion.Connect.Automation.Steps
             profilePage.MedicalExam();
         }
 
+        [When(@"I Request Behavior Exam")]
+        public void WhenIRequestBehaviorExam()
+        {
+            profilePage.BehaviorExam();
+        }
+
+
         [When(@"I Enter Animal Microchip Details")]
         public void WhenIEnterAnimalMicrochipDetails()
         {

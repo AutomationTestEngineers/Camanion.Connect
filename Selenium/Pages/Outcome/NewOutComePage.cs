@@ -1,4 +1,6 @@
 ﻿using OpenQA.Selenium;
+using Selenium.Pages.Outcome.Adaption;
+using Selenium.Pages.Outcome.Transfer;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -12,8 +14,8 @@ namespace Selenium.Pages.Outcome
     {
         public NewOutComePage(IWebDriver driver) : base(driver) { }
 
-        //[FindsBy]
-        //private IWebElement elem = null;
+        [FindsBy]
+        private IWebElement closeButton = null;
 
         public void SelectOutcome(string outCome)
         {            
@@ -63,28 +65,40 @@ namespace Selenium.Pages.Outcome
             var person = (new PersonPage(driver));
             person.SearchPartner("k");
             person.NextButton();
-            var release = new ReleasePage(driver);
-            release.CloseButton();
+            driver.Popup(false);
+            var trasfer = new TransferOutcomeInfoPage(driver);
+            trasfer.EnterTransferOutcomeInfo();
+            closeButton.ClickCustom(driver);
         }
 
         public void Adaption()
         {
             var person = (new PersonPage(driver));
             person.SearchPartner("k");
-            ClickWithLoop(By.Id("next-step")); //Next button Review Care History
-            Sleep(2000);
-            Signature();  // Companion Project Page
-            ClickWithLoop(By.Id("nextButton")); //Next button Companion Project Page
-            Sleep(2000);
-            Signature();  // Contract Page
-            ClickWithLoop(By.Id("nextButton")); //Next button Contract Page
-            var payment = (new DonationPage(driver)).EnterDonation(); // Donation
+            var review = new ReviewCareHistoryPage(driver);
+            var campanion = review.EnterReviewHistory();
+            var contract = campanion.ClickNext();
+            var donation = contract.ClickNext();
+            var payment = donation.EnterDonation();
             payment.PaymentBreakDown();
             payment.PaymentMethod();
-            Signature();
-            var release = payment.PaymentSummary();
-            ClickWithLoop(By.Id("nextButton")); //Next button Payment Pag            
-            release.Release();
+            var release = payment.PaymentSummaryAdaption();
+            release.CloseButton();
+
+            //ClickWithLoop(By.Id("next-step")); //Next button Review Care History
+            //Sleep(2000);
+            //Signature();  // Companion Project Page
+            //ClickWithLoop(By.Id("nextButton")); //Next button Companion Project Page
+            //Sleep(2000);
+            //Signature();  // Contract Page
+            //ClickWithLoop(By.Id("nextButton")); //Next button Contract Page
+            //var payment = (new DonationPage(driver)).EnterDonation(); // Donation
+            //payment.PaymentBreakDown();
+            //payment.PaymentMethod();
+            //Signature();
+            //var release = payment.PaymentSummary();
+            //ClickWithLoop(By.Id("nextButton")); //Next button Payment Pag            
+            //release.Release();
         }
     }
 }

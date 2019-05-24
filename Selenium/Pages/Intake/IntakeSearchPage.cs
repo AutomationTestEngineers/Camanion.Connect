@@ -1,6 +1,7 @@
 ﻿using Configuration;
 using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,6 +23,11 @@ namespace Selenium.Pages.Intake
         [FindsBy(How = How.XPath, Using = "(//tr/td[last()]/a[2])[1]")]
         private IWebElement x_Btn = null;
 
+        [FindsBy(How = How.CssSelector, Using = "div[class='toast-message']")]
+        private IWebElement toast = null;
+
+        
+
         public void SearchIntake()
         {
             fromDate.SendKeys(Keys.Tab);
@@ -38,6 +44,13 @@ namespace Selenium.Pages.Intake
             x_Btn.ClickCustom(driver);
             driver.Popup(true);
             ScreenBusy();
-        }        
+        } 
+        
+        public string GetToastMessage()
+        {
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")), 10);
+            toast.HighlightElement(driver);
+            return toast.Text;
+        }
     }
 }

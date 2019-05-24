@@ -22,6 +22,7 @@ Scenario Outline: Return_Intake_To_Outcome
 	And I Select "<Outcome>"
 	And I Delete Recent Outcome
 	And I Delete Recent Intake
+		Then "Update data successful" Message Should Be Display
 
 	Examples: 
 	| Outcome         | Shelter                         | Person | IntakeSection|
@@ -43,3 +44,5 @@ Scenario: Return_Intake
 	And I Enter Medical "5"
 	And I Enter Details
 		Then User Should See Animal Name
+	When I Delete Recent Intake
+		Then "Update data successful" Message Should Be Display

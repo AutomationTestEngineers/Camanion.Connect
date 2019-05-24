@@ -62,20 +62,34 @@ namespace Selenium
 
         public void ScreenBusy(int timeout = 120)
         {
-            Thread.Sleep(800);
+            Thread.Sleep(500);
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")),timeout);
-            Thread.Sleep(800);
+            Thread.Sleep(100);
         }
 
         public void Signature(bool chkbox =true)
         {
             try
             {
-                var element = FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a"), 2, true);
+                var element = FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a"), 1, true);
                 if (element.Displayed)
                 {
-                    if(chkbox)
+
+                    //if (chkbox)
+                    //{
+                    //    Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")), 10);
+                    //    FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
+                    //}
+                    try
+                    {
+                        if (chkbox)
+                            Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")),10);                        
+                    }
+                    catch { }
+                    if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"),1,true)!=null)
+                    {
                         FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
+                    }    
 
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
                     var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
@@ -105,15 +119,13 @@ namespace Selenium
                     driver.FindElement(by).Click();
                     found = true;
                     ScreenBusy(60);
-                    break;
+                    return;
                 }
-                catch (Exception e){
-                    if (found)
-                    {
-                        Console.WriteLine("[Locator] :" + by + " || " + $"[Error] : While Click & [Message] : [" + e.Message + "]");
-                        throw new Exception(e.Message);
-                    }
-                }
+                catch (Exception e){}
+            }
+            if(!found)
+            {
+                throw new Exception("Unable To Perform Click On Element : "+by);
             }
         }
     }
