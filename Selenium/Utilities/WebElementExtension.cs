@@ -202,10 +202,12 @@ namespace Selenium
         {
             Thread.Sleep(20);
             var elementProxy = RemotingServices.GetRealProxy(element);
-            var bysFromElement = (IReadOnlyList<object>)elementProxy
+            var bysFromElement = (IReadOnlyList<object>)elementProxy?
                 .GetType()
                 .GetProperty("Bys", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?
                 .GetValue(elementProxy);
+            if (bysFromElement == null)
+                return null;
             return (By)bysFromElement[0];
         }
 

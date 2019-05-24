@@ -121,7 +121,7 @@ namespace Selenium.Pages
             MedicalCare.ClickCustom(driver);
             int[] index = new int[] { 14, 17, 20 };
             for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
-                FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]")).ClickCustom(driver);
+                actions.MoveToElement(FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]"))).Click().Build().Perform();
             comments.SendKeysWrapper("Medical Exam Comments", driver);
             urgentChkBox.ClickCustom(driver);
             submit.ClickCustom(driver);
