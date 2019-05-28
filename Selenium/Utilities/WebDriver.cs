@@ -19,6 +19,13 @@ namespace Selenium
                         ChromeOptions options = new ChromeOptions();
                         options.AddArgument("--disable-infobars");
                         options.AddArguments("--disable-extensions");
+                        options.AddArguments("test-type");
+                        options.AddArguments("no-sandbox");
+                        options.AddArguments("disable-plugins");
+                        options.AddArguments("--enable-precise-memory-info");
+                        options.AddArguments("--disable-popup-blocking");
+                        options.AddArguments("--disable-default-apps");
+                        options.AddArguments("test-type=browser");
                         driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(120));                        
                         break;
                     }
