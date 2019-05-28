@@ -17,7 +17,7 @@ namespace Selenium.Pages.Intake
         [FindsBy]
         private IWebElement searchField = null, searchButton = null, fromDate = null;
 
-        [FindsBy(How = How.XPath, Using = "(//div[@class='row'])[6]/div[1]/div/div[1]")]
+        [FindsBy(How = How.XPath, Using = "(//div[@class='row'])[2]/div[1]/div/div[1]")]
         private IWebElement searchType = null;
 
         [FindsBy(How = How.XPath, Using = "(//tr/td[last()]/a[2])[1]")]
@@ -32,7 +32,7 @@ namespace Selenium.Pages.Intake
         {
             fromDate.SendKeys(Keys.Tab);
             searchType.ClickCustom(driver);
-            var searchTypeInput = FindBy(By.XPath("(//div[@class='row'])[6]/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
+            var searchTypeInput = FindBy(By.XPath("(//div[@class='row'])[2]/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
             searchTypeInput.SendKeys("Animal Name");
             searchTypeInput.SendKeys(Keys.Enter);
             searchField.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);

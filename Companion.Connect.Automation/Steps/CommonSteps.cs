@@ -31,7 +31,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Change Shelter ""(.*)""")]
         public void WhenIChangeShelter(string shelterName)
         {
-            homePage.ChangeShelter(shelterName);
+            //homePage.ChangeShelter(shelterName);
+            homePage.ChangeShelter_New(shelterName);
         }
 
         //[When(@"I Search ""(.*)""")]
@@ -43,7 +44,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click Add")]
         public void WhenIClickAdd()
         {
-            newIntake = homePage.ClickAdd();
+            //newIntake = homePage.ClickAdd();
+            newIntake = homePage.ClickAddAnimal();
         }
 
         [When(@"I Search Animal")]
@@ -113,7 +115,8 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"User Should See Animal Name")]
         public void ThenUserShouldSeeAnimalName()
         {
-            homePage.SearchAnimal();
+            //homePage.SearchAnimal();
+            homePage.SearchAnimal_New();
             homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
             profilePage = homePage.EditAnimal();
         }
@@ -142,7 +145,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click New Outcome Button")]
         public void WhenIClickNewOutcomeButton()
         {
-            homePage.SearchAnimal();
+            //homePage.SearchAnimal();
+            homePage.SearchAnimal_New();
             homePage.ClickPencilIcon();
             newOutcomePage = profilePage.ClickNewOutcome();
         }

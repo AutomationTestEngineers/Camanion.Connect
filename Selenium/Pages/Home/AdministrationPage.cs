@@ -14,10 +14,10 @@ namespace Selenium.Pages
     {
         public AdministrationPage(IWebDriver driver): base(driver) { }
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Outcomes')]")]
+        [FindsBy(How = How.XPath, Using = "//a[normalize-space()='Outcomes']")]
         private IWebElement outComes = null;
 
-        [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Intakes')]")]
+        [FindsBy(How = How.XPath, Using = "//a[normalize-space()='Intakes']")]
         private IWebElement intakes = null;
 
         public OutcomeSearchPage ClickOutcomes()

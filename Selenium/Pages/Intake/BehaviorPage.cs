@@ -30,13 +30,16 @@ namespace Selenium.Pages.Intake
         {
             temperament.SelectByIndex(driver,2);
             biteHistory.SelectByIndex(driver, 2);
-            FindBy(By.XPath($"(//div[@class='row'])[10]//label[contains(.,'{Parameter.Get<string>("Impression")}')]//i[1]")).ClickCustom(driver);
+            //FindBy(By.XPath($"(//div[@class='row'])[10]//label[contains(.,'{Parameter.Get<string>("Impression")}')]//i[1]")).ClickCustom(driver);
+            FindBy(By.XPath("//*[@id='content']/div/section/section/div/form/div[2]/div/div[2]/div[4]/label/span/label/i[1]")).ClickCustom(driver);
+
             handlingColor.ClickCustom(driver);
             FindBy(By.XPath($"//ul[@ng-show='showTicks']/li[3]")).ClickCustom(driver);
             intakeBehaviornote.SendKeysWrapper("AutomationTest", driver);
             saveNotes.ClickCustom(driver);
-            Sleep(500);
+            Sleep(100);
             nextBtn.ClickCustom(driver);
+            Sleep(400);
             return new MedicalPage(driver);
         }
     }
