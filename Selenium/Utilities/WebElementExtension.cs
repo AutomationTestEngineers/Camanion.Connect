@@ -221,12 +221,21 @@ namespace Selenium
             return (By)bysFromElement[0];
         }        
 
-        public static string GetText(this IWebElement element,IWebDriver driver)
+        public static string GetText(this IWebElement element,IWebDriver driver,bool js=false)
         {
             try
             {
-                ScreenBusy(driver);
-                return element.Text;
+                if (!js)
+                {
+                    ScreenBusy(driver);
+                    return element.Text;
+                }
+                else
+                {
+                    var Js = driver as IJavaScriptExecutor;
+                    return Js.ExecuteScript(JSOperator.GetText, element).ToString();
+                }
+                
             }
             catch (Exception e)
             {
@@ -406,7 +415,7 @@ namespace Selenium
             public static string ValidateAttribute { get { return "return arguments[0].getAttribute('{0}');"; } }
             public static string ScrollToElement { get { return "arguments[0].scrollIntoView(true);"; } }
             public static string DropDown { get { return "var length = arguments[0].options.length;  for (var i=0; i<length; i++){{  if (arguments[0].options[i].text == '{0}'){{ arguments[0].selectedIndex = i; break; }} }}"; } }
-
+            public static string GetText { get { return "return arguments[0].innerText"; } }
         }
 
     }

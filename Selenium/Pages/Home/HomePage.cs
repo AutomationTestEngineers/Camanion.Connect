@@ -103,7 +103,7 @@ namespace Selenium
             selection.Where(t => t.Text.Contains("Change Shelter Location")).FirstOrDefault().ClickCustom(driver);
             shelterId.ClickCustom(driver);
             FindBy(By.XPath($"//div[normalize-space()='{shelterName}']")).ClickCustom(driver);
-            if (shelterName == "Demo Shelter")
+            if (shelterName == "Demo Shelter" && FindBy(siteId.GetLocator(),1,true)!=null)
             {
                 siteId.ClickCustom(driver);
                 FindBy(By.XPath("//div[normalize-space()='Demo Site']")).ClickCustom(driver);
@@ -113,15 +113,19 @@ namespace Selenium
 
         public void ChangeShelter(string shelterName)
         {
-
-            gearIcon.ClickCustom(driver);
-            changeShelter.ClickCustom(driver);
-            FindBy(By.XPath($"//strong[normalize-space()='{shelterName}']"), 10).ClickCustom(driver);
-            ok.ClickCustom(driver);
-            if(shelterName== "Demo Shelter")
+            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+                ChangeShelter_New(shelterName);
+            else
             {
-                FindBy(By.XPath($"//strong[normalize-space()='Demo Site']"), 10).ClickCustom(driver);
+                gearIcon.ClickCustom(driver);
+                changeShelter.ClickCustom(driver);
+                FindBy(By.XPath($"//strong[normalize-space()='{shelterName}']"), 10).ClickCustom(driver);
                 ok.ClickCustom(driver);
+                if (shelterName == "Demo Shelter")
+                {
+                    FindBy(By.XPath($"//strong[normalize-space()='Demo Site']"), 10).ClickCustom(driver);
+                    ok.ClickCustom(driver);
+                }
             }
         }        
 
@@ -149,44 +153,33 @@ namespace Selenium
 
         public void SearchAnimal(string searchName=null)
         {
-            Sleep(1000);
+            Sleep(1500);
             ScreenBusy();
             if (searchName == null)
                 searchName = Parameter.Get<string>("AnimalName");
 
-            //ClickActiveOnly();
-            //FindBy(By.XPath("//div[@id='searchType']/div")).ClickCustom(driver);
-            //FindBy(By.XPath("(//div[text()='Animal Name'])[last()]")).ClickCustom(driver);
-            try
+            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+                SearchAnimal_New(searchName);
+            else
             {
-                activeOnly.Click();
-                if (activeOnly.GetAttribute("class").Contains("ng-untouched ng-valid ng-dirty ng-valid-parse ng-empty"))
-                    activeOnly.ClickCustom(driver);
-            }
-            catch { }
-            
-
-            searchDropDown.ClickCustom(driver);
-            searchInput.SendKeysWrapper(searchName, driver);
-            //searchValue.SendKeysWrapper(searchName, driver);
-            searchButton.ClickCustom(driver);
+                try
+                {
+                    activeOnly.Click();
+                    if (activeOnly.GetAttribute("class").Contains("ng-untouched ng-valid ng-dirty ng-valid-parse ng-empty"))
+                        activeOnly.ClickCustom(driver);
+                }
+                catch { }
+                searchDropDown.ClickCustom(driver);
+                searchInput.SendKeysWrapper(searchName, driver);
+                searchButton.ClickCustom(driver);
+            }                
         }
 
         public void SearchAnimal_New(string searchName = null)
         {
-            Sleep(1000);
-            ScreenBusy();
-            if (searchName == null)
-                searchName = Parameter.Get<string>("AnimalName");
             ClickActiveOnly();
             searchValue.SendKeysWrapper(searchName, driver);
             searchButton_New.ClickCustom(driver);
-            //if(FindBy(By.XPath("//div[@id='searchType']//div[text()='Animal Name']"),1,true)!=null)
-            //{
-            //    FindBy(By.XPath("//div[@id='searchType']/div")).ClickCustom(driver);
-            //    FindBy(By.XPath("(//div[text()='Animal Name'])[last()]")).ClickCustom(driver);
-            //}
-
         }
 
         public void ClickActiveOnly()
@@ -216,18 +209,26 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
-            //Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()));
-            //gearIcon.ClickCustom(driver);
-            //admin.ClickCustom(driver);
-            menu.ClickCustom(driver);
-            Sleep(100);
-            FindBy(By.XPath("//a[text()='Admin Settings']")).ClickCustom(driver);
+            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            {
+                menu.ClickCustom(driver); Sleep(100);
+                FindBy(By.XPath("//a[text()='Admin Settings']")).ClickCustom(driver);
+            }
+            else
+            {
+                Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()));
+                gearIcon.ClickCustom(driver);
+                admin.ClickCustom(driver);              
+            }
             return new AdministrationPage(driver);
         }
 
         public NewIntakePage ClickAdd()
         {
-            addBtn.ClickCustom(driver);
+            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+                ClickAddAnimal();
+            else
+                addBtn.ClickCustom(driver);
             return new NewIntakePage(driver);
         }
 
@@ -255,7 +256,6 @@ namespace Selenium
             Sleep(200);
             ScreenBusy();
             procedures.Displayed.Should().BeTrue("Procedures Not Displayed");
-
             return new ProfilePage(driver);
         }
     }

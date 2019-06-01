@@ -46,7 +46,7 @@ namespace Selenium
         {
             try
             {
-                if (exist) { Sleep(i * 1000); return driver.FindElement(by); }                    
+                if (exist) { Sleep(i * 500); return driver.FindElement(by); }                    
                 Wait(ExpectedConditions.ElementExists(by),i);
                 return driver.FindElement(by);
             }

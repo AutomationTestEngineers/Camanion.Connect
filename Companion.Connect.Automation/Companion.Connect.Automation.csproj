@@ -157,8 +157,8 @@
   </Target>
   <Import Project="..\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" />
   <PropertyGroup>
-    <PreBuildEvent>tasklist | find /i "chromedriver.exe" &amp;&amp; taskkill /im chromedriver.exe /F || echo process "chromedriver.exe" not running.
-exit 0</PreBuildEvent>
+    <PreBuildEvent>
+    </PreBuildEvent>
   </PropertyGroup>
   <Import Project="..\packages\SpecFlow.2.4.0\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.0\build\SpecFlow.targets')" />
 </Project>

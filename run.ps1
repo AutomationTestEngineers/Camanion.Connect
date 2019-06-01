@@ -1,18 +1,30 @@
+
+param(
+	[string]$NewVersion=''
+)
+function SetParameter($key, $value){
+	$parametersXMLName = "$PSScriptRoot\$PROJECTNAME\bin\Debug\Parameter.xml"
+	[xml]$parametersXML = New-Object System.Xml.XmlDocument
+	$parametersXML.Load($parametersXMLName)
+	$xpathNavigator = $parametersXML.CreateNavigator()
+	$xpathNavigator.SelectSingleNode([System.String]::Format("Parameter/{0}", $key)).SetValue($value)	
+	$parametersXML.Save($parametersXMLName)
+}
+
 try
 {
 	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Usage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	# .\run.ps1
 	# Change the Category if you want to execute all the test cases Example ::====>>>> [string]$TESTSELECT = 'cat == E2E'
 
-
 	# Result:
-	# All Results Stored in [C:\Automation] Location with DateTime
-	# All SrcenShots Stores [C:\evidence] Location with Test Case Name
+	# All Results will Saved in [C:\Automation] Location with DateTime
+	# All SrcenShots Will Saved [C:\evidence] Location with Test Case Name
 	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
-	[string]$TESTSELECT = 'Service'
+	[string]$TESTSELECT = 'E2E'
 	[string]$Ignore=''
 	[bool] $Nuget = $false
 	
@@ -50,6 +62,8 @@ try
 		$args = @("restore", $SOLUTION) 
         & NuGet $args
 	}
+
+	SetParameter "NewVersion" $NewVersion	
 
 	# Execute Tests
     $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT$Ignore"

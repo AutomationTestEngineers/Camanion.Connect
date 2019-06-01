@@ -28,7 +28,7 @@ namespace Selenium.Pages.Intake
 
         public DetailsPage EnterMedicalInfo(string index=null)
         {
-            Sleep(1000);
+            Sleep(700);
             Wait(ExpectedConditions.ElementExists(givenIntake.GetLocator()));
 
             if (index!=null) // Index Based Intake

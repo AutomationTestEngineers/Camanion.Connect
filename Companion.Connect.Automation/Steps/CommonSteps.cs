@@ -31,8 +31,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Change Shelter ""(.*)""")]
         public void WhenIChangeShelter(string shelterName)
         {
-            //homePage.ChangeShelter(shelterName);
-            homePage.ChangeShelter_New(shelterName);
+            homePage.ChangeShelter(shelterName);            
         }
 
         //[When(@"I Search ""(.*)""")]
@@ -44,8 +43,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click Add")]
         public void WhenIClickAdd()
         {
-            //newIntake = homePage.ClickAdd();
-            newIntake = homePage.ClickAddAnimal();
+            newIntake = homePage.ClickAdd();            
         }
 
         [When(@"I Search Animal")]
@@ -115,8 +113,7 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"User Should See Animal Name")]
         public void ThenUserShouldSeeAnimalName()
         {
-            //homePage.SearchAnimal();
-            homePage.SearchAnimal_New();
+            homePage.SearchAnimal();            
             homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
             profilePage = homePage.EditAnimal();
         }
@@ -145,8 +142,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click New Outcome Button")]
         public void WhenIClickNewOutcomeButton()
         {
-            //homePage.SearchAnimal();
-            homePage.SearchAnimal_New();
+            homePage.SearchAnimal();
             homePage.ClickPencilIcon();
             newOutcomePage = profilePage.ClickNewOutcome();
         }
@@ -178,7 +174,7 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"""(.*)"" Message Should Be Display")]
         public void ThenMessageShouldBeDisplay(string message)
         {
-            intakeSearchPage.GetToastMessage().Should().Equals(message);
+            //intakeSearchPage.GetToastMessage().Should().Equals(message);            
         }
 
     }
