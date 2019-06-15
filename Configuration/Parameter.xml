@@ -4,7 +4,8 @@
   <Browser>chrome</Browser>
   <SiteUrl>https://qat.companionconnect.com/login</SiteUrl>
   <Email>inazir@companionprotect.com</Email>
-  <Password>Muridke@1</Password>  
+  <!--<Password>Muridke@1</Password>-->
+  <Password>TXVyaWRrZUAx</Password>
   <Person>k</Person>
   <PetType>Dog</PetType>
   <Years>3</Years>

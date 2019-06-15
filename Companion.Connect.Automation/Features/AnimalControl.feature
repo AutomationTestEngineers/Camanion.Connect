@@ -5,7 +5,7 @@ Feature: AnimalControl
 Background: 
 	Given I Login
 
-Scenario Outline: Contol_Intake_To_Outcome
+Scenario Outline: Animal_Contol_Intake_To_Outcome
 	When I Change Shelter "<Shelter>"	
 	And I Click Add
 	And I Select "Animal Control" Intake

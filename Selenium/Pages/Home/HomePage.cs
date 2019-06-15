@@ -209,6 +209,7 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
+            Sleep(100);
             if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
             {
                 menu.ClickCustom(driver); Sleep(100);

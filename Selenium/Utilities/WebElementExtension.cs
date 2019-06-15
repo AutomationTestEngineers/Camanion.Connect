@@ -351,18 +351,19 @@ namespace Selenium
         {
             try
             {
-                string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]";
-                Thread.Sleep(300);
-                ScreenBusy(driver,30);
-                var e = driver.FindElement(By.XPath(xpath));
-                Wait(ExpectedConditions.ElementToBeClickable(e),driver,5);
-                e.ClickCustom(driver);
-                Thread.Sleep(100);
-                Console.WriteLine("************* Handling Un Expected Popup *************");
-                Console.WriteLine("             [Performed] : Click On 'OK/Yes'          ");
-                Console.WriteLine("******************************************************");
-                ScreenBusy(driver,30);
-                return true;
+                //string xpath = "//button[contains(text(),'Yes') or contains(text(),'OK')]";
+                //Thread.Sleep(300);
+                //ScreenBusy(driver,30);
+                //var e = driver.FindElement(By.XPath(xpath));
+                //Wait(ExpectedConditions.ElementToBeClickable(e),driver,5);
+                //e.ClickCustom(driver);
+                //Thread.Sleep(100);
+                //Console.WriteLine("************* Handling Un Expected Popup *************");
+                //Console.WriteLine("             [Performed] : Click On 'OK/Yes'          ");
+                //Console.WriteLine("******************************************************");
+                //ScreenBusy(driver,30);
+                //return true;
+                return false;
             }
             catch
             {
@@ -399,8 +400,8 @@ namespace Selenium
         {
             for (int i = 0; i < 2; i++)
             {
-                Thread.Sleep(30);
-                (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 3px solid blue;");
+                Thread.Sleep(10);
+                (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 5px solid blue;");
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
             }
 

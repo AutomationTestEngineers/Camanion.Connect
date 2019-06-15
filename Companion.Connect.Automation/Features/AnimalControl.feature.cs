@@ -82,15 +82,15 @@ namespace Companion.Connect.Automation.Features
         }
         
         [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Contol_Intake_To_Outcome")]
+        [NUnit.Framework.DescriptionAttribute("Animal_Contol_Intake_To_Outcome")]
         [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "k", "1", null)]
         [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "k", "2", null)]
         [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "k", "3", null)]
         [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "k", "4", null)]
         [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "k", "5", null)]
-        public virtual void Contol_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
+        public virtual void Animal_Contol_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
         {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Contol_Intake_To_Outcome", null, exampleTags);
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Animal_Contol_Intake_To_Outcome", null, exampleTags);
 #line 8
 this.ScenarioInitialize(scenarioInfo);
             this.ScenarioStart();

@@ -1,16 +1,7 @@
 
-param(
-	[string]$NewVersion=''
-)
-function SetParameter($key, $value){
-	$parametersXMLName = "$PSScriptRoot\$PROJECTNAME\bin\Debug\Parameter.xml"
-	[xml]$parametersXML = New-Object System.Xml.XmlDocument
-	$parametersXML.Load($parametersXMLName)
-	$xpathNavigator = $parametersXML.CreateNavigator()
-	$xpathNavigator.SelectSingleNode([System.String]::Format("Parameter/{0}", $key)).SetValue($value)	
-	$parametersXML.Save($parametersXMLName)
-}
-
+#param(
+#	[string]$NewVersion=''
+#)
 try
 {
 	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Usage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -63,7 +54,7 @@ try
         & NuGet $args
 	}
 
-	SetParameter "NewVersion" $NewVersion	
+	#SetParameter "NewVersion" $NewVersion	
 
 	# Execute Tests
     $OUTPUT  = nunit3-console --out=$RESULOUTTXT --framework=net-4.5 --result="$RESULTXML;format=nunit2" $PROJECT --where "cat == $TESTSELECT$Ignore"
@@ -85,4 +76,12 @@ Catch
 {
 	Stop-Transcript
     write-host $_.Exception.Message;
+}
+function SetParameter($key, $value){
+	$parametersXMLName = "$PSScriptRoot\$PROJECTNAME\bin\Debug\Parameter.xml"
+	[xml]$parametersXML = New-Object System.Xml.XmlDocument
+	$parametersXML.Load($parametersXMLName)
+	$xpathNavigator = $parametersXML.CreateNavigator()
+	$xpathNavigator.SelectSingleNode([System.String]::Format("Parameter/{0}", $key)).SetValue($value)	
+	$parametersXML.Save($parametersXMLName)
 }
