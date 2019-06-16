@@ -39,7 +39,8 @@ namespace Selenium.Pages.Intake
             if (index != null)  // If Scedule Date Present
             {
                 ScreenBusy();
-                IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"), 1, true);
+                Sleep(500);
+                IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"), 3, true);
                 if (schedule != null && schedule.Displayed)
                     schedule.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
             }            

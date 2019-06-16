@@ -1,5 +1,6 @@
 ﻿using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
+using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -53,6 +54,7 @@ namespace Selenium.Pages.Intake
         {
             if(type.Trim()== "Service")
             {
+                Wait(ExpectedConditions.ElementToBeClickable(site));
                 site.SelectByIndex(driver);
                 subSite.SelectByIndex(driver);
                 location.SelectByIndex(driver);

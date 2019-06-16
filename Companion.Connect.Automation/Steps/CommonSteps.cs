@@ -49,8 +49,9 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Search Animal")]
         public void WhenISearchAnimal()
         {
-            homePage.SearchAnimal();
-            homePage.ClickPencilIcon();
+            //homePage.SearchAnimal();
+            //homePage.ClickPencilIcon();
+            homePage.GotoProfilePage(Parameter.Get<string>("AnimalName"));
         }
 
         [Then(@"User Should See Search Reasult ""(.*)""")]
@@ -113,9 +114,10 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"User Should See Animal Name")]
         public void ThenUserShouldSeeAnimalName()
         {
-            homePage.SearchAnimal();            
-            homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
-            profilePage = homePage.EditAnimal();
+            //homePage.SearchAnimal();            
+            //homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
+            //profilePage = homePage.EditAnimal();
+            profilePage = homePage.GotoProfilePage(Parameter.Get<string>("AnimalName"));
         }
 
         [When(@"I Enter Animal Details To Profile")]

@@ -34,7 +34,7 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
 
-        [FindsBy(How = How.XPath, Using = "//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[4]/textarea")]
+        [FindsBy(How = How.TagName, Using = "textarea")]
         private IWebElement comments = null;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='inFoster']/..//span")]
@@ -102,6 +102,7 @@ namespace Selenium.Pages
                 {
                     Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
+                    Wait(ExpectedConditions.ElementExists(By.Name("startDate")));
                     releaseHoldBtn.ClickCustom(driver);
                 }
                 catch { Console.WriteLine(" <<<< Holds Released #"+i+" >>>>"); break; }
@@ -121,7 +122,7 @@ namespace Selenium.Pages
             MedicalCare.ClickCustom(driver);
             int[] index = new int[] { 14, 17, 20 };
             for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
-                actions.MoveToElement(FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]"))).Click().Build().Perform();
+                actions.MoveToElement(FindBy(By.XPath($"(//div[contains(@class,'checkbox-blue')]//i[1])[{index[i]}]"))).Click().Build().Perform();
             comments.SendKeysWrapper("Medical Exam Comments", driver);
             urgentChkBox.ClickCustom(driver);
             submit.ClickCustom(driver);
