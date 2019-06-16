@@ -36,7 +36,6 @@ $emailMessage.Body = @”
 	<br />
 	Thanks,
     <br />
-    Pradeep CH
     <br />
     QA Automation.
 “@
@@ -77,7 +76,7 @@ try
 		SetParameter "NewVersion" $NewVersion
 	}
 	# For Intakes Test no need to execute other tests
-	if($TESTSELECT -ne 'Intake')
+	if($TESTSELECT -eq 'E2E')
 	{
 		$Ignore += ' && cat != Intake'
 	}
