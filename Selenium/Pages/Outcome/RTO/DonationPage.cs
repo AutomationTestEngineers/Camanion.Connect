@@ -19,7 +19,7 @@ namespace Selenium.Pages.Outcome
         
         public PaymentPage EnterDonation()
         {
-            inputvalue.ClearAndPaste("10", driver);
+            inputvalue.SendKeysWrapper("10", driver);
             ClickWithLoop(nextButton.GetLocator());
             return new PaymentPage(driver);
         }

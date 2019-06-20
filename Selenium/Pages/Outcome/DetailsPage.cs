@@ -30,7 +30,7 @@ namespace Selenium.Pages.Outcome
             OutcomeSubType.SelectByIndex(driver, 1);
             AnimalCondition.SelectByIndex(driver, 1);
             OutcomeFee.SelectByIndex(driver, 1);
-            comments.ClearAndPaste(FakeData.Word, driver);
+            comments.SendKeysWrapper(FakeData.Word, driver);
             nextButton.ClickCustom(driver);
         }
 
@@ -41,7 +41,7 @@ namespace Selenium.Pages.Outcome
 
         public DonationPage EnterBahviorCare()
         {
-            behaviornote.ClearAndPaste("Behavior Notes", driver);
+            behaviornote.SendKeysWrapper("Behavior Notes", driver);
             ClickWithLoop(nextButton.GetLocator());
             return new DonationPage(driver);
         }
