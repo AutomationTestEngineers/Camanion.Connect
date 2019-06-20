@@ -26,6 +26,7 @@ namespace Selenium
                         options.AddArguments("--disable-popup-blocking");
                         options.AddArguments("--disable-default-apps");
                         options.AddArguments("test-type=browser");
+                        options.AddAdditionalCapability("useAutomationExtension", false);
                         driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(120));                        
                         break;
                     }
