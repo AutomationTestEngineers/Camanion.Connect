@@ -20,6 +20,7 @@ namespace Selenium.Pages.Outcome
         public PaymentPage EnterDonation()
         {
             inputvalue.SendKeysWrapper("10", driver);
+            Sleep(1000);
             ClickWithLoop(nextButton.GetLocator());
             return new PaymentPage(driver);
         }

@@ -50,6 +50,7 @@ namespace Companion.Connect.Automation.Steps
         public void WhenISearchAnimal()
         {
             homePage.SearchAnimal();
+            driver.Popup();
             homePage.ClickPencilIcon();
         }
 

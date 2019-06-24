@@ -43,6 +43,6 @@ Scenario: PublicStray_Intake
 	And I Enter Behavior
 	And I Enter Medical "4"
 	And I Enter Details
-		Then User Should See Animal Name
+		#Then User Should See Animal Name
 	When I Delete Recent Intake
-		Then "Update data successful" Message Should Be Display
+		#Then "Update data successful" Message Should Be Display

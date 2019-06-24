@@ -31,20 +31,26 @@ namespace Selenium.Pages.Intake
             Sleep(700);
             Wait(ExpectedConditions.ElementExists(givenIntake.GetLocator()));
 
-            if (index!=null) // Index Based Intake
+            if (!string.IsNullOrEmpty(index)) // Index Based Intake
                 FindBy(By.XPath($"(//ng-form[@name='medicalForm']/div[1]//input[@type='checkbox']/../i[1])[{index}]"), 1, true).ClickCustom(driver);
             else
                 givenIntake.ClickCustom(driver);
 
-            if (index != null)  // If Scedule Date Present
+            if (!string.IsNullOrEmpty(index))  // If Scedule Date Present
             {
                 ScreenBusy();
-                IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"), 1, true);
-                if (schedule != null && schedule.Displayed)
+                Sleep(100);
+                IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"));
+                if (!string.IsNullOrEmpty(index) && schedule.Displayed)
+                {
+                    for (int i = 0; i < 10; i++)
+                        if (FindBy(By.XPath("//label/text()[normalize-space()='Schedule the test for a specific date.']/preceding-sibling::i[1]")).GetCssValue("color") == "rgba(0, 158, 161, 1)")
+                            break;
                     schedule.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
-            }            
-            intakeMedicalVaccinationnote.SendKeys("Medical Notes");
-            Sleep(100);
+                    schedule.SendKeys(Keys.Enter);
+                }   
+            }
+            intakeMedicalVaccinationnote.SendKeysWrapper("Medical Notes",driver);            
             saveNotes_Medical.ClickCustom(driver);
             nextBtn.ClickCustom(driver);
             return new DetailsPage(driver);

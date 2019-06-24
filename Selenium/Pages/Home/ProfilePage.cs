@@ -34,7 +34,7 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
 
-        [FindsBy(How = How.XPath, Using = "//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[4]/textarea")]
+        [FindsBy(How = How.TagName, Using = "textarea")]
         private IWebElement comments = null;
 
         [FindsBy(How = How.XPath, Using = "//input[@id='inFoster']/..//span")]
@@ -48,7 +48,10 @@ namespace Selenium.Pages
 
         [FindsBy(How = How.XPath, Using = "//div[@data-ng-repeat='item in vm.observations']//i[1]")]
         private IList<IWebElement> abservations = null;
-        
+
+
+        [FindsBy(How = How.CssSelector, Using = "i[class='fa fa-square-o col-xs-2']")]
+        private IList<IWebElement> symptoms = null;
 
 
         public void EnterMicroChipDetails()
@@ -120,8 +123,9 @@ namespace Selenium.Pages
         {
             MedicalCare.ClickCustom(driver);
             int[] index = new int[] { 14, 17, 20 };
+            //actions.MoveToElement(FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]"))).Click().Build().Perform();
             for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
-                actions.MoveToElement(FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]"))).Click().Build().Perform();
+                actions.MoveToElement(symptoms[index[i]]).Click().Build().Perform();
             comments.SendKeysWrapper("Medical Exam Comments", driver);
             urgentChkBox.ClickCustom(driver);
             submit.ClickCustom(driver);

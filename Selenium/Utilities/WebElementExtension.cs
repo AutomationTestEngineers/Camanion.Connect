@@ -181,7 +181,7 @@ namespace Selenium
             try {
                 Thread.Sleep(100);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*")));
                 Thread.Sleep(50);
             }
             catch { }
@@ -193,7 +193,7 @@ namespace Selenium
             try {
                 Thread.Sleep(100);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*']")));
             }
             catch { }
         }

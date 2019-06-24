@@ -36,7 +36,6 @@ $emailMessage.Body = @”
 	<br />
 	Thanks,
     <br />
-    <br />
     QA Automation.
 “@
 	$SMTPClient = New-Object System.Net.Mail.SmtpClient( $emailSmtpServer , $emailSmtpServerPort )

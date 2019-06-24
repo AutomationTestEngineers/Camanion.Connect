@@ -17,13 +17,13 @@ namespace Selenium
 
         [FindsBy]
         private IWebElement newIntake = null, editAnimal=null, adminDate=null, scheduleDate=null, veterinarian=null, technician=null,
-            careComments=null, shelterId=null, siteId=null, searchValue=null;  
+            careComments=null, shelterId=null, siteId=null, searchValue=null, procedureId=null, veterinarianId=null, veterinaryTechnicianId=null;  
 
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
         private IWebElement vetBag = null;
 
-        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[5]")]
+        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[7]")]
         private IWebElement procedure = null;
 
         [FindsBy(How = How.Name, Using = "careActivity")]
@@ -95,6 +95,9 @@ namespace Selenium
 
         [FindsBy(How = How.CssSelector, Using = "div[class='QuickAdd-container']")]
         private IWebElement addAnimal = null;
+
+        [FindsBy(How = How.XPath, Using = "//span[text()='Save Procedure']")]
+        private IWebElement saveProcedure = null;
 
         public void ChangeShelter_New(string shelterName)
         {
@@ -196,7 +199,7 @@ namespace Selenium
         }
 
         public void ClickPencilIcon()
-        {
+        {   
             FindBy(By.XPath("(//span[@class='glyphicon glyphicon-pencil'])[1]")).ClickCustom(driver);
             Sleep(1000);
         }
@@ -245,18 +248,32 @@ namespace Selenium
             Sleep(1000);
             vetBag.ClickCustom(driver);
             procedure.ClickCustom(driver);
-            driver.Popup(true);
-            Sleep(1000);
-            careActivity.SelectByIndex(driver, 1);
-            adminDate.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
-            adminDate.SendKeys(Keys.Tab);
-            veterinarian.SelectByIndex(driver, 1);
-            technician.SelectByIndex(driver, 1);
-            careComments.SendKeysWrapper("Care Comments", driver);
-            saveAndClose.ClickCustom(driver);
+            FindBy(By.XPath($"//div[contains(text(),'{Parameter.Get<string>("AnimalName")}')]"),20);
+            procedureId.ClickCustom(driver);
+            FindBy(By.XPath($"(//div[@id='{nameof(procedureId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
+            veterinarianId.ClickCustom(driver);
+            FindBy(By.XPath($"(//div[@id='{nameof(veterinarianId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
+            veterinaryTechnicianId.ClickCustom(driver);
+            FindBy(By.XPath($"(//div[@id='{nameof(veterinaryTechnicianId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
+            do
+            {
+                Sleep(100);
+            } while (!FindBy(By.XPath("//span[text()='Save Procedure']/..")).GetCssValue("background-color").Contains("rgba(58, 174, 104, 1)"));
+            saveProcedure.ClickCustom(driver);
+            //driver.Popup(true);
+            //Sleep(1000);
+            //careActivity.SelectByIndex(driver, 1);
+            //adminDate.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
+            //adminDate.SendKeys(Keys.Tab);
+            //veterinarian.SelectByIndex(driver, 1);
+            //technician.SelectByIndex(driver, 1);
+            //careComments.SendKeysWrapper("Care Comments", driver);
+            //saveAndClose.ClickCustom(driver);
+            //Sleep(200);
+            //ScreenBusy();
+            //procedures.Displayed.Should().BeTrue("Procedures Not Displayed");
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//span[text()='Save Procedure']/..")));
             Sleep(200);
-            ScreenBusy();
-            procedures.Displayed.Should().BeTrue("Procedures Not Displayed");
             return new ProfilePage(driver);
         }
     }

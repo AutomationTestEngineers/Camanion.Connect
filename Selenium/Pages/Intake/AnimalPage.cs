@@ -37,8 +37,8 @@ namespace Selenium.Pages
             estAdultSize.SelectByIndex(driver);
             if(FindBy(noteType.GetLocator(), 1, true)!=null)
                 noteType.SelectByIndex(driver);
-
             nextButton.ClickCustom(driver);
+            Sleep(3000);
             return new BehaviorPage(driver);
         }
     }
