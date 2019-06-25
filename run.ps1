@@ -18,7 +18,7 @@ function SendMail($html,$cat){
 	$emailSmtpUser = "Automation.Test.Engineers@gmail.com"
 	$emailSmtpPass = "Automation@123"
 	$emailMessage = New-Object System.Net.Mail.MailMessage
-	$emailMessage.From = New-Object MailAddress("ch.pradeep4026@gmail.com", "Pradeep Chinthala" );
+	$emailMessage.From = New-Object MailAddress("ch.pradeep4026@gmail.com", "Imran Nazir" );
 	$emailMessage.To.Add( "ranaim76@hotmail.com" )
 	$emailMessage.To.Add( "ch.pradeep26@gmail.com" )
 	$emailMessage.Subject = “Comapanion Connect Result On $DateTime”

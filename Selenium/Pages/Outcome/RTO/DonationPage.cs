@@ -20,7 +20,7 @@ namespace Selenium.Pages.Outcome
         public PaymentPage EnterDonation()
         {
             inputvalue.SendKeysWrapper("10", driver);
-            Sleep(1000);
+            WebDriverWait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.CssSelector("div[class='toast-message']")));
             ClickWithLoop(nextButton.GetLocator());
             return new PaymentPage(driver);
         }

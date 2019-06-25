@@ -63,7 +63,7 @@ namespace Selenium
         public void ScreenBusy(int timeout = 120)
         {
             Thread.Sleep(300);
-            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")),timeout);
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*']")), timeout);            
             Thread.Sleep(100);
         }
 

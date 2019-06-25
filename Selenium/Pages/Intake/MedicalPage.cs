@@ -43,9 +43,12 @@ namespace Selenium.Pages.Intake
                 IWebElement schedule = FindBy(By.XPath("//ng-form[@name='medicalForm']/div[1]//input[contains(@name,'ScheduleDate') or contains(@name,'ScheduledDate')]"));
                 if (!string.IsNullOrEmpty(index) && schedule.Displayed)
                 {
-                    for (int i = 0; i < 10; i++)
+                    for (int i = 0; i < 20; i++)
+                    {
                         if (FindBy(By.XPath("//label/text()[normalize-space()='Schedule the test for a specific date.']/preceding-sibling::i[1]")).GetCssValue("color") == "rgba(0, 158, 161, 1)")
                             break;
+                    }
+                    Sleep(500);
                     schedule.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
                     schedule.SendKeys(Keys.Enter);
                 }   
