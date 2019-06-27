@@ -36,8 +36,10 @@ namespace Selenium.Pages.Intake
             handlingColor.ClickCustom(driver);
             FindBy(By.XPath($"//ul[@ng-show='showTicks']/li[3]")).ClickCustom(driver);
             intakeBehaviornote.SendKeysWrapper("AutomationTest", driver);
-            saveNotes.ClickCustom(driver);
             Sleep(100);
+            saveNotes.ClickCustom(driver);
+            Sleep(300);
+            nextBtn.ScrollElement(driver);
             nextBtn.ClickCustom(driver);
             Sleep(400);
             return new MedicalPage(driver);

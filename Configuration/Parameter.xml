@@ -14,7 +14,7 @@
   <BiteHistory>Bite - Person</BiteHistory>
   <Impression>Bites</Impression>
   <CauseOfDeath>Aggression</CauseOfDeath>
-
+  <ScreenBusy>(//div[@class='modal-backdrop fade in']/div/child::* | //div[@role='progressbar']/*/child::*[1])[1]</ScreenBusy>
   <!--Test Specific Paraneters-->
   <Test_Animal_Contol_Death>
     <Impression>Bites</Impression>

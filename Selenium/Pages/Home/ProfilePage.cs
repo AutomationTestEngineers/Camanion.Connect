@@ -106,6 +106,7 @@ namespace Selenium.Pages
                     Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
                     releaseHoldBtn.ClickCustom(driver);
+                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));
                 }
                 catch { Console.WriteLine(" <<<< Holds Released #"+i+" >>>>"); break; }
             }

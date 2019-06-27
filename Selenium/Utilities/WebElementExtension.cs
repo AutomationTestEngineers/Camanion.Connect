@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using OpenQA.Selenium.Interactions;
+using Configuration;
 
 namespace Selenium
 {
@@ -104,7 +105,6 @@ namespace Selenium
                         element.ClickCustom(driver);
                         var options = element.FindElements(By.TagName("option"));
                         Wait((d => d.FindElements(By.TagName("option")).Count() > 0), driver, 1);
-                        count = i;
                         foreach (var a in options)
                         {
                             if (a.Text.Trim() == option)
@@ -124,7 +124,7 @@ namespace Selenium
                 }
                 
                 if (!selected)
-                    throw new Exception($"[Root Cause] : Unable to Secting DropDown Option [{option}] On [{element.GetLocator()}] ## [Retry Count] : {count }");
+                    throw new Exception($"[Root Cause] : Unable to Secting DropDown Option [{option}] On [{element.GetLocator()}] ## [Retry Count] : {count+1}");
 
             }
             catch (Exception e)
@@ -162,7 +162,7 @@ namespace Selenium
                     Thread.Sleep(3000);
                 }                
                 if (!selected)
-                    throw new Exception($"[Root Cause] : Unable to Secting DropDown Index [{index}] On [{element.GetLocator()}] ## [Retry Count] : {count }");
+                    throw new Exception($"[Root Cause] : Unable to Select DropDown with Index [{index}] On [{element.GetLocator()}] After [Retry Count] : {count+1}");
             }
             catch (Exception e)
             {
@@ -181,7 +181,7 @@ namespace Selenium
             try {
                 Thread.Sleep(100);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*")));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
                 Thread.Sleep(50);
             }
             catch { }
@@ -193,7 +193,7 @@ namespace Selenium
             try {
                 Thread.Sleep(100);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*']")));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
             }
             catch { }
         }

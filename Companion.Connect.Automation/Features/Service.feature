@@ -51,7 +51,7 @@ Scenario: Service_Intake
 	And I Add Animal
 	And I Enter Details "Service"
 	And I Add Procedure
-	And I Search Animal
+	#And I Search Animal
 	And I Request Medical Exam
 	And  I Enter Animal Microchip Details
 	And I Enter Animal Rabies Vaccine Details And Realase Holds

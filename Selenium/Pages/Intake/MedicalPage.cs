@@ -45,7 +45,8 @@ namespace Selenium.Pages.Intake
                 {
                     for (int i = 0; i < 20; i++)
                     {
-                        if (FindBy(By.XPath("//label/text()[normalize-space()='Schedule the test for a specific date.']/preceding-sibling::i[1]")).GetCssValue("color") == "rgba(0, 158, 161, 1)")
+                        Sleep(300);
+                        if (FindBy(By.XPath("//label/text()[contains(normalize-space(),'for a specific date.')]/preceding-sibling::i[1]")).GetCssValue("color") != "rgba(176, 176, 176, 1)")
                             break;
                     }
                     Sleep(500);

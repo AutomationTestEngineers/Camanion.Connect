@@ -192,8 +192,6 @@ this.FeatureBackground();
  testRunner.And("I Enter Details \"Service\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 53
  testRunner.And("I Add Procedure", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 54
- testRunner.And("I Search Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 55
  testRunner.And("I Request Medical Exam", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 56

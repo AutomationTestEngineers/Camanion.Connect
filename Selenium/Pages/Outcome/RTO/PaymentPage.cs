@@ -35,6 +35,7 @@ namespace Selenium.Pages.Outcome
 
         public void PaymentBreakDown()
         {
+            ScreenBusy();
             ClickWithLoop(next.GetLocator());
         }
 

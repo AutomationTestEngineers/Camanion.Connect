@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Configuration;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.PageObjects;
@@ -63,7 +64,7 @@ namespace Selenium
         public void ScreenBusy(int timeout = 120)
         {
             Thread.Sleep(300);
-            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@role='progressbar']/*/child::*[1] | //div[@class='modal-backdrop fade in']/div/child::*']")), timeout);            
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))), timeout);            
             Thread.Sleep(100);
         }
 
@@ -113,7 +114,8 @@ namespace Selenium
             {
                 try
                 {
-                    ScreenBusy(30);
+                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("(//div[@class='modal-backdrop fade in']/div/child::* | //div[@role='progressbar']/*/child::*[1])[1]")), 60);
+                    ScreenBusy(60);
                     driver.FindElement(by).HighlightElement(driver);
                     WebDriverWait.Until(ExpectedConditions.ElementToBeClickable(by));
                     driver.FindElement(by).Click();

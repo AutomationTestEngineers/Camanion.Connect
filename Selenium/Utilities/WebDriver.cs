@@ -27,7 +27,7 @@ namespace Selenium
                         options.AddArguments("--disable-default-apps");
                         options.AddArguments("test-type=browser");
                         options.AddAdditionalCapability("useAutomationExtension", false);
-                        driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(120));                        
+                        driver = new ChromeDriver(service, options, TimeSpan.FromSeconds(180));                        
                         break;
                     }
                 

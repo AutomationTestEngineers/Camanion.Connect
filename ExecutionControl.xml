@@ -1,0 +1,6 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Cat>
+  <Include>AnimalControl,PublicStray,Return,Service,Surrender,Transfer</Include>
+  <!--<Include>E2E</Include>-->
+  <Exclude>Intake</Exclude>
+</Cat>
