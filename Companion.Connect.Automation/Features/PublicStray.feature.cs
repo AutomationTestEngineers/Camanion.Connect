@@ -85,7 +85,7 @@ namespace Companion.Connect.Automation.Features
         [NUnit.Framework.DescriptionAttribute("PublicStray_Intake_To_Outcome")]
         [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "John", "1", null)]
         [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "John", "2", null)]
-        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "John", "3", null)]
+        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Demo Shelter", "John", "3", null)]
         [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "John", "4", null)]
         [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "John", "2", null)]
         public virtual void PublicStray_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)

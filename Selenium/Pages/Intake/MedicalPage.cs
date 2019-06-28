@@ -45,7 +45,7 @@ namespace Selenium.Pages.Intake
                 {
                     for (int i = 0; i < 20; i++)
                     {
-                        Sleep(300);
+                        Sleep(500);
                         if (FindBy(By.XPath("//label/text()[contains(normalize-space(),'for a specific date.')]/preceding-sibling::i[1]")).GetCssValue("color") != "rgba(176, 176, 176, 1)")
                             break;
                     }

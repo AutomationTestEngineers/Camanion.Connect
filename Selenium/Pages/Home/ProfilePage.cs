@@ -105,10 +105,14 @@ namespace Selenium.Pages
                 {
                     Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
-                    releaseHoldBtn.ClickCustom(driver);
+                    Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn),10);
+                    releaseHoldBtn.Click();
+                    Sleep(3000);
+                    if (FindBy(By.XPath("//span[text()='Ok']"),3,true) != null)
+                        FindBy(By.XPath("//span[text()='Ok']")).Click();
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));
                 }
-                catch { Console.WriteLine(" <<<< Holds Released #"+i+" >>>>"); break; }
+                catch { Console.WriteLine(" <<<< Holds Released #"+(i+1)+" >>>>"); break; }
             }
             btnClose.ClickCustom(driver);
         }        
