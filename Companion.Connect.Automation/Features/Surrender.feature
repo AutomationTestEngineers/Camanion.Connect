@@ -26,12 +26,12 @@ Scenario Outline: Surrender_Intake_To_Outcome
 		Then "Update data successful" Message Should Be Display
 
 	Examples: 
-	| Outcome         | Shelter                         | Person | IntakeSection |
-	| Death           | Demo Shelter                    | John   | 1             |
-	| Return to Owner | Demo Shelter                    | John   | 2             |
-	| Euthanasia      | Central Missouri Humane Society | John   | 3             |
-	| Transfer        | Demo Shelter                    | John   | 4             |
-	| Adoption        | Demo Shelter                    | John   | 5             |
+	| Outcome         | Shelter      | Person | IntakeSection |
+	| Death           | Demo Shelter | John   | 1             |
+	| Return to Owner | Demo Shelter | John   | 2             |
+	| Euthanasia      | Demo Shelter | John   | 3             |
+	| Transfer        | Demo Shelter | John   | 4             |
+	| Adoption        | Demo Shelter | John   | 5             |
 
 
 

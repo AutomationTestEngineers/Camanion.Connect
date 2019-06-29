@@ -85,7 +85,7 @@ namespace Companion.Connect.Automation.Features
         [NUnit.Framework.DescriptionAttribute("Return_Intake_To_Outcome")]
         [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "k", "1", null)]
         [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "k", "2", null)]
-        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "k", "3", null)]
+        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Demo Shelter", "k", "3", null)]
         [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "k", "4", null)]
         [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "k", "4", null)]
         public virtual void Return_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)

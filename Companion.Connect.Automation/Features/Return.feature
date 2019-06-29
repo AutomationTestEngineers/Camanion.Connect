@@ -25,12 +25,12 @@ Scenario Outline: Return_Intake_To_Outcome
 		Then "Update data successful" Message Should Be Display
 
 	Examples: 
-	| Outcome         | Shelter                         | Person | IntakeSection|
-	| Death           | Demo Shelter                    | k      | 1            |
-	| Return to Owner | Demo Shelter                    | k      | 2            |
-	| Euthanasia      | Central Missouri Humane Society | k      | 3            |
-	| Transfer        | Demo Shelter                    | k      | 4            |
-	| Adoption        | Demo Shelter                    | k      | 4            |
+	| Outcome         | Shelter      | Person | IntakeSection |
+	| Death           | Demo Shelter | k      | 1             |
+	| Return to Owner | Demo Shelter | k      | 2             |
+	| Euthanasia      | Demo Shelter | k      | 3             |
+	| Transfer        | Demo Shelter | k      | 4             |
+	| Adoption        | Demo Shelter | k      | 4             |
 
 
 @Intake

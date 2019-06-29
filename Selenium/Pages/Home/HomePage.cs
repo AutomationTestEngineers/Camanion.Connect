@@ -102,7 +102,8 @@ namespace Selenium
         public void ChangeShelter_New(string shelterName)
         {
             Sleep(300);
-            menu.ClickCustom(driver);
+            actions.MoveToElement(menu).Click().Build().Perform();
+            //menu.ClickCustom(driver);
             Sleep(100);
             selection.Where(t => t.Text.Contains("Change Shelter Location")).FirstOrDefault().ClickCustom(driver);
             shelterId.ClickCustom(driver);
@@ -213,10 +214,11 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
-            Sleep(200);
+            Sleep(100);
             if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
             {
-                menu.ClickCustom(driver); Sleep(300);
+                Wait(ExpectedConditions.ElementExists(menu.GetLocator()));
+                actions.MoveToElement(menu).Click().Build().Perform(); Sleep(300);
                 FindBy(By.XPath("//a[text()='Admin Settings']")).ClickCustom(driver);
             }
             else
