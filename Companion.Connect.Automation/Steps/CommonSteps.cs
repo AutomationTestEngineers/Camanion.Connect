@@ -172,6 +172,23 @@ namespace Companion.Connect.Automation.Steps
             intakeSearchPage.DeleteIntake();            
         }
 
+        [When(@"I Delete Recent Outcome ""(.*)""")]
+        public void WhenIDeleteRecentOutcome(string p0)
+        {
+            administrationPage = homePage.SelectAdmin();
+            outcomeSearchPage = administrationPage.ClickOutcomes();
+            outcomeSearchPage.SearchOutcome(p0);
+        }
+
+        [When(@"I Delete Recent Intake ""(.*)""")]
+        public void WhenIDeleteRecentIntake(string p0)
+        {
+            administrationPage = homePage.SelectAdmin();
+            intakeSearchPage = administrationPage.ClickIntakes();
+            intakeSearchPage.SearchIntake(p0);
+        }
+
+
         [Then(@"""(.*)"" Message Should Be Display")]
         public void ThenMessageShouldBeDisplay(string message)
         {

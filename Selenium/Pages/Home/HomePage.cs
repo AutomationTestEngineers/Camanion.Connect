@@ -16,24 +16,14 @@ namespace Selenium
         public HomePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement newIntake = null, editAnimal=null, adminDate=null, scheduleDate=null, veterinarian=null, technician=null,
-            careComments=null, shelterId=null, siteId=null, searchValue=null, procedureId=null, veterinarianId=null, veterinaryTechnicianId=null;  
+        private IWebElement newIntake = null, editAnimal=null, shelterId=null, siteId=null, searchValue=null, procedureId=null, veterinarianId=null, veterinaryTechnicianId=null;  
 
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
         private IWebElement vetBag = null;
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[7]")]
-        private IWebElement procedure = null;
-
-        [FindsBy(How = How.Name, Using = "careActivity")]
-        private IWebElement careActivity = null;
-
-        [FindsBy(How = How.XPath, Using = "//button[@ng-click='vm.save()']")]
-        private IWebElement saveAndClose = null;
-
-        [FindsBy(How = How.XPath, Using = "//*[@id='procedure']")]
-        private IWebElement procedures = null;        
+        private IWebElement procedure = null;        
 
         //[FindsBy(How = How.Name, Using = "careActivity")]
         //private IWebElement careActivity = null;
@@ -214,11 +204,11 @@ namespace Selenium
         
         public AdministrationPage SelectAdmin()
         {
-            Sleep(100);
+            Sleep(300);
             if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
             {
                 Wait(ExpectedConditions.ElementExists(menu.GetLocator()));
-                actions.MoveToElement(menu).Click().Build().Perform(); Sleep(300);
+                menu.ClickCustom(driver); Sleep(400);
                 FindBy(By.XPath("//a[text()='Admin Settings']")).ClickCustom(driver);
             }
             else

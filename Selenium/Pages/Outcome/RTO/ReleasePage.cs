@@ -11,10 +11,7 @@ namespace Selenium.Pages.Outcome
     public class ReleasePage : BasePage
     {
         public ReleasePage(IWebDriver driver) : base(driver) { }
-
-        [FindsBy]
-        private IWebElement closeButton = null;
-
+               
         [FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
         private IWebElement close = null;
 
@@ -22,7 +19,7 @@ namespace Selenium.Pages.Outcome
         public void Release()
         {
             driver.Popup();
-            close.ClickCustom(driver);
+            ClickWithLoop(close.GetLocator());
         }
 
         public void CloseButton()

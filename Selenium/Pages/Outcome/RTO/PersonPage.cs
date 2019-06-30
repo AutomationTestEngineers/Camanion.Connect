@@ -14,7 +14,7 @@ namespace Selenium.Pages.Outcome
         public PersonPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement searchButton = null, cancelButton=null;
+        private IWebElement searchButton = null;
 
         [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
         private IWebElement search = null;

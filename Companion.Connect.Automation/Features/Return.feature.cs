@@ -87,7 +87,6 @@ namespace Companion.Connect.Automation.Features
         [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "k", "2", null)]
         [NUnit.Framework.TestCaseAttribute("Euthanasia", "Demo Shelter", "k", "3", null)]
         [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "k", "4", null)]
-        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "k", "4", null)]
         public virtual void Return_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Return_Intake_To_Outcome", null, exampleTags);
@@ -128,40 +127,6 @@ this.FeatureBackground();
  testRunner.And("I Delete Recent Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 25
   testRunner.Then("\"Update data successful\" Message Should Be Display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
-#line hidden
-            this.ScenarioCleanup();
-        }
-        
-        [NUnit.Framework.TestAttribute()]
-        [NUnit.Framework.DescriptionAttribute("Return_Intake")]
-        [NUnit.Framework.CategoryAttribute("Intake")]
-        public virtual void Return_Intake()
-        {
-            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Return_Intake", null, new string[] {
-                        "Intake"});
-#line 37
-this.ScenarioInitialize(scenarioInfo);
-            this.ScenarioStart();
-#line 5
-this.FeatureBackground();
-#line 38
- testRunner.When("I Change Shelter \"Demo Shelter\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
-#line 39
- testRunner.And("I Click Add", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
- testRunner.And("I Select \"Return\" Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 41
- testRunner.And("I Select Partner \"k\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 42
- testRunner.And("I Add Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 43
- testRunner.And("I Enter Behavior", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 44
- testRunner.And("I Enter Medical \"5\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 45
- testRunner.And("I Enter Details", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 47
- testRunner.When("I Delete Recent Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line hidden
             this.ScenarioCleanup();
         }

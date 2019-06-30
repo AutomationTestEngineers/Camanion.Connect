@@ -27,8 +27,8 @@ namespace Selenium.Pages.Intake
         [FindsBy(How = How.CssSelector, Using = "button[data-ng-click='vm.completePayment()']")]
         private IWebElement completePayment = null;
 
-        [FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
-        private IWebElement close = null;
+        //[FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
+        //private IWebElement close = null;
 
         
 

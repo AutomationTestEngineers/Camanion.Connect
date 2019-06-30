@@ -30,19 +30,19 @@ Scenario Outline: PublicStray_Intake_To_Outcome
 	| Return to Owner | Demo Shelter | John   | 2             |
 	| Euthanasia      | Demo Shelter | John   | 3             |
 	| Transfer        | Demo Shelter | John   | 4             |
-	| Adoption        | Demo Shelter | John   | 2             |
+	#| Adoption        | Demo Shelter | John   | 2             |
 
 
-@Intake
-Scenario: PublicStray_Intake
-	When I Change Shelter "Demo Shelter"	
-	And I Click Add
-	And I Select "Public Stray" Intake
-	And I Select Partner "John"
-	And I Add Animal
-	And I Enter Behavior
-	And I Enter Medical "4"
-	And I Enter Details
-		#Then User Should See Animal Name
-	When I Delete Recent Intake
-		#Then "Update data successful" Message Should Be Display
+#@Intake
+#Scenario: PublicStray_Intake
+#	When I Change Shelter "Demo Shelter"	
+#	And I Click Add
+#	And I Select "Public Stray" Intake
+#	And I Select Partner "John"
+#	And I Add Animal
+#	And I Enter Behavior
+#	And I Enter Medical "4"
+#	And I Enter Details
+#		#Then User Should See Animal Name
+#	When I Delete Recent Intake
+#		#Then "Update data successful" Message Should Be Display

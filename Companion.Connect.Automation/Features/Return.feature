@@ -30,19 +30,19 @@ Scenario Outline: Return_Intake_To_Outcome
 	| Return to Owner | Demo Shelter | k      | 2             |
 	| Euthanasia      | Demo Shelter | k      | 3             |
 	| Transfer        | Demo Shelter | k      | 4             |
-	| Adoption        | Demo Shelter | k      | 4             |
+	#| Adoption        | Demo Shelter | k      | 4             |
 
 
-@Intake
-Scenario: Return_Intake
-	When I Change Shelter "Demo Shelter"	
-	And I Click Add
-	And I Select "Return" Intake
-	And I Select Partner "k"
-	And I Add Animal
-	And I Enter Behavior
-	And I Enter Medical "5"
-	And I Enter Details
-		#Then User Should See Animal Name
-	When I Delete Recent Intake
-		#Then "Update data successful" Message Should Be Display
+#@Intake
+#Scenario: Return_Intake
+#	When I Change Shelter "Demo Shelter"	
+#	And I Click Add
+#	And I Select "Return" Intake
+#	And I Select Partner "k"
+#	And I Add Animal
+#	And I Enter Behavior
+#	And I Enter Medical "5"
+#	And I Enter Details
+#		#Then User Should See Animal Name
+#	When I Delete Recent Intake
+#		#Then "Update data successful" Message Should Be Display

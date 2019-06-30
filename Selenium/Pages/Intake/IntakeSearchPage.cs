@@ -52,5 +52,24 @@ namespace Selenium.Pages.Intake
             toast.HighlightElement(driver);
             return toast.GetText(driver,true);
         }
+
+        public void SearchIntake(string p0)
+        {
+            fromDate.SendKeysWrapper(DateTime.Today.AddDays(-20).ToShortDateString(), driver);
+            fromDate.SendKeys(Keys.Tab);
+            searchType.ClickCustom(driver);
+            var searchTypeInput = FindBy(By.XPath("((//div[@class='row'])[6] |(//div[@class='row'])[2])/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
+            searchTypeInput.SendKeys("Animal Name");
+            searchTypeInput.SendKeys(Keys.Enter);
+            searchField.SendKeysWrapper(p0, driver);
+            searchButton.ClickCustom(driver);
+            var a = driver.FindElements(By.XPath("(//tr/td[last()]/a[2])"));
+            for (int i = 0; i < a.Count; i++)
+            {
+                x_Btn.ClickCustom(driver);
+                driver.Popup(true);
+                ScreenBusy();
+            }
+        }
     }
 }

@@ -28,6 +28,7 @@ namespace Selenium.Pages
 
         public IntakeSearchPage ClickIntakes()
         {
+            Sleep(300);
             intakes.ClickCustom(driver);  return new IntakeSearchPage(driver);
         }
        

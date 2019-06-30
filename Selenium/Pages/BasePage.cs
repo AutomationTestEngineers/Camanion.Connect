@@ -118,6 +118,7 @@ namespace Selenium
                     ScreenBusy(60);
                     driver.FindElement(by).HighlightElement(driver);
                     WebDriverWait.Until(ExpectedConditions.ElementToBeClickable(by));
+                    driver.FindElement(by).ScrollElement(driver);
                     driver.FindElement(by).Click();
                     found = true;
                     ScreenBusy(60);

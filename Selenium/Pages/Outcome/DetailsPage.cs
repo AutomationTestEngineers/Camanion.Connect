@@ -16,10 +16,7 @@ namespace Selenium.Pages.Outcome
         [FindsBy]
         private IWebElement OutcomeSubType = null, AnimalCondition = null, OutcomeFee = null, comments=null, nextButton=null, behaviornote=null,
             euthanasiaReason=null, performedBy=null, euthanasiaSubtance=null, euthanasiaDosage=null, method=null, route=null, Deathnote=null,
-            closeButton=null;
-
-        [FindsBy(How = How.Name, Using = "IntakeSubType")]
-        private IWebElement intakeSubType = null;
+            closeButton=null;        
 
         [FindsBy(How = How.Name, Using = "euthanasiaMeasurement")]
         private IWebElement euthanasiaMeasurement = null;

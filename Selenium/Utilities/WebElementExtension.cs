@@ -179,7 +179,7 @@ namespace Selenium
         public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 120)
         {
             try {
-                Thread.Sleep(100);
+                Thread.Sleep(200);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
                 wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
                 Thread.Sleep(50);
@@ -191,7 +191,7 @@ namespace Selenium
         public static void ScreenBusy(IWebDriver driver, int timeout = 120)
         {
             try {
-                Thread.Sleep(100);
+                Thread.Sleep(300);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
                 wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
             }

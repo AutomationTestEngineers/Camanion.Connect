@@ -17,7 +17,7 @@ namespace Selenium.Pages
 
         [FindsBy]
         private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null, btnClose=null, NewOutcome=null,
-            MedicalCare=null, BehavioralCare=null, note=null, addNote=null, submitButton=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, animalStatus=null, btnAddPetId = null;
+            MedicalCare=null, BehavioralCare=null, note=null, addNote=null, submitButton=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, btnAddPetId = null;
 
         //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
         //private IWebElement animalCurrentHolds = null;
@@ -105,9 +105,10 @@ namespace Selenium.Pages
                 {
                     Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
-                    Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn),10);
+                    Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn),30);
                     releaseHoldBtn.Click();
-                    Sleep(3000);
+                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']/div/child::*")),120);
+                    Sleep(2000);
                     if (FindBy(By.XPath("//span[text()='Ok']"),3,true) != null)
                         FindBy(By.XPath("//span[text()='Ok']")).Click();
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));

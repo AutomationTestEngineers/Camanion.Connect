@@ -22,8 +22,8 @@ namespace Selenium.Pages.Outcome
         [FindsBy(How = How.XPath, Using = "//*[@id='configure-filter']//i")]
         private IWebElement personalInfoChkBox = null;
 
-        [FindsBy(How = How.XPath, Using = "//div[@class='radio-blue display-inline']//i[1]")]
-        private IList<IWebElement> paymentMethods = null;
+        //[FindsBy(How = How.XPath, Using = "//div[@class='radio-blue display-inline']//i[1]")]
+        //private IList<IWebElement> paymentMethods = null;
 
         [FindsBy(How = How.XPath, Using = "//button[@id='nextButton']")]
         private IWebElement submitPayment = null;
@@ -54,7 +54,7 @@ namespace Selenium.Pages.Outcome
             //if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"),2,true)!=null)
             //    FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
             Signature(false);
-            next.ClickCustom(driver);
+            ClickWithLoop(next.GetLocator());
             driver.Popup();
         }
         

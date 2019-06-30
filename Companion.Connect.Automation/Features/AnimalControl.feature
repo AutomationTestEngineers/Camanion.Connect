@@ -29,19 +29,24 @@ Scenario Outline: Animal_Contol_Intake_To_Outcome
 	| Return to Owner | Demo Shelter                    | k      | 2             |
 	| Euthanasia      | Central Missouri Humane Society | k      | 3             |
 	| Transfer        | Demo Shelter                    | k      | 4             |
-	| Adoption        | Demo Shelter                    | k      | 5             |
+	#| Adoption        | Demo Shelter                    | k      | 5             |
 
 
-@Intake
-Scenario: Animal_Contol_Intake
-	When I Change Shelter "Demo Shelter"	
-	And I Click Add
-	And I Select "Animal Control" Intake
-	And I Select Partner "k"
-	And I Add Animal
-	And I Enter Behavior
-	And I Enter Medical "2"
-	And I Enter Details
-		#Then User Should See Animal Name
-	When I Delete Recent Intake
-		#Then "Update data successful" Message Should Be Display
+#@Intake
+#Scenario: Animal_Contol_Intake
+#	When I Change Shelter "Demo Shelter"	
+#	And I Click Add
+#	And I Select "Animal Control" Intake
+#	And I Select Partner "k"
+#	And I Add Animal
+#	And I Enter Behavior
+#	And I Enter Medical "2"
+#	And I Enter Details
+#		#Then User Should See Animal Name
+#	When I Delete Recent Intake
+#		#Then "Update data successful" Message Should Be Display
+
+#Scenario: Delete Animal
+#	When I Change Shelter "Demo Shelter"
+#	And I Delete Recent Outcome "Animal_"
+#	And I Delete Recent Intake "Animal_"
