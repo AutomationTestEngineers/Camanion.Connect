@@ -21,6 +21,7 @@ namespace Selenium.Pages
 
         public BehaviorPage AddAnimal()
         {
+            Sleep(500);
             ScreenBusy();
             addAnimal.ClickCustom(driver);
             Sleep(3000);
