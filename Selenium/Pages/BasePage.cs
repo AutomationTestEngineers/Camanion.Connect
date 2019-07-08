@@ -64,7 +64,7 @@ namespace Selenium
         public void ScreenBusy(int timeout = 120)
         {
             Thread.Sleep(300);
-            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))), timeout);            
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)), timeout);            
             Thread.Sleep(100);
         }
 

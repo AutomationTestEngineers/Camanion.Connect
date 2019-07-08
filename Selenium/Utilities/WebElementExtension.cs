@@ -181,7 +181,7 @@ namespace Selenium
             try {
                 Thread.Sleep(200);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)));
                 Thread.Sleep(50);
             }
             catch { }
@@ -193,7 +193,7 @@ namespace Selenium
             try {
                 Thread.Sleep(300);
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)));
             }
             catch { }
         }

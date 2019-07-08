@@ -108,7 +108,7 @@ namespace Selenium
 
         public void ChangeShelter(string shelterName)
         {
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 ChangeShelter_New(shelterName);
             else
             {
@@ -150,10 +150,10 @@ namespace Selenium
         {
             Sleep(1500);
             ScreenBusy();
-            if (searchName == null)
-                searchName = Parameter.Get<string>("AnimalName");
+            //if (searchName == null)
+            //    searchName = Parameter.Get<string>("AnimalName");
 
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 SearchAnimal_New(searchName);
             else
             {
@@ -205,7 +205,7 @@ namespace Selenium
         public AdministrationPage SelectAdmin()
         {
             Sleep(300);
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
             {
                 Wait(ExpectedConditions.ElementExists(menu.GetLocator()));
                 menu.ClickCustom(driver); Sleep(400);
@@ -222,7 +222,7 @@ namespace Selenium
 
         public NewIntakePage ClickAdd()
         {
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 ClickAddAnimal();
             else
                 addBtn.ClickCustom(driver);
@@ -236,12 +236,12 @@ namespace Selenium
             return new NewIntakePage(driver);
         }
 
-        public ProfilePage AddProcedure()
+        public ProfilePage AddProcedure(string name)
         {
             Sleep(1000);
             vetBag.ClickCustom(driver);
             procedure.ClickCustom(driver);
-            FindBy(By.XPath($"//div[contains(text(),'{Parameter.Get<string>("AnimalName")}')]"),20);
+            FindBy(By.XPath($"//div[contains(text(),'{name}')]"),20);
             procedureId.ClickCustom(driver);
             FindBy(By.XPath($"(//div[@id='{nameof(procedureId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
             veterinarianId.ClickCustom(driver);

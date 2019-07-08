@@ -29,7 +29,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Add Procedure")]
         public void WhenIAddProcedure()
         {
-            profilePage = home.AddProcedure();
+            profilePage = home.AddProcedure(scenarioContext.Get<string>("AnimalName"));
         }
 
         [When(@"I Request Medical Exam")]

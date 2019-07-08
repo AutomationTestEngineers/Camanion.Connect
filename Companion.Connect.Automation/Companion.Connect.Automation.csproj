@@ -83,11 +83,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>PublicStray.feature</DependentUpon>
     </Compile>
-    <Compile Include="Features\Service.feature.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>Service.feature</DependentUpon>
-    </Compile>
     <Compile Include="Features\Surrender.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -118,10 +113,6 @@
     <None Include="Features\PublicStray.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>PublicStray.feature.cs</LastGenOutput>
-    </None>
-    <None Include="Features\Service.feature">
-      <Generator>SpecFlowSingleFileGenerator</Generator>
-      <LastGenOutput>Service.feature.cs</LastGenOutput>
     </None>
     <None Include="Features\Surrender.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>

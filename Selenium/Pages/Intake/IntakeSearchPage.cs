@@ -28,14 +28,14 @@ namespace Selenium.Pages.Intake
 
         
 
-        public void SearchIntake()
+        public void SearchIntake(string name)
         {
             fromDate.SendKeys(Keys.Tab);
             searchType.ClickCustom(driver);
             var searchTypeInput = FindBy(By.XPath("((//div[@class='row'])[6] |(//div[@class='row'])[2])/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
             searchTypeInput.SendKeys("Animal Name");
             searchTypeInput.SendKeys(Keys.Enter);
-            searchField.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);
+            searchField.SendKeysWrapper(name, driver);
             searchButton.ClickCustom(driver);
         }
 
@@ -53,9 +53,9 @@ namespace Selenium.Pages.Intake
             return toast.GetText(driver,true);
         }
 
-        public void SearchIntake(string p0)
+        public void SearchIntake_Specific(string p0)
         {
-            fromDate.SendKeysWrapper(DateTime.Today.AddDays(-20).ToShortDateString(), driver);
+            fromDate.SendKeysWrapper(DateTime.Today.AddDays(-40).ToShortDateString(), driver);
             fromDate.SendKeys(Keys.Tab);
             searchType.ClickCustom(driver);
             var searchTypeInput = FindBy(By.XPath("((//div[@class='row'])[6] |(//div[@class='row'])[2])/div[1]/div/div[1]/following-sibling::input[1]"), 1, true);
@@ -63,12 +63,14 @@ namespace Selenium.Pages.Intake
             searchTypeInput.SendKeys(Keys.Enter);
             searchField.SendKeysWrapper(p0, driver);
             searchButton.ClickCustom(driver);
-            var a = driver.FindElements(By.XPath("(//tr/td[last()]/a[2])"));
-            for (int i = 0; i < a.Count; i++)
+            for (int i = 0; i < 100; i++)
             {
-                x_Btn.ClickCustom(driver);
-                driver.Popup(true);
-                ScreenBusy();
+                try
+                {
+                    x_Btn.ClickCustom(driver);
+                    driver.Popup(true);
+                    ScreenBusy();                   
+                }catch { break;}                
             }
         }
     }

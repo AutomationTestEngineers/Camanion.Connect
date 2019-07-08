@@ -90,7 +90,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Add Animal")]
         public void WhenIAddAnimal()
         {
-            behaviorPage = animalPage.AddAnimal();
+            scenarioContext.Add("AnimalName", "Animal_" + FakeData.FirstName);
+            behaviorPage = animalPage.AddAnimal(scenarioContext.Get<string>("AnimalName"));
         }
 
         [When(@"I Enter Behavior")]
@@ -114,8 +115,8 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"User Should See Animal Name")]
         public void ThenUserShouldSeeAnimalName()
         {
-            homePage.SearchAnimal();            
-            homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
+            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));            
+            homePage.GetAnimalName().Should().Contain(scenarioContext.Get<string>("AnimalName"));
             profilePage = homePage.EditAnimal();
         }
 
@@ -143,7 +144,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click New Outcome Button")]
         public void WhenIClickNewOutcomeButton()
         {
-            homePage.SearchAnimal();
+            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
             homePage.ClickPencilIcon();
             newOutcomePage = profilePage.ClickNewOutcome();
         }
@@ -159,7 +160,7 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             outcomeSearchPage = administrationPage.ClickOutcomes();
-            outcomeSearchPage.SearchOutcome();
+            outcomeSearchPage.SearchOutcome(scenarioContext.Get<string>("AnimalName"));
             outcomeSearchPage.DeleteOutcome();
         }
 
@@ -168,7 +169,7 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             intakeSearchPage = administrationPage.ClickIntakes();
-            intakeSearchPage.SearchIntake();
+            intakeSearchPage.SearchIntake(scenarioContext.Get<string>("AnimalName"));
             intakeSearchPage.DeleteIntake();            
         }
 
@@ -177,7 +178,7 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             outcomeSearchPage = administrationPage.ClickOutcomes();
-            outcomeSearchPage.SearchOutcome(p0);
+            outcomeSearchPage.SearchOutcome_Specific(p0);
         }
 
         [When(@"I Delete Recent Intake ""(.*)""")]
@@ -185,7 +186,7 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             intakeSearchPage = administrationPage.ClickIntakes();
-            intakeSearchPage.SearchIntake(p0);
+            intakeSearchPage.SearchIntake_Specific(p0);
         }
 
 

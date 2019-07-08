@@ -5,9 +5,6 @@ using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Selenium.Pages
 {
@@ -56,9 +53,11 @@ namespace Selenium.Pages
 
         public void EnterMicroChipDetails()
         {
+            string number= string.Empty;
             Sleep(500);
-            Parameter.Add<string>("MicroChipNumber",FakeData.Number(1,10000));
-            microchipNumber.SendKeysWrapper(Parameter.Get<string>("MicroChipNumber"),driver);
+            for (int i = 0; i < 4; i++)
+                number += FakeData.Number(0, 9);
+            microchipNumber.SendKeysWrapper(number, driver);
             issuer.SelectByIndex(driver);            
         }
 
@@ -107,9 +106,9 @@ namespace Selenium.Pages
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
                     Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn),30);
                     releaseHoldBtn.Click();
-                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']/div/child::*")),120);
-                    Sleep(2000);
-                    if (FindBy(By.XPath("//span[text()='Ok']"),3,true) != null)
+                    Sleep(3000);
+                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']/div/child::*")),120);                    
+                    if (FindBy(By.XPath("//span[text()='Ok']"),2,true) != null)
                         FindBy(By.XPath("//span[text()='Ok']")).Click();
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));
                 }
