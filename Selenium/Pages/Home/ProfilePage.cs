@@ -55,7 +55,7 @@ namespace Selenium.Pages
         {
             string number= string.Empty;
             Sleep(500);
-            for (int i = 0; i < 4; i++)
+            for (int i = 0; i < 8; i++)
                 number += FakeData.Number(0, 9);
             microchipNumber.SendKeysWrapper(number, driver);
             issuer.SelectByIndex(driver);            
