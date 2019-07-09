@@ -15,26 +15,25 @@ namespace Selenium
         protected Actions actions;
         protected IWebDriver driver;
         protected int minTimeOut = 10;
-       
+
 
         public BasePage(IWebDriver driver)
         {
             this.driver = driver;
-            actions = new Actions(driver);  
+            actions = new Actions(driver);
             PageFactory.InitElements(this.driver, this);
             ScreenBusy();
         }
-
         public WebDriverWait WebDriverWait
-        { get
+        {
+            get
             {
                 var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(minTimeOut));
                 wait.PollingInterval = TimeSpan.FromMilliseconds(500);
                 wait.IgnoreExceptionTypes(typeof(Exception));
                 return wait;
-            }            
+            }
         }
-
         public void Wait<TResult>(Func<IWebDriver, TResult> condition, int seconds = 20)
         {
             var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(seconds));
@@ -42,33 +41,30 @@ namespace Selenium
             wait.IgnoreExceptionTypes(typeof(Exception));
             wait.Until(condition);
         }
-
-        public IWebElement FindBy(By by,int i=5,bool exist = false)
+        public IWebElement FindBy(By by, int i = 5, bool exist = false)
         {
             try
             {
-                if (exist) { Sleep(i * 500); return driver.FindElement(by); }                    
-                Wait(ExpectedConditions.ElementExists(by),i);
+                if (exist) { Sleep(i * 500); return driver.FindElement(by); }
+                Wait(ExpectedConditions.ElementExists(by), i);
                 return driver.FindElement(by);
             }
-            catch(StaleElementReferenceException e)
+            catch (StaleElementReferenceException e)
             {
                 return FindBy(by);
             }
-            catch(NoSuchElementException ex)
+            catch (NoSuchElementException ex)
             {
                 return null;
             }
         }
-
         public void ScreenBusy(int timeout = 120)
         {
             Thread.Sleep(300);
-            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))), timeout);            
+            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)), timeout);
             Thread.Sleep(100);
         }
-
-        public void Signature(bool chkbox =true)
+        public void Signature(bool chkbox = true)
         {
             try
             {
@@ -84,33 +80,34 @@ namespace Selenium
                     try
                     {
                         if (chkbox)
-                            Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")),10);                        
+                            Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")), 10);
                     }
                     catch { }
-                    if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"),1,true)!=null)
+                    if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"), 1, true) != null)
                     {
                         FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")).ClickCustom(driver);
-                    }    
+                    }
 
                     FindBy(By.XPath("//signature-pad/div/div[2]/div[1]/a")).ClickCustom(driver);
                     var signature = FindBy(By.XPath("//signature-pad/div/div[1]/canvas"));
                     actions.MoveToElement(signature).ClickAndHold().MoveByOffset(165, 15).MoveByOffset(185, 15)
                         .Release().Build().Perform();
-                    FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);                    
+                    FindBy(By.XPath("//signature-pad/div/div[2]/div[2]/a")).ClickCustom(driver);
                     ScreenBusy();
                 }
-            } catch { }
+            }
+            catch { }
         }
 
         public void Sleep(int timeout = 1000)
         {
             Thread.Sleep(timeout);
-        }        
+        }
 
-        public void ClickWithLoop(By by,int retry=3)
+        public void ClickWithLoop(By by, int retry = 3)
         {
             bool found = false;
-            for(int i = 0; i < retry; i++)
+            for (int i = 0; i < retry; i++)
             {
                 try
                 {
@@ -124,11 +121,11 @@ namespace Selenium
                     ScreenBusy(60);
                     return;
                 }
-                catch (Exception e){}
+                catch (Exception e) { }
             }
-            if(!found)
+            if (!found)
             {
-                throw new Exception("Unable To Perform Click On Element : "+by);
+                throw new Exception($"Unable To Perform Click On Element : [{by}]");
             }
         }
     }

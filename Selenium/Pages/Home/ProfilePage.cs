@@ -5,9 +5,6 @@ using SeleniumExtras.PageObjects;
 using SeleniumExtras.WaitHelpers;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Selenium.Pages
 {
@@ -16,8 +13,8 @@ namespace Selenium.Pages
         public ProfilePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement microchipNumber = null, issuer=null, animalAltered=null, btnSave=null, btnClose=null, NewOutcome=null,
-            MedicalCare=null, BehavioralCare=null, note=null, addNote=null, submitButton=null, clinicName=null, clinicPhone=null, PetIDNumber_ = null, petIdType_=null, animalStatus=null, btnAddPetId = null;
+        private IWebElement microchipNumber = null, issuer = null, animalAltered = null, btnSave = null, btnClose = null, NewOutcome = null,
+            MedicalCare = null, BehavioralCare = null, note = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null;
 
         //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
         //private IWebElement animalCurrentHolds = null;
@@ -29,7 +26,7 @@ namespace Selenium.Pages
         private IWebElement ViewHoldHistory = null;
 
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='animalDetail']/div/label/span/span")]
-        private IWebElement animalDetails = null;        
+        private IWebElement animalDetails = null;
 
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
@@ -56,10 +53,12 @@ namespace Selenium.Pages
 
         public void EnterMicroChipDetails()
         {
+            string number = string.Empty;
             Sleep(500);
-            Parameter.Add<string>("MicroChipNumber",FakeData.Number(1,10000));
-            microchipNumber.SendKeysWrapper(Parameter.Get<string>("MicroChipNumber"),driver);
-            issuer.SelectByIndex(driver);            
+            for (int i = 0; i < 8; i++)
+                number += FakeData.Number(0, 9);
+            microchipNumber.SendKeysWrapper(number, driver);
+            issuer.SelectByIndex(driver);
         }
 
         public void EnterAnimalDetails()
@@ -77,12 +76,12 @@ namespace Selenium.Pages
         }
 
         public void ReleaseHolds()
-        {            
+        {
             Sleep(200);
             ScreenBusy();
             driver.ScrollPage(0, 1000);
             Sleep(20);
-            Wait(ExpectedConditions.PresenceOfAllElementsLocatedBy(animalCurrentHolds.GetLocator()),10);
+            Wait(ExpectedConditions.PresenceOfAllElementsLocatedBy(animalCurrentHolds.GetLocator()), 10);
             bool state = true;
             while (state)
             {
@@ -91,7 +90,7 @@ namespace Selenium.Pages
                     driver.FindElement(animalCurrentHolds.GetLocator()).Click();
                     state = false;
                 }
-                catch(Exception e) { state = true; }
+                catch (Exception e) { state = true; }
             }
             //actions.MoveToElement(FindBy(animalCurrentHolds.GetLocator())).Click().Build().Perform();
             Sleep(300);
@@ -99,23 +98,24 @@ namespace Selenium.Pages
                 animalCurrentHolds.ClickCustom(driver);
 
             ViewHoldHistory.ClickCustom(driver);
-            for(int i = 0; i < 20; i++)
+            for (int i = 0; i < 20; i++)
             {
                 try
                 {
                     Sleep(300);
                     FindBy(By.XPath("(//tbody/tr/td/a)[1]")).ClickCustom(driver);
-                    Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn),10);
+                    Wait(ExpectedConditions.ElementToBeClickable(releaseHoldBtn), 30);
                     releaseHoldBtn.Click();
                     Sleep(3000);
-                    if (FindBy(By.XPath("//span[text()='Ok']"),3,true) != null)
+                    Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']/div/child::*")), 120);
+                    if (FindBy(By.XPath("//span[text()='Ok']"), 2, true) != null)
                         FindBy(By.XPath("//span[text()='Ok']")).Click();
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));
                 }
-                catch { Console.WriteLine(" <<<< Holds Released #"+(i+1)+" >>>>"); break; }
+                catch { Console.WriteLine(" <<<< Holds Released #" + (i + 1) + " >>>>"); break; }
             }
             btnClose.ClickCustom(driver);
-        }        
+        }
 
         public NewOutComePage ClickNewOutcome()
         {

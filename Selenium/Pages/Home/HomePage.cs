@@ -16,8 +16,7 @@ namespace Selenium
         public HomePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement newIntake = null, editAnimal=null, adminDate=null, scheduleDate=null, veterinarian=null, technician=null,
-            careComments=null, shelterId=null, siteId=null, searchValue=null, procedureId=null, veterinarianId=null, veterinaryTechnicianId=null;  
+        private IWebElement newIntake = null, editAnimal = null, shelterId = null, siteId = null, searchValue = null, procedureId = null, veterinarianId = null, veterinaryTechnicianId = null;
 
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
@@ -25,15 +24,6 @@ namespace Selenium
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[7]")]
         private IWebElement procedure = null;
-
-        [FindsBy(How = How.Name, Using = "careActivity")]
-        private IWebElement careActivity = null;
-
-        [FindsBy(How = How.XPath, Using = "//button[@ng-click='vm.save()']")]
-        private IWebElement saveAndClose = null;
-
-        [FindsBy(How = How.XPath, Using = "//*[@id='procedure']")]
-        private IWebElement procedures = null;        
 
         //[FindsBy(How = How.Name, Using = "careActivity")]
         //private IWebElement careActivity = null;
@@ -76,7 +66,7 @@ namespace Selenium
 
         [FindsBy(How = How.XPath, Using = "//button[contains(text(),'OK')]")]
         private IWebElement ok = null;
-        
+
 
         [FindsBy(How = How.XPath, Using = "//tbody/tr/td[3]")]
         private IList<IWebElement> searchList = null;
@@ -108,7 +98,7 @@ namespace Selenium
             selection.Where(t => t.Text.Contains("Change Shelter Location")).FirstOrDefault().ClickCustom(driver);
             shelterId.ClickCustom(driver);
             FindBy(By.XPath($"//div[normalize-space()='{shelterName}']")).ClickCustom(driver);
-            if (shelterName == "Demo Shelter" && FindBy(siteId.GetLocator(),1,true)!=null)
+            if (shelterName == "Demo Shelter" && FindBy(siteId.GetLocator(), 1, true) != null)
             {
                 siteId.ClickCustom(driver);
                 FindBy(By.XPath("//div[normalize-space()='Demo Site']")).ClickCustom(driver);
@@ -118,7 +108,7 @@ namespace Selenium
 
         public void ChangeShelter(string shelterName)
         {
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 ChangeShelter_New(shelterName);
             else
             {
@@ -132,7 +122,7 @@ namespace Selenium
                     ok.ClickCustom(driver);
                 }
             }
-        }        
+        }
 
         public string GetUserName()
         {
@@ -141,7 +131,7 @@ namespace Selenium
 
         public void EnterSearch(string text)
         {
-            searchInput.SendKeysWrapper(text,driver);
+            searchInput.SendKeysWrapper(text, driver);
             searchButton.ClickCustom(driver);
         }
 
@@ -156,14 +146,14 @@ namespace Selenium
             return new NewIntakePage(driver);
         }
 
-        public void SearchAnimal(string searchName=null)
+        public void SearchAnimal(string searchName = null)
         {
             Sleep(1500);
             ScreenBusy();
-            if (searchName == null)
-                searchName = Parameter.Get<string>("AnimalName");
+            //if (searchName == null)
+            //    searchName = Parameter.Get<string>("AnimalName");
 
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 SearchAnimal_New(searchName);
             else
             {
@@ -177,7 +167,7 @@ namespace Selenium
                 searchDropDown.ClickCustom(driver);
                 searchInput.SendKeysWrapper(searchName, driver);
                 searchButton.ClickCustom(driver);
-            }                
+            }
         }
 
         public void SearchAnimal_New(string searchName = null)
@@ -190,18 +180,18 @@ namespace Selenium
         public void ClickActiveOnly()
         {
             searchValue.ClickCustom(driver);
-            if (activeOnly_new.GetCssValue("color")!= "rgba(161, 102, 166, 1)")
+            if (activeOnly_new.GetCssValue("color") != "rgba(161, 102, 166, 1)")
                 activeOnly_new.ClickCustom(driver);
         }
 
         public string GetAnimalName()
         {
             Sleep(500);
-            return FindBy(By.XPath("//table[@class='table table-custom']//td[3]")).Text;            
+            return FindBy(By.XPath("//table[@class='table table-custom']//td[3]")).Text;
         }
 
         public void ClickPencilIcon()
-        {   
+        {
             FindBy(By.XPath("(//span[@class='glyphicon glyphicon-pencil'])[1]")).ClickCustom(driver);
             Sleep(1000);
         }
@@ -211,28 +201,28 @@ namespace Selenium
             editAnimal.ClickCustom(driver);
             return new ProfilePage(driver);
         }
-        
+
         public AdministrationPage SelectAdmin()
         {
-            Sleep(100);
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            Sleep(300);
+            if (!string.IsNullOrEmpty(Config.NewVersion))
             {
                 Wait(ExpectedConditions.ElementExists(menu.GetLocator()));
-                actions.MoveToElement(menu).Click().Build().Perform(); Sleep(300);
+                menu.ClickCustom(driver); Sleep(400);
                 FindBy(By.XPath("//a[text()='Admin Settings']")).ClickCustom(driver);
             }
             else
             {
                 Wait(ExpectedConditions.ElementExists(gearIcon.GetLocator()));
                 gearIcon.ClickCustom(driver);
-                admin.ClickCustom(driver);              
+                admin.ClickCustom(driver);
             }
             return new AdministrationPage(driver);
         }
 
         public NewIntakePage ClickAdd()
         {
-            if (!string.IsNullOrEmpty(Parameter.Get<string>("NewVersion")))
+            if (!string.IsNullOrEmpty(Config.NewVersion))
                 ClickAddAnimal();
             else
                 addBtn.ClickCustom(driver);
@@ -246,12 +236,12 @@ namespace Selenium
             return new NewIntakePage(driver);
         }
 
-        public ProfilePage AddProcedure()
+        public ProfilePage AddProcedure(string name)
         {
             Sleep(1000);
             vetBag.ClickCustom(driver);
             procedure.ClickCustom(driver);
-            FindBy(By.XPath($"//div[contains(text(),'{Parameter.Get<string>("AnimalName")}')]"),20);
+            FindBy(By.XPath($"//div[contains(text(),'{name}')]"), 20);
             procedureId.ClickCustom(driver);
             FindBy(By.XPath($"(//div[@id='{nameof(procedureId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
             veterinarianId.ClickCustom(driver);

@@ -15,7 +15,7 @@ namespace Companion.Connect.Automation.Steps
         OutcomeSearchPage outcomeSearchPage;
         AdministrationPage administrationPage;
         IntakeSearchPage intakeSearchPage;
-       
+
 
         public CommonSteps(ScenarioContext scenarioContext) : base(scenarioContext)
         {
@@ -31,7 +31,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Change Shelter ""(.*)""")]
         public void WhenIChangeShelter(string shelterName)
         {
-            homePage.ChangeShelter(shelterName);            
+            homePage.ChangeShelter(shelterName);
         }
 
         //[When(@"I Search ""(.*)""")]
@@ -43,7 +43,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click Add")]
         public void WhenIClickAdd()
         {
-            newIntake = homePage.ClickAdd();            
+            newIntake = homePage.ClickAdd();
         }
 
         [When(@"I Search Animal")]
@@ -90,7 +90,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Add Animal")]
         public void WhenIAddAnimal()
         {
-            behaviorPage = animalPage.AddAnimal();
+            scenarioContext.Add("AnimalName", "Animal_" + FakeData.FirstName);
+            behaviorPage = animalPage.AddAnimal(scenarioContext.Get<string>("AnimalName"));
         }
 
         [When(@"I Enter Behavior")]
@@ -104,7 +105,7 @@ namespace Companion.Connect.Automation.Steps
         {
             detailsPage = medicalPage.EnterMedicalInfo(index);
         }
-        
+
 
         [When(@"I Enter Details")]
         public void WhenIEnterDetails()
@@ -114,8 +115,8 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"User Should See Animal Name")]
         public void ThenUserShouldSeeAnimalName()
         {
-            homePage.SearchAnimal();            
-            homePage.GetAnimalName().Should().Contain(Parameter.Get<string>("AnimalName"));
+            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
+            homePage.GetAnimalName().Should().Contain(scenarioContext.Get<string>("AnimalName"));
             profilePage = homePage.EditAnimal();
         }
 
@@ -143,7 +144,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click New Outcome Button")]
         public void WhenIClickNewOutcomeButton()
         {
-            homePage.SearchAnimal();
+            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
             homePage.ClickPencilIcon();
             newOutcomePage = profilePage.ClickNewOutcome();
         }
@@ -159,7 +160,7 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             outcomeSearchPage = administrationPage.ClickOutcomes();
-            outcomeSearchPage.SearchOutcome();
+            outcomeSearchPage.SearchOutcome(scenarioContext.Get<string>("AnimalName"));
             outcomeSearchPage.DeleteOutcome();
         }
 
@@ -168,9 +169,26 @@ namespace Companion.Connect.Automation.Steps
         {
             administrationPage = homePage.SelectAdmin();
             intakeSearchPage = administrationPage.ClickIntakes();
-            intakeSearchPage.SearchIntake();
-            intakeSearchPage.DeleteIntake();            
+            intakeSearchPage.SearchIntake(scenarioContext.Get<string>("AnimalName"));
+            intakeSearchPage.DeleteIntake();
         }
+
+        [When(@"I Delete Recent Outcome ""(.*)""")]
+        public void WhenIDeleteRecentOutcome(string p0)
+        {
+            administrationPage = homePage.SelectAdmin();
+            outcomeSearchPage = administrationPage.ClickOutcomes();
+            outcomeSearchPage.SearchOutcome_Specific(p0);
+        }
+
+        [When(@"I Delete Recent Intake ""(.*)""")]
+        public void WhenIDeleteRecentIntake(string p0)
+        {
+            administrationPage = homePage.SelectAdmin();
+            intakeSearchPage = administrationPage.ClickIntakes();
+            intakeSearchPage.SearchIntake_Specific(p0);
+        }
+
 
         [Then(@"""(.*)"" Message Should Be Display")]
         public void ThenMessageShouldBeDisplay(string message)

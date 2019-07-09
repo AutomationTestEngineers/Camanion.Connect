@@ -63,7 +63,7 @@ namespace Selenium
                     Console.WriteLine($"[Root Cause] : While Performing Clear Paste On [{element.GetLocator()}]");
                     throw new Exception(e.Message);
                 }
-                    
+
             }
         }
 
@@ -85,18 +85,18 @@ namespace Selenium
                 {
                     Console.WriteLine($"[Root Cause] : While Sending Text On [{element.GetLocator()}]");
                     throw new Exception(e.Message);
-                }                    
+                }
             }
         }
 
-        public static void SelectDropDown(this IWebElement element, IWebDriver driver,string option, bool js = false)
+        public static void SelectDropDown(this IWebElement element, IWebDriver driver, string option, bool js = false)
         {
             int count = 0;
             try
             {
                 ScreenBusy(driver);
                 Thread.Sleep(20);
-                bool selected = false;                
+                bool selected = false;
                 if (!js)
                 {
                     for (int i = 0; i < 25; i++)
@@ -122,9 +122,9 @@ namespace Selenium
                     Thread.Sleep(3000);
                     JavaScriptExecutor(string.Format(JSOperator.DropDown, option), element);
                 }
-                
+
                 if (!selected)
-                    throw new Exception($"[Root Cause] : Unable to Secting DropDown Option [{option}] On [{element.GetLocator()}] ## [Retry Count] : {count+1}");
+                    throw new Exception($"[Root Cause] : Unable to Secting DropDown Option [{option}] On [{element.GetLocator()}] ## [Retry Count] : {count + 1}");
 
             }
             catch (Exception e)
@@ -134,11 +134,11 @@ namespace Selenium
                 {
                     Console.WriteLine($"[Root Cause] : Unable to Secting DropDown Option [{option}] On [{element.GetLocator()}]");
                     throw new Exception(e.Message);
-                }   
-            }            
+                }
+            }
         }
 
-        public static void SelectByIndex(this IWebElement element, IWebDriver driver,int index=1)
+        public static void SelectByIndex(this IWebElement element, IWebDriver driver, int index = 1)
         {
             int count = 0;
             try
@@ -146,7 +146,7 @@ namespace Selenium
                 ScreenBusy(driver);
                 bool selected = false;
                 Thread.Sleep(20);
-                IList<IWebElement> options = null;                
+                IList<IWebElement> options = null;
                 Wait((d => d.FindElements(By.TagName("option")).Count() > 1), driver, 3);
                 for (int i = 0; i < 25; i++)
                 {
@@ -154,15 +154,15 @@ namespace Selenium
                     count = i;
                     element.ClickCustom(driver);
                     if (options.Count() > 1)
-                    {                        
+                    {
                         options[index].Click();
                         selected = true;
                         break;
                     }
                     Thread.Sleep(3000);
-                }                
+                }
                 if (!selected)
-                    throw new Exception($"[Root Cause] : Unable to Select DropDown with Index [{index}] On [{element.GetLocator()}] After [Retry Count] : {count+1}");
+                    throw new Exception($"[Root Cause] : Unable to Select DropDown with Index [{index}] On [{element.GetLocator()}] After [Retry Count] : {count + 1}");
             }
             catch (Exception e)
             {
@@ -172,28 +172,30 @@ namespace Selenium
                     Console.WriteLine($"[Root Cause] : Unable to Secting DropDown Index [{index}] On [{element.GetLocator()}]");
                     throw new Exception(e.Message);
                 }
-            }            
+            }
 
         }
 
-        public static void ScreenBusy(this IWebElement element,IWebDriver driver, int timeout = 120)
+        public static void ScreenBusy(this IWebElement element, IWebDriver driver)
         {
-            try {
-                Thread.Sleep(100);
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
+            try
+            {
+                Thread.Sleep(200);
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Int16.Parse(Config.ScreenTimeOut)));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)));
                 Thread.Sleep(50);
             }
             catch { }
-            
+
         }
 
-        public static void ScreenBusy(IWebDriver driver, int timeout = 120)
+        public static void ScreenBusy(IWebDriver driver)
         {
-            try {
-                Thread.Sleep(100);
-                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeout));
-                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Parameter.Get<string>("ScreenBusy"))));
+            try
+            {
+                Thread.Sleep(300);
+                var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(Int16.Parse(Config.ScreenTimeOut)));
+                wait.Until(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)));
             }
             catch { }
         }
@@ -219,9 +221,9 @@ namespace Selenium
                 .GetProperty("Bys", BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)?
                 .GetValue(elementProxy);
             return (By)bysFromElement[0];
-        }        
+        }
 
-        public static string GetText(this IWebElement element,IWebDriver driver,bool js=false)
+        public static string GetText(this IWebElement element, IWebDriver driver, bool js = false)
         {
             try
             {
@@ -235,7 +237,7 @@ namespace Selenium
                     var Js = driver as IJavaScriptExecutor;
                     return Js.ExecuteScript(JSOperator.GetText, element).ToString();
                 }
-                
+
             }
             catch (Exception e)
             {
@@ -250,9 +252,9 @@ namespace Selenium
 
         }
 
-        public static List<string> GetText(this IList<IWebElement> element,IWebDriver driver)
+        public static List<string> GetText(this IList<IWebElement> element, IWebDriver driver)
         {
-            List<string> list=null;
+            List<string> list = null;
             try
             {
                 Thread.Sleep(50);
@@ -270,7 +272,7 @@ namespace Selenium
             return list;
         }
 
-        public static void SendTextAndSelect(this IWebElement element, string text, IWebDriver driver,bool js = false)
+        public static void SendTextAndSelect(this IWebElement element, string text, IWebDriver driver, bool js = false)
         {
             try
             {
@@ -297,7 +299,7 @@ namespace Selenium
                 else
                     throw new Exception("[Error] : While Sending Text & [Message] : [" + e.Message + "]");
             }
-        }        
+        }
 
         public static void ClearManual(this IWebElement element)
         {
@@ -339,13 +341,15 @@ namespace Selenium
 
         public static void ScrollElement(this IWebElement element, IWebDriver driver)
         {
-            try {
+            try
+            {
                 Thread.Sleep(20);
                 ((IJavaScriptExecutor)driver).ExecuteScript("arguments[0].scrollIntoView(true);", element);
                 Thread.Sleep(20);
-            } catch { }
-            
-        }        
+            }
+            catch { }
+
+        }
 
         public static bool HandlePopUp(IWebDriver driver)
         {
@@ -371,7 +375,7 @@ namespace Selenium
             }
 
         }
-        
+
         private static void JavaScriptExecutor(string pattern, IWebElement element)
         {
             var js = element.GetWrappedDriver() as IJavaScriptExecutor;
@@ -386,7 +390,7 @@ namespace Selenium
             wait.Until(condition);
         }
 
-        public static void ElementToBeClickable(this IWebElement element, IWebDriver driver,int timeOut =10)
+        public static void ElementToBeClickable(this IWebElement element, IWebDriver driver, int timeOut = 10)
         {
             try
             {
@@ -396,7 +400,7 @@ namespace Selenium
 
         }
 
-        public static void HighlightElement(this IWebElement element,IWebDriver driver)
+        public static void HighlightElement(this IWebElement element, IWebDriver driver)
         {
             for (int i = 0; i < 2; i++)
             {
@@ -406,7 +410,7 @@ namespace Selenium
             }
 
         }
-        
+
         private static class JSOperator
         {
             public static string Click { get { return "arguments[0].click();"; } }

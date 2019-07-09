@@ -19,25 +19,25 @@ namespace Selenium.Pages
             gender = null, noteType = null, estAdultSize = null, nextButton = null;
 
 
-        public BehaviorPage AddAnimal()
+        public BehaviorPage AddAnimal(string name)
         {
             Sleep(500);
             ScreenBusy();
             addAnimal.ClickCustom(driver);
-            Sleep(3000);
+            Sleep(1500);
             petType.ClickCustom(driver);
             Sleep();
-            petType.SelectDropDown(driver, Parameter.Get<string>("PetType"));
+            petType.SelectDropDown(driver, Config.PetType);
             Sleep();
-            Parameter.Add<string>("AnimalName", "Animal_" + FakeData.FirstName);
-            animalName.SendKeysWrapper(Parameter.Get<string>("AnimalName"), driver);
-            years.SendKeys(Parameter.Get<string>("Years"));
+            //Parameter.Add<string>("AnimalName", "Animal_" + FakeData.FirstName);
+            animalName.SendKeysWrapper(name, driver);
+            years.SendKeys(Config.Years);
             years.SendKeys(Keys.Tab);
             primaryBreed.SelectByIndex(driver);
             primaryColor.SelectByIndex(driver);
-            gender.SelectDropDown(driver, Parameter.Get<string>("Gender"));
+            gender.SelectDropDown(driver, Config.Gender);
             estAdultSize.SelectByIndex(driver);
-            if(FindBy(noteType.GetLocator(), 1, true)!=null)
+            if (FindBy(noteType.GetLocator(), 1, true) != null)
                 noteType.SelectByIndex(driver);
             nextButton.ClickCustom(driver);
             Sleep(3000);

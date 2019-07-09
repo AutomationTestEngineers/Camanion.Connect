@@ -30,7 +30,7 @@ namespace Epiq.ECA.E2ETest.Global
         [BeforeScenario]
         public void SetUp(FeatureContext featureContext)
         {
-            Parameter.Collect("Parameter.xml",new List<string> { "Parameter"/*, $"Parameter/{this.scenarioContext.ScenarioInfo.Title}"*/ });
+            //Parameter.Collect("Parameter.xml",new List<string> { "Parameter"/*, $"Parameter/{this.scenarioContext.ScenarioInfo.Title}"*/ });
             IWebDriver driver;
             if (featureContext.Keys.Count > 0)
             {
@@ -52,7 +52,7 @@ namespace Epiq.ECA.E2ETest.Global
             if (scenarioContext.TestError != null)
                 driver.GetScreenShot(scenarioContext.ScenarioInfo.Title);
             driver.Quit();
-            Parameter.ClearParameters();
+            //Parameter.ClearParameters();
         }
 
         [AfterStep]

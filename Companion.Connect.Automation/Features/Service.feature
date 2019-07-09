@@ -44,7 +44,7 @@ Scenario: Service_Intake_To_Outcome_BehaviorExam
 
 @Intake
 Scenario: Service_Intake
-	When I Change Shelter "Prairie Paws Animal Shelter"	
+	When I Change Shelter "Demo Shelter"	
 	And I Click Add
 	And I Select "Service" Intake
 	And I Select Partner "John"
