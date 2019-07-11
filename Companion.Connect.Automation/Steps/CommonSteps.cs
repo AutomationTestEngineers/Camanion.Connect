@@ -21,7 +21,7 @@ namespace Companion.Connect.Automation.Steps
         {
             profilePage = new ProfilePage(driver); ;
         }
-
+        
         [Given(@"I Login")]
         public void ILogin()
         {
@@ -33,12 +33,6 @@ namespace Companion.Connect.Automation.Steps
         {
             homePage.ChangeShelter(shelterName);
         }
-
-        //[When(@"I Search ""(.*)""")]
-        //public void WhenISearch(string searchText)
-        //{
-        //    homePage.EnterSearch(searchText);
-        //}
 
         [When(@"I Click Add")]
         public void WhenIClickAdd()
@@ -60,13 +54,7 @@ namespace Companion.Connect.Automation.Steps
             homePage.getSearchList().Count.Should().NotBe(0);
             foreach (string s in homePage.getSearchList())
                 s.ToLower().Should().Contain(searchName.ToLower());
-        }
-
-        //[When(@"I Click New Intake")]
-        //public void WhenIClickNewIntake()
-        //{
-        //    newIntake = homePage.NewAddIntake();
-        //}
+        }        
 
         [When(@"I Select ""(.*)"" Intake")]
         public void WhenISelectIntake(string intake)
@@ -193,7 +181,7 @@ namespace Companion.Connect.Automation.Steps
         [Then(@"""(.*)"" Message Should Be Display")]
         public void ThenMessageShouldBeDisplay(string message)
         {
-            //intakeSearchPage.GetToastMessage().Should().Equals(message);            
+            intakeSearchPage.GetToastMessage().Should().Equals(message);            
         }
 
     }

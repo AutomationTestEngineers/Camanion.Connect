@@ -23,7 +23,6 @@ namespace Selenium.Pages
         public OutcomeSearchPage ClickOutcomes()
         {
             outComes.ClickCustom(driver);return new OutcomeSearchPage(driver);
-
         }
 
         public IntakeSearchPage ClickIntakes()

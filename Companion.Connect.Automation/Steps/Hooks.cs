@@ -41,8 +41,7 @@ namespace Epiq.ECA.E2ETest.Global
                 driver = (new WebDriver()).InitDriver();
             }
             scenarioContext.Set<IWebDriver>(driver);
-            var login = new LoginPage(driver);
-            scenarioContext.Set<LoginPage>(login);
+            scenarioContext.Set<LoginPage>(new LoginPage(driver));
         }
 
         [AfterScenario]
@@ -52,7 +51,6 @@ namespace Epiq.ECA.E2ETest.Global
             if (scenarioContext.TestError != null)
                 driver.GetScreenShot(scenarioContext.ScenarioInfo.Title);
             driver.Quit();
-            //Parameter.ClearParameters();
         }
 
         [AfterStep]

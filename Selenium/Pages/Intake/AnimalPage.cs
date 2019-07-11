@@ -29,7 +29,6 @@ namespace Selenium.Pages
             Sleep();
             petType.SelectDropDown(driver, Config.PetType);
             Sleep();
-            //Parameter.Add<string>("AnimalName", "Animal_" + FakeData.FirstName);
             animalName.SendKeysWrapper(name, driver);
             years.SendKeys(Config.Years);
             years.SendKeys(Keys.Tab);

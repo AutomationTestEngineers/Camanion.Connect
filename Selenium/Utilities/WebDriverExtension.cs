@@ -2,14 +2,10 @@
 using OpenQA.Selenium.Support.UI;
 using SeleniumExtras.WaitHelpers;
 using System;
-using System.Collections.Generic;
 using System.Drawing;
 using System.Drawing.Imaging;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace Selenium
 {
@@ -68,18 +64,16 @@ namespace Selenium
         {
             try
             {
-                var folderName = "testresults" + DateTime.Now.ToString("yyyyMMdd");
-                var artifactDirectory = Path.Combine("C:\\evidence\\screenshots", folderName);
+                var artifactDirectory = Path.Combine("C:\\evidence\\screenshots", "testresults" + DateTime.Now.ToString("yyyyMMdd"));
                 if (!Directory.Exists(artifactDirectory)) Directory.CreateDirectory(artifactDirectory);
                 ITakesScreenshot takesScreenshot = driver as ITakesScreenshot;
                 if (takesScreenshot != null)
                 {
                     var screenshot = takesScreenshot.GetScreenshot();
-                    string screenshotFilePath = Path.Combine(artifactDirectory, fileNameBase + "_screenshot.jpg");
+                    string screenshotFilePath = Path.Combine(artifactDirectory, fileNameBase + ".jpg");
                     Console.WriteLine($"[Screen Shot Path] {screenshotFilePath}");
                     var screenshotBase64 = screenshot.AsBase64EncodedString;
                     SaveByteArrayAsImage(screenshotFilePath, screenshotBase64);
-                    //Console.WriteLine($"[IMG] {screenshotBase64}");
                 }
             }
             catch (Exception ex)
@@ -91,21 +85,15 @@ namespace Selenium
         private static void SaveByteArrayAsImage(string screenshotFilePath, string base64String)
         {
             byte[] bytes = Convert.FromBase64String(base64String);
-
             Image image;
             using (MemoryStream ms = new MemoryStream(bytes))
-            {
-                image = Image.FromStream(ms);
-            }
-
+            {image = Image.FromStream(ms);}
             image.Save(screenshotFilePath, ImageFormat.Jpeg);
-            //Console.WriteLine("Screenshot: {0}", new Uri(screenshotFilePath));
         }
 
         public static void GetScreenShot(this IWebDriver driver,string testName)
         {
-            string fileNameBase = string.Format("Error_{0}_{1}", testName, DateTime.Now.ToString("yyyyMMdd_HHmmss"));
-            driver.TakeScreenshot(fileNameBase);
+            driver.TakeScreenshot($"Error_{testName}_{DateTime.Now.ToString("yyyyMMdd_HHmmss")}");
         }
 
         public static void ScrollPage(this IWebDriver driver,int x,int y)

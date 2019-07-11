@@ -152,7 +152,8 @@ namespace Selenium
                 {
                     options = element.FindElements(By.TagName("option"));
                     count = i;
-                    element.ClickCustom(driver);
+                    element.HighlightElement(driver);
+                    element.Click();
                     if (options.Count() > 1)
                     {
                         options[index].Click();
@@ -186,7 +187,6 @@ namespace Selenium
                 Thread.Sleep(50);
             }
             catch { }
-
         }
 
         public static void ScreenBusy(IWebDriver driver)
@@ -229,8 +229,11 @@ namespace Selenium
             {
                 if (!js)
                 {
+                    string text = string.Empty;
                     ScreenBusy(driver);
-                    return element.Text;
+                    for (int i = 0; i < 10; i++)
+                        try { text = element.Text; if (!string.IsNullOrEmpty(text)) break; } catch { }
+                    return text;
                 }
                 else
                 {
@@ -404,7 +407,7 @@ namespace Selenium
         {
             for (int i = 0; i < 2; i++)
             {
-                Thread.Sleep(10);
+                Thread.Sleep(7);
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 5px solid blue;");
                 (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
             }
@@ -413,14 +416,14 @@ namespace Selenium
 
         private static class JSOperator
         {
-            public static string Click { get { return "arguments[0].click();"; } }
-            public static string Clear { get { return "arguments[0].value = '';"; } }
-            public static string SetValue { get { return "arguments[0].value = '{0}';"; } }
-            public static string IsDisplayed { get { return "if(parseInt(arguments[0].offsetHeight) > 0 && parseInt(arguments[0].offsetWidth) > 0) return true; return false;"; } }
-            public static string ValidateAttribute { get { return "return arguments[0].getAttribute('{0}');"; } }
-            public static string ScrollToElement { get { return "arguments[0].scrollIntoView(true);"; } }
-            public static string DropDown { get { return "var length = arguments[0].options.length;  for (var i=0; i<length; i++){{  if (arguments[0].options[i].text == '{0}'){{ arguments[0].selectedIndex = i; break; }} }}"; } }
-            public static string GetText { get { return "return arguments[0].innerText"; } }
+            public static string Click { get { return "arguments[0].click();"; }}
+            public static string Clear { get { return "arguments[0].value = '';"; }}
+            public static string SetValue { get { return "arguments[0].value = '{0}';"; }}
+            public static string IsDisplayed { get { return "if(parseInt(arguments[0].offsetHeight) > 0 && parseInt(arguments[0].offsetWidth) > 0) return true; return false;"; }}
+            public static string ValidateAttribute { get { return "return arguments[0].getAttribute('{0}');"; }}
+            public static string ScrollToElement { get { return "arguments[0].scrollIntoView(true);"; }}
+            public static string DropDown { get { return "var length = arguments[0].options.length;  for (var i=0; i<length; i++){{  if (arguments[0].options[i].text == '{0}'){{ arguments[0].selectedIndex = i; break; }} }}"; }}
+            public static string GetText { get { return "return arguments[0].innerText"; }}
         }
 
     }

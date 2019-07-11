@@ -39,7 +39,6 @@ namespace Selenium.Pages.Intake
             personalInfoChkBox.ClickCustom(driver);
             CreditCardMethod();
             completePayment.ClickCustom(driver);
-            //close.ClickCustom(driver);
             return new AnimalPage(driver);
         }
 
@@ -60,7 +59,7 @@ namespace Selenium.Pages.Intake
                 paymentMethods[method].ClickCustom(driver);
             amountReceived.SendKeysWrapper("1000", driver);
             cashRegisterName.SelectByIndex(driver, 1);
-            submitPayment.ClickCustom(driver);  // need to update if fail
+            submitPayment.ClickCustom(driver);
             driver.Popup();
         }
     }

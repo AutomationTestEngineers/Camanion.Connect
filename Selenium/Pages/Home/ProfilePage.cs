@@ -16,9 +16,6 @@ namespace Selenium.Pages
         private IWebElement microchipNumber = null, issuer = null, animalAltered = null, btnSave = null, btnClose = null, NewOutcome = null,
             MedicalCare = null, BehavioralCare = null, note = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null;
 
-        //[FindsBy(How = How.CssSelector, Using = "span[data-target='#collapseHold']")]
-        //private IWebElement animalCurrentHolds = null;
-
         [FindsBy(How = How.XPath, Using = "//button[normalize-space()='Release Hold']")]
         private IWebElement releaseHoldBtn = null;
 
@@ -45,7 +42,6 @@ namespace Selenium.Pages
 
         [FindsBy(How = How.XPath, Using = "//div[@data-ng-repeat='item in vm.observations']//i[1]")]
         private IList<IWebElement> abservations = null;
-
 
         [FindsBy(How = How.CssSelector, Using = "i[class='fa fa-square-o col-xs-2']")]
         private IList<IWebElement> symptoms = null;

@@ -30,7 +30,7 @@ namespace Selenium
         {
             search.SendKeysWrapper(partner, driver);
             searchButton.ClickCustom(driver);
-            Sleep(1000);
+            Sleep(700);
             Wait(ExpectedConditions.ElementExists(select.GetLocator()));
             select.ClickCustom(driver);
             nextButton.ClickCustom(driver);

@@ -11,8 +11,7 @@ namespace Companion.Connect.Automation.Steps
     [Scope(Feature = "AnimalControl")]
     public class AnimalControlSteps : BaseSteps
     { 
-        public AnimalControlSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }   
-
+        public AnimalControlSteps(ScenarioContext scenarioContext) : base(scenarioContext) { }  
 
     }
 }

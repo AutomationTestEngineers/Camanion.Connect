@@ -43,10 +43,8 @@ namespace Selenium.Pages.Intake
         }
 
         public string GetToastMessage()
-        {
-            Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']")), 10);
-            toast.HighlightElement(driver);
-            return toast.GetText(driver, true);
+        {           
+            return toast.GetText(driver);
         }
 
         public void SearchIntake_Specific(string p0)

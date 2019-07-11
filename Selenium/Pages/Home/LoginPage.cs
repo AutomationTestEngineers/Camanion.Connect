@@ -14,10 +14,6 @@ namespace Selenium.Pages
     {
         public LoginPage(IWebDriver driver) : base(driver) { }
 
-        //[FindsBy]
-        //private IWebElement email = null, password = null;
-
-
         [FindsBy(How = How.XPath, Using = "//*[@name='email']")]
         private IWebElement email = null;
 

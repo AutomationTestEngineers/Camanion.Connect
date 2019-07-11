@@ -16,20 +16,14 @@ namespace Selenium
         public HomePage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement newIntake = null, editAnimal = null, shelterId = null, siteId = null, searchValue = null, procedureId = null, veterinarianId = null, veterinaryTechnicianId = null;
-
+        private IWebElement newIntake = null, editAnimal = null, shelterId = null, siteId = null, searchValue = null,
+            procedureId = null, veterinarianId = null, veterinaryTechnicianId = null;
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
         private IWebElement vetBag = null;
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[7]")]
-        private IWebElement procedure = null;
-
-        //[FindsBy(How = How.Name, Using = "careActivity")]
-        //private IWebElement careActivity = null;
-
-        //[FindsBy(How = How.XPath, Using = "//a[@class='QuickAdd-button']")]
-        //private IWebElement addBtn = null;
+        private IWebElement procedure = null;        
 
         [FindsBy(How = How.XPath, Using = "//button[@data-cy='addIntake']")]
         private IWebElement addBtn = null;
@@ -60,9 +54,6 @@ namespace Selenium
 
         [FindsBy(How = How.XPath, Using = "//li[2]//a[contains(text(),'Admin')]")]
         private IWebElement admin = null;
-
-        //[FindsBy(How = How.LinkText, Using = "/admin")]
-        //private IWebElement admin = null;
 
         [FindsBy(How = How.XPath, Using = "//button[contains(text(),'OK')]")]
         private IWebElement ok = null;
@@ -105,7 +96,6 @@ namespace Selenium
             }
             save.ClickCustom(driver);
         }
-
         public void ChangeShelter(string shelterName)
         {
             if (!string.IsNullOrEmpty(Config.NewVersion))
@@ -123,29 +113,19 @@ namespace Selenium
                 }
             }
         }
-
         public string GetUserName()
         {
             return email.GetText(driver);
         }
-
         public void EnterSearch(string text)
         {
             searchInput.SendKeysWrapper(text, driver);
             searchButton.ClickCustom(driver);
         }
-
         public List<string> getSearchList()
         {
             return searchList.GetText(driver);
         }
-
-        public NewIntakePage NewAddIntake()
-        {
-            newIntake.ClickCustom(driver);
-            return new NewIntakePage(driver);
-        }
-
         public void SearchAnimal(string searchName = null)
         {
             Sleep(1500);
@@ -176,32 +156,27 @@ namespace Selenium
             searchValue.SendKeysWrapper(searchName, driver);
             searchButton_New.ClickCustom(driver);
         }
-
         public void ClickActiveOnly()
         {
             searchValue.ClickCustom(driver);
             if (activeOnly_new.GetCssValue("color") != "rgba(161, 102, 166, 1)")
                 activeOnly_new.ClickCustom(driver);
         }
-
         public string GetAnimalName()
         {
             Sleep(500);
             return FindBy(By.XPath("//table[@class='table table-custom']//td[3]")).Text;
         }
-
         public void ClickPencilIcon()
         {
             FindBy(By.XPath("(//span[@class='glyphicon glyphicon-pencil'])[1]")).ClickCustom(driver);
             Sleep(1000);
         }
-
         public ProfilePage EditAnimal()
         {
             editAnimal.ClickCustom(driver);
             return new ProfilePage(driver);
         }
-
         public AdministrationPage SelectAdmin()
         {
             Sleep(300);
@@ -219,7 +194,6 @@ namespace Selenium
             }
             return new AdministrationPage(driver);
         }
-
         public NewIntakePage ClickAdd()
         {
             if (!string.IsNullOrEmpty(Config.NewVersion))
@@ -228,14 +202,12 @@ namespace Selenium
                 addBtn.ClickCustom(driver);
             return new NewIntakePage(driver);
         }
-
         public NewIntakePage ClickAddAnimal()
         {
             Sleep(1000);
             addAnimal.ClickCustom(driver);
             return new NewIntakePage(driver);
         }
-
         public ProfilePage AddProcedure(string name)
         {
             Sleep(1000);
@@ -252,19 +224,7 @@ namespace Selenium
             {
                 Sleep(100);
             } while (!FindBy(By.XPath("//span[text()='Save Procedure']/..")).GetCssValue("background-color").Contains("rgba(58, 174, 104, 1)"));
-            saveProcedure.ClickCustom(driver);
-            //driver.Popup(true);
-            //Sleep(1000);
-            //careActivity.SelectByIndex(driver, 1);
-            //adminDate.SendKeysWrapper(DateTime.Today.ToShortDateString(), driver);
-            //adminDate.SendKeys(Keys.Tab);
-            //veterinarian.SelectByIndex(driver, 1);
-            //technician.SelectByIndex(driver, 1);
-            //careComments.SendKeysWrapper("Care Comments", driver);
-            //saveAndClose.ClickCustom(driver);
-            //Sleep(200);
-            //ScreenBusy();
-            //procedures.Displayed.Should().BeTrue("Procedures Not Displayed");
+            saveProcedure.ClickCustom(driver);           
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//span[text()='Save Procedure']/..")));
             Sleep(200);
             return new ProfilePage(driver);
