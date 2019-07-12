@@ -20,7 +20,7 @@ namespace Selenium.Pages.Outcome.Transfer
         {
             animalcondition.SelectByIndex(driver, 1);
             transferreason.SelectByIndex(driver, 1);
-            nextButton.ClickCustom(driver);
+            ClickWithLoop(nextButton.GetLocator());
         }
     }
 }

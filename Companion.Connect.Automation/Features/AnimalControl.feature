@@ -25,11 +25,11 @@ Scenario Outline: Animal_Contol_Intake_To_Outcome
 
 	Examples: 
 	| Outcome         | Shelter                         | Person | IntakeSection |
-	| Death           | Demo Shelter                    | k      | 1             |
-	| Return to Owner | Demo Shelter                    | k      | 2             |
-	| Euthanasia      | Central Missouri Humane Society | k      | 3             |
-	| Transfer        | Demo Shelter                    | k      | 4             |
-	| Adoption        | Demo Shelter                    | k      | 5             |
+	| Death           | Demo Shelter                    | kc     | 1             |
+	| Return to Owner | Demo Shelter                    | kc     | 2             |
+	| Euthanasia      | Central Missouri Humane Society | kc     | 3             |
+	| Transfer        | Demo Shelter                    | kc     | 4             |
+	| Adoption        | Demo Shelter                    | kc     | 5             |
 
 
 @Intake
@@ -44,3 +44,8 @@ Scenario: Animal_Contol_Intake
 	And I Enter Details
 	When I Delete Recent Intake
 		Then "Update data successful" Message Should Be Display
+
+Scenario: Delete Animal
+	When I Change Shelter "Demo Shelter"
+	And I Delete Recent Outcome "Animal_"
+	And I Delete Recent Intake "Animal_"

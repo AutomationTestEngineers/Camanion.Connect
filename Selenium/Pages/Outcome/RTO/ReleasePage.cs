@@ -22,13 +22,13 @@ namespace Selenium.Pages.Outcome
         public void Release()
         {
             driver.Popup();
-            close.ClickCustom(driver);
+            ClickWithLoop(close.GetLocator());
         }
 
         public void CloseButton()
         {
             driver.Popup();
-            close.ClickCustom(driver);
+            ClickWithLoop(close.GetLocator());
         }
     }
 }

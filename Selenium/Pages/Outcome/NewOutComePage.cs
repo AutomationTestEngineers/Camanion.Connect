@@ -68,7 +68,7 @@ namespace Selenium.Pages.Outcome
             driver.Popup(false);
             var trasfer = new TransferOutcomeInfoPage(driver);
             trasfer.EnterTransferOutcomeInfo();
-            closeButton.ClickCustom(driver);
+            ClickWithLoop(closeButton.GetLocator());
         }
 
         public void Adaption()

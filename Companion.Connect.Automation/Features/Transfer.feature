@@ -26,11 +26,11 @@ Scenario Outline: Transfer_Intake_To_Outcome
 
 	Examples: 
 	| Outcome         | Shelter      | Person | IntakeSection |
-	| Death           | Demo Shelter | k      | 1             |
-	| Return to Owner | Demo Shelter | k      | 3             |
-	| Euthanasia      | Demo Shelter | k      | 2             |
-	| Transfer        | Demo Shelter | k      | 4             |
-	| Adoption        | Demo Shelter | k      | 5             |
+	| Death           | Demo Shelter | kc     | 1             |
+	| Return to Owner | Demo Shelter | kc     | 3             |
+	| Euthanasia      | Demo Shelter | kc     | 2             |
+	| Transfer        | Demo Shelter | kc     | 4             |
+	| Adoption        | Demo Shelter | kc     | 5             |
 
 
 @Intake

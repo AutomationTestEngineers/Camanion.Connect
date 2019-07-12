@@ -33,7 +33,7 @@ namespace Selenium.Pages.Outcome
             causeOfDeath.SelectByIndex(driver,2);
             Deathnote.SendKeysWrapper(FakeData.Word, driver);
             nextButton.ClickCustom(driver);
-            closeButton.ClickCustom(driver);
+            ClickWithLoop(closeButton.GetLocator());
         }
 
         public void EnterDeathEuthanasia()

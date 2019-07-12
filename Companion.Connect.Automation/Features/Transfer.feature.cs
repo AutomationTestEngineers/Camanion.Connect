@@ -83,11 +83,11 @@ namespace Companion.Connect.Automation.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Transfer_Intake_To_Outcome")]
-        [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "k", "1", null)]
-        [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "k", "3", null)]
-        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Demo Shelter", "k", "2", null)]
-        [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "k", "4", null)]
-        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "k", "5", null)]
+        [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "kc", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "kc", "3", null)]
+        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Demo Shelter", "kc", "2", null)]
+        [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "kc", "4", null)]
+        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "kc", "5", null)]
         public virtual void Transfer_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Transfer_Intake_To_Outcome", null, exampleTags);

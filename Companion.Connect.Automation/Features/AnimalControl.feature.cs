@@ -83,11 +83,11 @@ namespace Companion.Connect.Automation.Features
         
         [NUnit.Framework.TestAttribute()]
         [NUnit.Framework.DescriptionAttribute("Animal_Contol_Intake_To_Outcome")]
-        [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "k", "1", null)]
-        [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "k", "2", null)]
-        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "k", "3", null)]
-        [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "k", "4", null)]
-        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "k", "5", null)]
+        [NUnit.Framework.TestCaseAttribute("Death", "Demo Shelter", "kc", "1", null)]
+        [NUnit.Framework.TestCaseAttribute("Return to Owner", "Demo Shelter", "kc", "2", null)]
+        [NUnit.Framework.TestCaseAttribute("Euthanasia", "Central Missouri Humane Society", "kc", "3", null)]
+        [NUnit.Framework.TestCaseAttribute("Transfer", "Demo Shelter", "kc", "4", null)]
+        [NUnit.Framework.TestCaseAttribute("Adoption", "Demo Shelter", "kc", "5", null)]
         public virtual void Animal_Contol_Intake_To_Outcome(string outcome, string shelter, string person, string intakeSection, string[] exampleTags)
         {
             TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Animal_Contol_Intake_To_Outcome", null, exampleTags);
@@ -164,6 +164,26 @@ this.FeatureBackground();
  testRunner.When("I Delete Recent Intake", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
 #line 46
   testRunner.Then("\"Update data successful\" Message Should Be Display", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "Then ");
+#line hidden
+            this.ScenarioCleanup();
+        }
+        
+        [NUnit.Framework.TestAttribute()]
+        [NUnit.Framework.DescriptionAttribute("Delete Animal")]
+        public virtual void DeleteAnimal()
+        {
+            TechTalk.SpecFlow.ScenarioInfo scenarioInfo = new TechTalk.SpecFlow.ScenarioInfo("Delete Animal", null, ((string[])(null)));
+#line 48
+this.ScenarioInitialize(scenarioInfo);
+            this.ScenarioStart();
+#line 5
+this.FeatureBackground();
+#line 49
+ testRunner.When("I Change Shelter \"Demo Shelter\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "When ");
+#line 50
+ testRunner.And("I Delete Recent Outcome \"Animal_\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
+#line 51
+ testRunner.And("I Delete Recent Intake \"Animal_\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line hidden
             this.ScenarioCleanup();
         }
