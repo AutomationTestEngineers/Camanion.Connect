@@ -11,7 +11,7 @@ Scenario Outline: PublicStray_Intake_To_Outcome
 	And I Click Add
 	And I Select "Public Stray" Intake
 	And I Select Partner ""
-	And I Enter Payment Details PublicStray
+	And I Enter Payment Details "cash"
 	And I Add Animal
 	And I Enter Behavior
 	And I Enter Medical "<IntakeSection>"

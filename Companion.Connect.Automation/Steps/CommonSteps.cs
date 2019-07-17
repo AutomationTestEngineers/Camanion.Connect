@@ -68,16 +68,10 @@ namespace Companion.Connect.Automation.Steps
             animalPage = (!string.IsNullOrWhiteSpace(partner))?personPage.SearchPartner(partner): personPage.WithNoPerson();
         }
 
-        [When(@"I Enter Payment Details")]
-        public void WhenIEnterPaymentDetails()
+        [When(@"I Enter Payment Details ""(.*)""")]
+        public void WhenIEnterPaymentDetails(string paymentMethod)
         {
-            animalPage = (new Selenium.Pages.Intake.PaymentPage(driver)).EnterPayment(0);
-        }
-
-        [When(@"I Enter Payment Details PublicStray")]
-        public void WhenIEnterPaymentDetailsPublicStray()
-        {
-            animalPage = (new Selenium.Pages.Intake.PaymentPage(driver)).EnterPayment();
+            animalPage = (new Selenium.Pages.Intake.PaymentPage(driver)).EnterPayment(paymentMethod);
         }
 
         [When(@"I Add Animal")]

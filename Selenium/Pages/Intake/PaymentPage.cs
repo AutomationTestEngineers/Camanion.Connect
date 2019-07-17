@@ -15,7 +15,7 @@ namespace Selenium.Pages.Intake
 
         [FindsBy]
         private IWebElement AnimalFee0 = null, nextButton=null, amountReceived = null, cashRegisterName = null, CardNumber=null, month=null, year=null, ccv=null,
-            firstName=null, LastName=null, address1=null, zipCode=null, city=null;
+            firstName=null, LastName=null, address1=null, zipCode=null, city=null, checkAmount=null, checkRegisterName=null, PaymentOutsideOfConnectAmount=null;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='configure-filter']//i")]
         private IWebElement personalInfoChkBox = null;
@@ -28,24 +28,30 @@ namespace Selenium.Pages.Intake
 
         [FindsBy(How = How.CssSelector, Using = "button[data-ng-click='vm.completePayment()']")]
         private IWebElement completePayment = null;
-
-        [FindsBy(How = How.CssSelector, Using = "button[ng-click='vm.close()']")]
-        private IWebElement close = null;
-
         
 
-        public AnimalPage EnterPayment(int method = 0)
+        public AnimalPage EnterPayment(string method)
         {
-            AnimalFee0.SelectByIndex(driver, 3);
+            AnimalFee0.SelectByIndex(driver, 1);
             nextButton.ClickCustom(driver);
-            personalInfoChkBox.ClickCustom(driver);
-            CreditCardMethod();
+            if (method.ToLower().Contains("cash"))
+                CashMethod(1);
+            else if (method.ToLower().Contains("creditcard"))
+                CreditCardMethod();
+            else if (method.ToLower().Contains("check"))
+                this.Check(2);
+            else
+                this.PaymentOutsideOfConnect(3);
             completePayment.ClickCustom(driver);
             return new AnimalPage(driver);
         }
 
         public void CreditCardMethod()
         {
+            if(FindBy(By.XPath("//*[@id='configure-filter']//i"),2,true).Displayed)
+                personalInfoChkBox.ClickCustom(driver);
+            else
+                EnterBillingInfo();
             CardNumber.SendKeysWrapper("4111111111111111", driver);
             month.SelectByIndex(driver, 5);
             year.SelectByIndex(driver, 4);
@@ -55,24 +61,30 @@ namespace Selenium.Pages.Intake
             driver.Popup();
         }
 
-        public void CashMethod(int method = 0)
+        public void CashMethod(int method)
         {
-            if(method!=0)
-                paymentMethods[method].ClickCustom(driver);
-            amountReceived.SendKeysWrapper("1000", driver);
+            paymentMethods[method].ClickCustom(driver);
+            amountReceived.SendKeysWrapper("100", driver);
             cashRegisterName.SelectByIndex(driver, 1);
+            submitPayment.ClickCustom(driver);
+            driver.Popup();
+        }        
+
+        public void Check(int method)
+        {
+            paymentMethods[method].ClickCustom(driver);
+            checkAmount.SendKeysWrapper("100",driver);
+            checkRegisterName.SelectByIndex(driver, 1);
             submitPayment.ClickCustom(driver);
             driver.Popup();
         }
 
-        public AnimalPage EnterPayment()
+        public void PaymentOutsideOfConnect(int method)
         {
-            AnimalFee0.SelectByIndex(driver, 1);
-            nextButton.ClickCustom(driver);
-            //EnterBillingInfo();
-            CashMethod(1);
-            completePayment.ClickCustom(driver);
-            return new AnimalPage(driver);
+            paymentMethods[method].ClickCustom(driver);
+            PaymentOutsideOfConnectAmount.SendKeysWrapper("100", driver);
+            submitPayment.ClickCustom(driver);
+            driver.Popup();
         }
 
         public void EnterBillingInfo()

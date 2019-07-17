@@ -11,7 +11,7 @@ Scenario Outline: Surrender_Intake_To_Outcome
 	And I Click Add
 	And I Select "Surrender" Intake
 	And I Select Partner "<Person>"
-	And I Enter Payment Details
+	And I Enter Payment Details "cash"
 	And I Add Animal
 	And I Enter Behavior
 	And I Enter Medical "<IntakeSection>"
