@@ -14,7 +14,7 @@ namespace Selenium
         public PersonPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement searchButton = null;
+        private IWebElement searchButton = null, continueButton=null;
 
         [FindsBy(How = How.XPath, Using = "//input[contains(@id,'Search')][contains(@ng-model,'vm.')]")]
         private IWebElement search = null;
@@ -37,5 +37,10 @@ namespace Selenium
             return new AnimalPage(driver);
         }
 
+        public AnimalPage WithNoPerson()
+        {
+            continueButton.ClickCustom(driver);
+            return new AnimalPage(driver);
+        }
     }
 }

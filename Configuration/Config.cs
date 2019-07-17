@@ -135,6 +135,10 @@ namespace Configuration
         {
             get { return new Bogus.DataSets.Address().ZipCode(); }
         }
+        public static string City
+        {
+            get { return new Bogus.DataSets.Address().City(); }
+        }
         public static string StreetAddress
         {
             get { return new Bogus.DataSets.Address().StreetAddress(); }

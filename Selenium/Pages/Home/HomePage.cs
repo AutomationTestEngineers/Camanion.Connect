@@ -194,7 +194,7 @@ namespace Selenium
         {
             Sleep(300);
             if (!string.IsNullOrEmpty(Config.NewVersion))
-            {  
+            { 
                 menu.ClickCustom(driver);
                 Sleep(500);
                 adminSetting.ClickCustom(driver);

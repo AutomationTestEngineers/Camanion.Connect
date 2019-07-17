@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using Configuration;
+using OpenQA.Selenium;
 using SeleniumExtras.PageObjects;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,8 @@ namespace Selenium.Pages.Intake
         public PaymentPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement AnimalFee0 = null, nextButton=null, amountReceived = null, cashRegisterName = null, CardNumber=null, month=null, year=null, ccv=null;
+        private IWebElement AnimalFee0 = null, nextButton=null, amountReceived = null, cashRegisterName = null, CardNumber=null, month=null, year=null, ccv=null,
+            firstName=null, LastName=null, address1=null, zipCode=null, city=null;
 
         [FindsBy(How = How.XPath, Using = "//*[@id='configure-filter']//i")]
         private IWebElement personalInfoChkBox = null;
@@ -61,6 +63,25 @@ namespace Selenium.Pages.Intake
             cashRegisterName.SelectByIndex(driver, 1);
             submitPayment.ClickCustom(driver);
             driver.Popup();
+        }
+
+        public AnimalPage EnterPayment()
+        {
+            AnimalFee0.SelectByIndex(driver, 1);
+            nextButton.ClickCustom(driver);
+            //EnterBillingInfo();
+            CashMethod(1);
+            completePayment.ClickCustom(driver);
+            return new AnimalPage(driver);
+        }
+
+        public void EnterBillingInfo()
+        {
+            firstName.SendKeysWrapper(FakeData.FirstName,driver);
+            LastName.SendKeysWrapper(FakeData.LastName, driver);
+            address1.SendKeysWrapper(FakeData.StreetAddress, driver);
+            zipCode.SendKeysWrapper(FakeData.Zip, driver);
+            city.SendKeysWrapper(FakeData.City, driver);
         }
     }
 }
