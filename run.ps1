@@ -11,16 +11,19 @@ function SetParameter($key, $value){
 	$xpathNavigator.SelectSingleNode([System.String]::Format("Parameter/{0}", $key)).SetValue($value)	
 	$parametersXML.Save($parametersXMLName)
 }
+function GetDecode($key){
+	return [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($k))
+}
 function SendMail($html,$cat){
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm
-	$emailSmtpServer = "smtp.gmail.com"
+	$emailSmtpServer = GetDecode “cwBtAHQAcAAuAGcAbQBhAGkAbAAuAGMAbwBtAA==”
 	$emailSmtpServerPort = “587”
-	$emailSmtpUser = "Automation.Test.Engineers@gmail.com"
-	$emailSmtpPass = "Automation@123"
+	$emailSmtpUser = GetDecode  “QQB1AHQAbwBtAGEAdABpAG8AbgAuAFQAZQBzAHQALgBFAG4AZwBpAG4AZQBlAHIAcwBAAGcAbQBhAGkAbAAuAGMAbwBtAA==”
+	$emailSmtpPass = GetDecode  “QQB1AHQAbwBtAGEAdABpAG8AbgBAADEAMgAzAA==”
 	$emailMessage = New-Object System.Net.Mail.MailMessage
-	$emailMessage.From = New-Object MailAddress("ranaim76@hotmail.com", "Imran Nazir" );
-	$emailMessage.To.Add( "ranaim76@hotmail.com" )
-	$emailMessage.To.Add( "ch.pradeep26@gmail.com" )
+	$emailMessage.From = New-Object MailAddress((GetDecode “cgBhAG4AYQBpAG0ANwA2AEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==”),(GetDecode “SQBtAHIAYQBuACAATgBhAHoAaQByAA==”));
+	$emailMessage.To.Add((GetDecode “cgBhAG4AYQBpAG0ANwA2AEAAaABvAHQAbQBhAGkAbAAuAGMAbwBtAA==”))
+	$emailMessage.To.Add((GetDecode “YwBoAC4AcAByAGEAZABlAGUAcAAyADYAQABnAG0AYQBpAGwALgBjAG8AbQA=”))
 	$emailMessage.Subject = “Comapanion Connect Result On $DateTime”
 	$emailMessage.IsBodyHtml = “True”
 	$emailMessage.Priority = 1
