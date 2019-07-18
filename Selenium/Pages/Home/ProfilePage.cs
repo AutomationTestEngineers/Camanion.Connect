@@ -14,7 +14,8 @@ namespace Selenium.Pages
 
         [FindsBy]
         private IWebElement microchipNumber = null, issuer = null, animalAltered = null, btnSave = null, btnClose = null, NewOutcome = null,
-            MedicalCare = null, BehavioralCare = null, note = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null;
+            MedicalCare = null, BehavioralCare = null, note = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null,
+            saveMER=null;
 
         [FindsBy(How = How.XPath, Using = "//button[normalize-space()='Release Hold']")]
         private IWebElement releaseHoldBtn = null;
@@ -28,10 +29,10 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//form[@id='viewAnimalProfileForm']//div[@id='currenthold']/div/label/span/span")]
         private IWebElement animalCurrentHolds = null;
 
-        [FindsBy(How = How.TagName, Using = "textarea")]
+        [FindsBy(How = How.CssSelector, Using = "div[role='dialog'] textarea#note")]
         private IWebElement comments = null;
 
-        [FindsBy(How = How.XPath, Using = "//input[@id='inFoster']/..//span")]
+        [FindsBy(How = How.XPath, Using = "//input[@id='isUrgent']/..")]
         private IWebElement urgentChkBox = null;
 
         [FindsBy(How = How.XPath, Using = "//button[contains(text(),'Submit')]")]
@@ -43,7 +44,7 @@ namespace Selenium.Pages
         [FindsBy(How = How.XPath, Using = "//div[@data-ng-repeat='item in vm.observations']//i[1]")]
         private IList<IWebElement> abservations = null;
 
-        [FindsBy(How = How.CssSelector, Using = "i[class='fa fa-square-o col-xs-2']")]
+        [FindsBy(How = How.CssSelector, Using = "div[role='dialog'] label span svg[role='presentation']")]
         private IList<IWebElement> symptoms = null;
 
 
@@ -124,12 +125,11 @@ namespace Selenium.Pages
         {
             MedicalCare.ClickCustom(driver);
             int[] index = new int[] { 14, 17, 20 };
-            //actions.MoveToElement(FindBy(By.XPath("//*[@id='content']/div[3]/section/section/div/div[2]/div/div/div/div[1]/div/div/div/div[2]/div[" + index[i] + "]//i[1]"))).Click().Build().Perform();
             for (int i = 0; i < index.Length; i++) // Select Animal Symptoms
-                actions.MoveToElement(symptoms[index[i]]).Click().Build().Perform();
-            comments.SendKeysWrapper("Medical Exam Comments", driver);
+                FindBy(By.XPath($"(//div[@role='dialog']//span/span/*[@role='presentation'])[{index[i]}]")).Click();//actions.MoveToElement(symptoms[index[i]]).Click().Build().Perform();
             urgentChkBox.ClickCustom(driver);
-            submit.ClickCustom(driver);
+            comments.SendKeysWrapper("Medical Exam Comments", driver);
+            saveMER.ClickCustom(driver);
         }
 
         public void BehaviorExam()
