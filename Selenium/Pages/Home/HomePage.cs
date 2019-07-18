@@ -17,12 +17,12 @@ namespace Selenium
 
         [FindsBy]
         private IWebElement newIntake = null, editAnimal = null, shelterId = null, siteId = null, searchValue = null,
-            procedureId = null, veterinarianId = null, veterinaryTechnicianId = null;
+            procedureId = null, veterinarianId = null, technicianId = null;
 
         [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]")]
         private IWebElement vetBag = null;
 
-        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[7]")]
+        [FindsBy(How = How.XPath, Using = "(//button[@id='vetBag'])[1]/../ul/li[text()=' Procedure ']")]
         private IWebElement procedure = null;        
 
         [FindsBy(How = How.XPath, Using = "//button[@data-cy='addIntake']")]
@@ -134,7 +134,7 @@ namespace Selenium
             return searchList.GetText(driver);
         }
 
-        public void SearchAnimal(string searchName = null)
+        public void SearchAnimal(string searchName)
         {
             Sleep(1500);
             ScreenBusy();
@@ -161,7 +161,7 @@ namespace Selenium
         public void SearchAnimal_New(string searchName = null)
         {
             ClickActiveOnly();
-            searchValue.SendKeysWrapper(searchName, driver);
+            searchValue.SendTextAndSelect(searchName, driver, true);
             searchButton_New.ClickCustom(driver);
         }
 
@@ -234,8 +234,8 @@ namespace Selenium
             FindBy(By.XPath($"(//div[@id='{nameof(procedureId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
             veterinarianId.ClickCustom(driver);
             FindBy(By.XPath($"(//div[@id='{nameof(veterinarianId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
-            veterinaryTechnicianId.ClickCustom(driver);
-            FindBy(By.XPath($"(//div[@id='{nameof(veterinaryTechnicianId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
+            technicianId.ClickCustom(driver);
+            FindBy(By.XPath($"(//div[@id='{nameof(technicianId)}']//div[2]/div/div[text()])[1]")).ClickCustom(driver, true);
             do
             {
                 Sleep(100);

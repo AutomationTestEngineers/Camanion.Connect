@@ -43,7 +43,7 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Search Animal")]
         public void WhenISearchAnimal()
         {
-            homePage.SearchAnimal();
+            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
             driver.Popup();
             homePage.ClickPencilIcon();
         }
