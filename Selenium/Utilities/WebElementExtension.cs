@@ -405,13 +405,15 @@ namespace Selenium
 
         public static void HighlightElement(this IWebElement element, IWebDriver driver)
         {
-            for (int i = 0; i < 2; i++)
+            if (Config.Highlight)
             {
-                Thread.Sleep(7);
-                (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 5px solid blue;");
-                (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
+                for (int i = 0; i < 2; i++)
+                {
+                    Thread.Sleep(7);
+                    (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 5px solid blue;");
+                    (driver as IJavaScriptExecutor).ExecuteScript("arguments[0].setAttribute('style',arguments[1]);", element, "border: 0px solid blue;");
+                }
             }
-
         }
 
         private static class JSOperator

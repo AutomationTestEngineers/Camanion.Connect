@@ -19,6 +19,7 @@ namespace Configuration
         public static string Email => ConfigurationManager.AppSettings["Email"];
         public static string Password => ConfigurationManager.AppSettings["Password"];
         public static string ScreenBusy => ConfigurationManager.AppSettings["ScreenBusy"];
+        public static bool Highlight => bool.Parse(ConfigurationManager.AppSettings["Highlight"]);
 
         public static string Person => ConfigurationManager.AppSettings["Person"];
         public static string AnimalType => ConfigurationManager.AppSettings["AnimalType"];

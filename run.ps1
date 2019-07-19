@@ -1,4 +1,11 @@
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Usage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+	# .\run.ps1 (will execute all scenario's)
+	# Change the Category if you want to execute specific test cases Example ::====>>>> .\run.ps1 -Category "AnimalControl"
 
+	# Results:
+	# All Results(HTML,Logs) will Saved in [C:\Automation] Location with DateTime
+	# All SrcenShots Will Saved [C:\evidence] Location with Test Case Name
+#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 param(
 	[string]$NewVersion='',
 	[string]$Category=''
@@ -12,7 +19,7 @@ function SetParameter($key, $value){
 	$parametersXML.Save($parametersXMLName)
 }
 function GetDecode($key){
-	return [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($k))
+	return [System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String($key))
 }
 function SendMail($html,$cat){
 	$DateTime = get-date -format ddd_dd.MM.yyyy_HH.mm
@@ -37,9 +44,9 @@ $emailMessage.Body = @”
 	<strong>Executed Category: $cat</strong>
     <br />
 	<br />
-	Thanks,
+	Regards,
     <br />
-    QA Automation.
+    <strong><font color="green">QA Automation.</font></strong>
 “@
 	$SMTPClient = New-Object System.Net.Mail.SmtpClient( $emailSmtpServer , $emailSmtpServerPort )
 	$SMTPClient.EnableSsl = $true
@@ -48,15 +55,6 @@ $emailMessage.Body = @”
 }
 try
 {
-	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Usage %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-	# .\run.ps1
-	# Change the Category if you want to execute all the test cases Example ::====>>>> [string]$TESTSELECT = 'cat == E2E'
-
-	# Result:
-	# All Results will Saved in [C:\Automation] Location with DateTime
-	# All SrcenShots Will Saved [C:\evidence] Location with Test Case Name
-	#%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
 	[string]$PROJECTNAME = 'Companion.Connect.Automation'
 	[string]$TESTSELECT = 'E2E'
 	[string]$Ignore=''

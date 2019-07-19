@@ -8,7 +8,8 @@ namespace Selenium.Pages.Intake
         public DetailsPage(IWebDriver driver) : base(driver) { }
 
         [FindsBy]
-        private IWebElement site = null, subSite = null, location = null, subLocation = null, intakeDetailsnote = null, intakeServicenote=null;
+        private IWebElement site = null, subSite = null, location = null, subLocation = null, intakeDetailsnote = null, intakeServicenote=null,
+            animalStatus=null;
 
         [FindsBy(How = How.Name, Using = "IntakeSubType")]
         private IWebElement intakeSubType = null;
@@ -32,7 +33,8 @@ namespace Selenium.Pages.Intake
             animalCondition.SelectByIndex(driver);
             if (FindBy(By.Name("OriginalSource"), 1, true)!=null)
                 FindBy(By.Name("OriginalSource"), 1, true).SelectByIndex(driver, 1);
-            site.SelectByIndex(driver);
+            //site.SelectByIndex(driver);
+            animalStatus.SelectDropDown(driver, "Available");
             subSite.SelectByIndex(driver);
             location.SelectByIndex(driver);
             subLocation.SelectByIndex(driver);

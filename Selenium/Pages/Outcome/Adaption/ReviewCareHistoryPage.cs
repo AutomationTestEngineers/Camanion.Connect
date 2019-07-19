@@ -24,13 +24,13 @@ namespace Selenium.Pages.Outcome.Adaption
 
         public CampanionProjectPage EnterReviewHistory()
         {
-            FindBy(By.Id("shelter-feedback"), 1, true).Click();
-            Sleep(20);
-            shelterFeedback[1].Click();
-            Sleep(20);
-            FindBy(By.Id("animal-condition"), 1, true).Click();
-            Sleep(20);
-            animalCondition[1].Click();
+            //FindBy(By.Id("shelter-feedback"), 1, true).Click();
+            //Sleep(20);
+            //shelterFeedback[1].Click();
+            //Sleep(20);
+            //FindBy(By.Id("animal-condition"), 1, true).Click();
+            //Sleep(20);
+            //animalCondition[1].Click();
             ClickWithLoop(next.GetLocator());
             return new CampanionProjectPage(driver);
         }

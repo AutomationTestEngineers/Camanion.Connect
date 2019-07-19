@@ -161,8 +161,10 @@ namespace Selenium
         public void SearchAnimal_New(string searchName = null)
         {
             ClickActiveOnly();
-            searchValue.SendTextAndSelect(searchName, driver, true);
-            searchButton_New.ClickCustom(driver);
+            searchValue.SendKeys(searchName);
+            //searchValue.SendTextAndSelect(searchName, driver, true);
+            //searchValue.SendKeys(Keys.Enter);
+            searchButton_New.SendKeys(Keys.Enter);
         }
 
         public void ClickActiveOnly()

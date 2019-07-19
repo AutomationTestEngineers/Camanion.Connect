@@ -45,7 +45,8 @@ Scenario: Animal_Contol_Intake
 	When I Delete Recent Intake
 		Then "Update data successful" Message Should Be Display
 
-#Scenario: Delete Animal
-#	When I Change Shelter "Demo Shelter"
-#	And I Delete Recent Outcome "Animal_"
-#	And I Delete Recent Intake "Animal_"
+@Delete
+Scenario: Delete Animal
+	#When I Change Shelter "Demo Shelter"
+	#And I Delete Recent Outcome "Animal_"
+	#And I Delete Recent Intake "Animal_"
