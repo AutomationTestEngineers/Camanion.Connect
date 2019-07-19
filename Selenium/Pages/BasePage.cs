@@ -64,7 +64,7 @@ namespace Selenium
             Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath(Config.ScreenBusy)), timeout);
             Thread.Sleep(100);
         }
-        public void Signature(bool chkbox = true)
+        public void Signature(bool chkbox = true,int time=10)
         {
             try
             {
@@ -80,7 +80,7 @@ namespace Selenium
                     try
                     {
                         if (chkbox)
-                            Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")), 10);
+                            Wait(ExpectedConditions.ElementExists(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)")), time);
                     }
                     catch { }
                     if (FindBy(By.XPath("(//label[@type='checkbox']/span/span/child::*[1]) | (//div[@class='checkbox-blue']/label/i)"), 1, true) != null)

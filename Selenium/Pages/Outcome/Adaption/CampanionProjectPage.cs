@@ -22,7 +22,7 @@ namespace Selenium.Pages.Outcome.Adaption
 
         public ContractPage ClickNext()
         {            
-            Signature(true);
+            Signature(true,60);
             ClickWithLoop(next.GetLocator());
             return new ContractPage(driver);
         }

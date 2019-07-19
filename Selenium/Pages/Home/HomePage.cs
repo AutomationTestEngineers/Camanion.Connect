@@ -102,7 +102,7 @@ namespace Selenium
 
         public void ChangeShelter(string shelterName)
         {
-            if (!string.IsNullOrEmpty(Config.NewVersion))
+            if (Config.NewVersion)
                 ChangeShelter_New(shelterName);
             else
             {
@@ -141,7 +141,7 @@ namespace Selenium
             //if (searchName == null)
             //    searchName = Parameter.Get<string>("AnimalName");
 
-            if (!string.IsNullOrEmpty(Config.NewVersion))
+            if (Config.NewVersion)
                 SearchAnimal_New(searchName);
             else
             {
@@ -195,7 +195,7 @@ namespace Selenium
         public AdministrationPage SelectAdmin()
         {
             Sleep(300);
-            if (!string.IsNullOrEmpty(Config.NewVersion))
+            if (Config.NewVersion)
             { 
                 menu.ClickCustom(driver);
                 Sleep(500);
@@ -212,7 +212,7 @@ namespace Selenium
 
         public NewIntakePage ClickAdd()
         {
-            if (!string.IsNullOrEmpty(Config.NewVersion))
+            if (Config.NewVersion)
                 ClickAddAnimal();
             else
                 addBtn.ClickCustom(driver);

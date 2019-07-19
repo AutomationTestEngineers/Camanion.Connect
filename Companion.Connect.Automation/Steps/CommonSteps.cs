@@ -131,8 +131,8 @@ namespace Companion.Connect.Automation.Steps
         [When(@"I Click New Outcome Button")]
         public void WhenIClickNewOutcomeButton()
         {
-            homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
-            homePage.ClickPencilIcon();
+            //homePage.SearchAnimal(scenarioContext.Get<string>("AnimalName"));
+            //homePage.ClickPencilIcon();
             newOutcomePage = profilePage.ClickNewOutcome();
         }
 

@@ -9,7 +9,7 @@ namespace Configuration
 {
     public class Config
     {
-        public static string NewVersion => ConfigurationManager.AppSettings["NewVersion"];
+        public static bool NewVersion => bool.Parse(ConfigurationManager.AppSettings["NewVersion"]);
         public static string Browser => ConfigurationManager.AppSettings["Browser"];
         public static string BrowserLoad => ConfigurationManager.AppSettings["BrowserLoad"];
         public static string ImplicitWait => ConfigurationManager.AppSettings["ImplicitWait"];

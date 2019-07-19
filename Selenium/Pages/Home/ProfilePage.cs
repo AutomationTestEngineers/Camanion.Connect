@@ -62,13 +62,13 @@ namespace Selenium.Pages
         {
             Sleep(100);
             driver.ScrollPage(0, 1000);
-            Sleep(500);
-            actions.MoveToElement(animalDetails).Click().Build().Perform();
-            Sleep(1000);
-            if (FindBy(By.XPath("(//div[7]//*[@id='headingAction']/label/span)[1][@class='expandable collapsed']"), 2, true) != null)
-                animalDetails.ClickCustom(driver);
-
-            animalAltered.SelectByIndex(driver, 2);
+            //Sleep(500);
+            //actions.MoveToElement(animalDetails).Click().Build().Perform();
+            //Sleep(1000);
+            //if (FindBy(By.XPath("(//div[7]//*[@id='headingAction']/label/span)[1][@class='expandable collapsed']"), 2, true) != null)
+            //    animalDetails.ClickCustom(driver);
+            //animalAltered.SelectByIndex(driver, 2);
+            btnSave.ScrollElement(driver);
             btnSave.ClickCustom(driver);
         }
 
@@ -105,7 +105,7 @@ namespace Selenium.Pages
                     releaseHoldBtn.Click();
                     Sleep(3000);
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[@class='modal-backdrop fade in']/div/child::*")), 120);
-                    if (FindBy(By.XPath("//span[text()='Ok']"), 2, true) != null)
+                    if (FindBy(By.XPath("//span[text()='Ok']"), 3, true) != null)
                         FindBy(By.XPath("//span[text()='Ok']")).Click();
                     Wait(ExpectedConditions.InvisibilityOfElementLocated(By.XPath("//div[contains(@class,'toast')]")));
                 }

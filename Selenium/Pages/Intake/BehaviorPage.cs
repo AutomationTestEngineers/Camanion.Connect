@@ -28,7 +28,7 @@ namespace Selenium.Pages.Intake
 
         public MedicalPage EnterBehavior()
         {
-            temperament.SelectByIndex(driver,2);
+            //temperament.SelectByIndex(driver,2);
             biteHistory.SelectByIndex(driver, 2);
             //FindBy(By.XPath($"(//div[@class='row'])[10]//label[contains(.,'{Parameter.Get<string>("Impression")}')]//i[1]")).ClickCustom(driver);
             FindBy(By.XPath("//*[@id='content']/div/section/section/div/form/div[2]/div/div[2]/div[4]/label/span/label/i[1]")).ClickCustom(driver);
