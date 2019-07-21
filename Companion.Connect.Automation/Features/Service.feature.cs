@@ -154,8 +154,6 @@ this.FeatureBackground();
  testRunner.And("I Enter Details \"Service\"", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 39
  testRunner.And("I Add Procedure", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
-#line 40
- testRunner.And("I Search Animal", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 41
  testRunner.And("I Request Behavior Exam", ((string)(null)), ((TechTalk.SpecFlow.Table)(null)), "And ");
 #line 42

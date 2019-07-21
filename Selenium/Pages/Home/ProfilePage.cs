@@ -14,7 +14,7 @@ namespace Selenium.Pages
 
         [FindsBy]
         private IWebElement microchipNumber = null, issuer = null, animalAltered = null, btnSave = null, btnClose = null, NewOutcome = null,
-            MedicalCare = null, BehavioralCare = null, note = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null,
+            MedicalCare = null, BehavioralCare = null, comment = null, addNote = null, submitButton = null, clinicName = null, clinicPhone = null, PetIDNumber_ = null, petIdType_ = null, btnAddPetId = null,
             saveMER=null;
 
         [FindsBy(How = How.XPath, Using = "//button[normalize-space()='Release Hold']")]
@@ -137,9 +137,10 @@ namespace Selenium.Pages
             BehavioralCare.ClickCustom(driver);
             for (int i = 1; i <= 4; i++)
                 abservations[i].ClickCustom(driver);
-            note.SendKeysWrapper("Behavior Exam Notes", driver);
-            addNote.ClickCustom(driver);
-            submitButton.ClickCustom(driver);
+            comment.SendKeysWrapper("Behavior Exam Notes", driver);
+            //addNote.ClickCustom(driver);
+            ClickWithLoop(submitButton.GetLocator());
+            Sleep(300);
         }
 
         public void EnterAnimalRabiesVaccineDetails()

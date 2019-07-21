@@ -37,7 +37,7 @@ Scenario: Service_Intake_To_Outcome_BehaviorExam
 	And I Add Animal
 	And I Enter Details "Service"
 	And I Add Procedure
-	And I Search Animal
+	#And I Search Animal
 	And I Request Behavior Exam
 	And I Delete Recent Intake
 		Then "Update data successful" Message Should Be Display
