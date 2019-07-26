@@ -176,6 +176,7 @@ namespace Selenium
 
         public string GetAnimalName()
         {
+            Sleep(500);
             ScreenBusy();
             return FindBy(By.XPath("//table[@class='table table-custom']//td[3]")).Text;
         }
